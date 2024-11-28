@@ -9,7 +9,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cc18587-173c-42a4-814b-cef1176c3673" name="Changes" comment="Merged arad-league-meet branch" />
+    <list default="true" id="2cc18587-173c-42a4-814b-cef1176c3673" name="Changes" comment="Merged arad-league-meet branch">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/MainTeleOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/MainTeleOp.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,47 +89,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.TeamCode.executor": "Run",
-    "DEBUGGABLE_DEVICE": "rev_robotics-control_hub_v1_0-192.168.43.1:5555",
-    "DEBUGGABLE_PROCESS": "com.qualcomm.ftcrobotcontroller",
-    "DEBUGGER_ID": "Auto",
-    "Gradle.Build FTC2024.executor": "Run",
-    "Gradle.Building Gradle Dependencies.executor": "Run",
-    "Gradle.FTC2024 [buildEnvironment].executor": "Run",
-    "Gradle.FTC2024 [init].executor": "Run",
-    "Gradle.FTC2024 [wrapper].executor": "Run",
-    "Gradle.FTC2024.executor": "Run",
-    "Gradle.Load Gradle Dependencies.executor": "Run",
-    "Gradle.Upgrade Gradle wrapper.executor": "Run",
-    "JAR Application.Unnamed.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SHOW_ALL_PROCESSES": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "full.screen.before.presentation.mode": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "jbr-11",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Mihai/Documents/GitHub/FTC-2025",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.TeamCode.executor&quot;: &quot;Run&quot;,
+    &quot;DEBUGGABLE_DEVICE&quot;: &quot;rev_robotics-control_hub_v1_0-192.168.43.1:5555&quot;,
+    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.qualcomm.ftcrobotcontroller&quot;,
+    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
+    &quot;Gradle.Build FTC2024.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Building Gradle Dependencies.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FTC2024 [buildEnvironment].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FTC2024 [init].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FTC2024 [wrapper].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FTC2024.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Load Gradle Dependencies.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Upgrade Gradle wrapper.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;jbr-11&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mihai/Documents/GitHub/FTC-2025&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.firstinspires.ftc.teamcode" />
@@ -131,7 +138,7 @@
       <recent name="org.firstinspires.ftc.teamcode" />
     </key>
   </component>
-  <component name="RunManager" selected="Android App.TeamCode">
+  <component name="RunManager" selected="Application.MeepMeepTesting">
     <configuration name="TeamCode" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="FTC-2025.TeamCode.main" />
       <option name="DEPLOY" value="true" />
@@ -274,7 +281,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Android App.TeamCode" />
       <item itemvalue="Application.MeepMeepTesting" />
       <item itemvalue="Gradle.FTC2024 [buildEnvironment]" />
       <item itemvalue="Gradle.FTC2024 [init]" />
@@ -291,8 +297,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
       </set>
     </attachedChunks>
   </component>
@@ -332,6 +338,7 @@
       <workItem from="1730984896910" duration="558000" />
       <workItem from="1730985478417" duration="5735000" />
       <workItem from="1732800673114" duration="36000" />
+      <workItem from="1732815165391" duration="1049000" />
     </task>
     <task id="LOCAL-00001" summary="Changed the location of some classes.">
       <created>1705414576508</created>
@@ -388,7 +395,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/MainTeleOp.java</url>
           <line>117</line>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
