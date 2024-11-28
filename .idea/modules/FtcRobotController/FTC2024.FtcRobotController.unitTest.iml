@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":FtcRobotController:unitTest" external.linked.project.path="$MODULE_DIR$/../../../FtcRobotController" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.type="sourceSet" type="JAVA_MODULE" version="4">
+  <component name="AdditionalModuleElements">
+    <content url="file://$MODULE_DIR$/../../../FtcRobotController/build/generated/ap_generated_sources/debugUnitTest/out" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/build/generated/ap_generated_sources/debugUnitTest/out" isTestSource="true" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../FtcRobotController/src/test" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/kotlin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/test/shaders" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/kotlin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcRobotController/src/testDebug/shaders" isTestSource="true" />
+    </content>
+  </component>
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
+        <option name="PROJECT_TYPE" value="1" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="TestModuleProperties" production-module="FTC2024.FtcRobotController.main" />
+</module>

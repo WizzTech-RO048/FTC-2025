@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="AdditionalModuleElements">
+    <content url="file://$MODULE_DIR$/../../../TeamCode/build/generated/ap_generated_sources/debugUnitTest/out" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/build/generated/ap_generated_sources/debugUnitTest/out" isTestSource="true" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../TeamCode/src/test" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/kotlin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/test/shaders" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/kotlin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../TeamCode/src/testDebug/shaders" isTestSource="true" />
+    </content>
+  </component>
+</module>
