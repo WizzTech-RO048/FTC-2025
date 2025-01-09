@@ -25,8 +25,8 @@ public class Gripper {
 
 //    private final Servo left_gripper, right_gripper;
    // private final Servo gheara_right, gheara_left;
-    private final Servo barier;
-    private final CRServo intake;
+
+
 
     Gripper(@NonNull final Parameters parameters) {
         telemetry = Objects.requireNonNull(parameters.telemetry, "Telemetry object was not set");
@@ -37,15 +37,12 @@ public class Gripper {
 
        // gheara_left = hardwareMap.get(Servo.class, "gheara_left");
        // gheara_right = hardwareMap.get(Servo.class, "gheara_right");
-        barier = hardwareMap.get(Servo.class, "barier");
 
-        intake = hardwareMap.get(CRServo.class, "crservo");
-        intake.setDirection(DcMotorSimple.Direction.FORWARD);
+
+
     }
 
-    public void stopIntakeServo() {
-        intake.close();
-    }
+
 //
 //    public void leavePixels() {
 //        gheara_left.setPosition(LEFT_RELEASE);
@@ -57,16 +54,10 @@ public class Gripper {
 //        gheara_right.setPosition(RIGHT_DEFAULT);
 //    }
 
-    public void closeBarier() {
-        barier.setPosition(CLOSE_BARIER_POS);
-    }
 
-    public void openBarier() {
-        barier.setPosition(OPEN_BARIER_POS);
-    }
 
     public void rotateIntake(double speed) {
-        intake.setPower(speed);
+
     }
 
 //    public void grab() {

@@ -85,7 +85,7 @@ public class AutoBlueBackdrop extends LinearOpMode {
 
         if (detected_location == 1) {
             // scenariul left
-            TrajectorySequence Blue_BackDrop_Left = drive.trajectorySequenceBuilder(new Pose2d())
+           /* TrajectorySequence Blue_BackDrop_Left = drive.trajectorySequenceBuilder(new Pose2d())
                     .lineToConstantHeading(new Vector2d(-25,-9))//pixel on spike
                     .addTemporalMarker(() -> { robot.arm.raiseArm(900, 1.0); })
                     .lineToConstantHeading(new Vector2d(-2,-9))
@@ -103,15 +103,15 @@ public class AutoBlueBackdrop extends LinearOpMode {
                     .addTemporalMarker(() -> { robot.slider.raiseSlider(0, 1.0);})
                     .waitSeconds(3.5)
                     .addTemporalMarker(() -> { robot.arm.raiseArm(0, 1.0);})
-                    .build();
+                    .build();*/
 
             if(isStopRequested()) return;
 
-            drive.followTrajectorySequence(Blue_BackDrop_Left);
+            //drive.followTrajectorySequence(Blue_BackDrop_Left);
 
         } else if (detected_location == 2) {
             // scenariul mid
-            TrajectorySequence Blue_BackDrop_Middle = drive.trajectorySequenceBuilder(new Pose2d())
+           /* TrajectorySequence Blue_BackDrop_Middle = drive.trajectorySequenceBuilder(new Pose2d())
                     .lineToConstantHeading(new Vector2d(-33,0))
                     .addTemporalMarker(() -> { robot.arm.raiseArm(900, 1.0); })
                     .lineToConstantHeading(new Vector2d(-20,0))
@@ -129,15 +129,15 @@ public class AutoBlueBackdrop extends LinearOpMode {
                     .addTemporalMarker(() -> { robot.slider.raiseSlider(0, 1.0);})
                     .waitSeconds(3.5)
                     .addTemporalMarker(() -> { robot.arm.raiseArm(0, 1.0);})
-                    .build();
+                    .build();*/
 
             if(isStopRequested()) return;
 
-            drive.followTrajectorySequence(Blue_BackDrop_Middle);
+            //drive.followTrajectorySequence(Blue_BackDrop_Middle);
 
         } else if (detected_location == 3) {
             // scenariul right
-            TrajectorySequence Blue_BackDrop_Right = drive.trajectorySequenceBuilder(new Pose2d())//testata si merge
+            /*TrajectorySequence Blue_BackDrop_Right = drive.trajectorySequenceBuilder(new Pose2d())//testata si merge
                     //.addTemporalMarker(()->robot.gripper.closeBarier())
                     .back(27)
                     .turn(Math.toRadians(-90), 4,4)
@@ -159,12 +159,12 @@ public class AutoBlueBackdrop extends LinearOpMode {
                     .addTemporalMarker(() -> { robot.slider.raiseSlider(0, 1.0);})
                     .waitSeconds(3.5)
                     .addTemporalMarker(() -> { robot.arm.raiseArm(0, 1.0);})
-                    .build();
+                    .build();*/
 
 
             if(isStopRequested()) return;
 
-            drive.followTrajectorySequence(Blue_BackDrop_Right);
+           // drive.followTrajectorySequence(Blue_BackDrop_Right);
 
         }
 

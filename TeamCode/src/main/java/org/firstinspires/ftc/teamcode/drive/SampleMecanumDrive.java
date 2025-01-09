@@ -90,10 +90,10 @@ public class SampleMecanumDrive extends MecanumDrive {
 
         // TODO: adjust the names of the following hardware devices to match your configuration
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront"); // aici initial era leftFront
+        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");// leftRear
+        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear"); // rightRear
+        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront"); //rightFront poate merge cu astea la device name
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 

@@ -15,8 +15,8 @@ public class Robot {
     public Telemetry telemetry;
 
     public Slider slider;
-    public Arm arm;
-    public Plane plane;
+    //public Arm arm;
+
     public Gripper gripper;
     public Lift lift;
 
@@ -34,16 +34,14 @@ public class Robot {
         slider_parameters.scheduler = scheduler;
         slider = new Slider(slider_parameters);
 
-        Arm.Parameters arm_parameters = new Arm.Parameters();
-        arm_parameters.telemetry = telemetry;
-        arm_parameters.hardwareMap = hardwareMap;
-        arm_parameters.scheduler = scheduler;
-        arm = new Arm(arm_parameters);
+//        Arm.Parameters arm_parameters = new Arm.Parameters();
+//        arm_parameters.telemetry = telemetry;
+//        arm_parameters.hardwareMap = hardwareMap;
+//        arm_parameters.scheduler = scheduler;
+//        arm = new Arm(arm_parameters);
 
-        Plane.Parameters plane_parameters = new Plane.Parameters();
-        plane_parameters.telemetry = telemetry;
-        plane_parameters.hardwareMap = hardwareMap;
-        plane = new Plane(plane_parameters);
+
+
 
         Gripper.Parameters gripper_parameters = new Gripper.Parameters();
         gripper_parameters.telemetry = telemetry;

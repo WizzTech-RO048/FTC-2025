@@ -42,7 +42,7 @@ public class MainTeleOp extends OpMode {
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        robot.plane.grabPlane();
+
         //robot.gripper.openBarier();
         robot.lift.setDownPosition();
         closed = false;
@@ -84,7 +84,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- (BODO) lansare avion ---------
         if (controller1.dpadUpOnce()){
-            robot.plane.releasePlane();
+
         }
 
         // --------- (BODO) intake primire ---------
@@ -118,18 +118,18 @@ public class MainTeleOp extends OpMode {
         else if (controller2.YOnce()) {
             arm_value = 910;
 
-            if (last_arm_position == 0) {
+            /*if (last_arm_position == 0) {
                 robot.arm.gripperSafety();
                 robot.gripper.closeBarier();
-            }
+            }*/
 
             armIsUp = true;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
+            //robot.arm.raiseArm(arm_value, RAISE_POWER);
             last_arm_position = 3;
         } else if (controller2.BOnce()) {
             arm_value = 750;
 
-            if (last_arm_position == 0) {
+           /* if (last_arm_position == 0) {
                 robot.arm.gripperSafety();
                 robot.gripper.closeBarier();
             }
@@ -139,29 +139,29 @@ public class MainTeleOp extends OpMode {
             robot.gripper.closeBarier();
 
             robot.arm.raiseArm(arm_value, RAISE_POWER);
-            last_arm_position = 2;
+            last_arm_position = 2;*/
         } else if (controller2.XOnce()) {
             arm_value = 250;
 
             if (last_arm_position == 0) {
-                robot.arm.gripperSafety();
-                robot.gripper.closeBarier();
+//                robot.arm.gripperSafety();
+//                robot.gripper.closeBarier();
             }
 
             armIsUp = false;
-            robot.arm.gripperSafety();
-            robot.gripper.closeBarier();
+            //robot.arm.gripperSafety();
 
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
+
+            //robot.arm.raiseArm(arm_value, RAISE_POWER);
             last_arm_position = 1;
         } else if (controller2.AOnce()) {
             arm_value = 0;
 
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
+            //robot.arm.raiseArm(arm_value, RAISE_POWER);
             last_arm_position = 0;
 
-            robot.arm.gripperAfterArm();
-            robot.gripper.openBarier();
+            //robot.arm.gripperAfterArm();
+
         }
 
 
@@ -172,9 +172,9 @@ public class MainTeleOp extends OpMode {
         // ------- (BELE) basculare cutie intake -------
         if (controller2.dpadLeftOnce()) {
             if(gripper_released == true) {
-                robot.arm.gripperInitialPos();
+               // robot.arm.gripperInitialPos();
             } else {
-                robot.arm.gripperReleasePos();
+                //robot.arm.gripperReleasePos();
             }
             gripper_released = !gripper_released;
         }
@@ -182,9 +182,9 @@ public class MainTeleOp extends OpMode {
         // ------- (BELE) controlare bariera -------
         if (controller2.dpadRightOnce()) {
             if (closed == true) {
-                robot.gripper.openBarier();
+
             } else {
-                robot.gripper.closeBarier();
+
             }
             closed = !closed;
         }
@@ -216,7 +216,7 @@ public class MainTeleOp extends OpMode {
         telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
         telemetry.addLine("---------------------");
         telemetry.addData("Arm target value", arm_value);
-        telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
+       // telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
         telemetry.addLine("---------------------");
         telemetry.addData("Lift target value", arm_value);
         telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
