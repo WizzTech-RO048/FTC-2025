@@ -1,4 +1,4 @@
-.0package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
 import android.os.Build;
 import android.util.Pair;
