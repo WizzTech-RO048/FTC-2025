@@ -90,14 +90,13 @@ public class MainTeleOp extends OpMode {
         if (controller1.B()){
             if (slider_target_positionup <=5500)
                 slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
-            robot.slider.raiseSlider(slider_target_positionup, 4);
+            robot.slider.raiseSlider(slider_target_positionup, 8);
         }
         if (controller1.X()){
             if (slider_target_positiondown >=0)
                 slider_target_positiondown =robot.slider.getCurrentPositionSlider()-100;
-            robot.slider.raiseSlider(slider_target_positiondown, 4);
+            robot.slider.raiseSlider(slider_target_positionup, 8);
         }
-
         // --------- (BODO) intake primire ---------
         double rotation_speed1 = controller1.right_trigger - controller1.left_trigger;
         robot.gripper.rotateIntake(rotation_speed1);
