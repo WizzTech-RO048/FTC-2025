@@ -46,7 +46,7 @@ public class Arm {
         arm.setTargetPosition(targetPositionValue);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        if (currentPosition < targetPositionValue) {
+        if (currentPosition > targetPositionValue) {
             arm.setPower(raisePower);
         } else{
             arm.setPower(-raisePower);

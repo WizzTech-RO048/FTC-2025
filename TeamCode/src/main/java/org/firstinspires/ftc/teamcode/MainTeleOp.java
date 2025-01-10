@@ -106,7 +106,7 @@ public class MainTeleOp extends OpMode {
             arm_value = 50;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
         } else if (controller1.dpadDownOnce()) {
-            arm_value = -10;
+            arm_value = 0;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
         }
 
