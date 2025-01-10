@@ -14,10 +14,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 
-@TeleOp(name="FTC2024")
+@TeleOp(name="FTC2025")
 public class MainTeleOp extends OpMode {
     private Robot robot;
-    private Controller controller1, controller2;
+    private Controller controller1;
     private SampleMecanumDrive drive;
 
     private  int raise_value, arm_value;
@@ -37,7 +37,7 @@ public class MainTeleOp extends OpMode {
                 Executors.newScheduledThreadPool(1)
         );
         controller1 = new Controller(gamepad1);
-        controller2 = new Controller(gamepad2);
+
 
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -58,33 +58,29 @@ public class MainTeleOp extends OpMode {
     @Override
     public void loop() {
         controller1.update();
-        controller2.update();
+
 
         // controller 1
         // - movement
-        // - avion
-        // - intake rotire - a primi
+        // - ridcare arm
+        // - intake gripper
+        // - control slider
         // - lift
 
-        // controller 2
-        // - rotire reverse intake
-        // - ridicare arm
-        // - control slider
-        // - cutie rotate
-        // - bariera
 
-        // --------- (BODO) movement general al robotului ---------
+
+        // --------- movement general al robotului ---------
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (-controller1.left_stick_y + controller2.left_stick_y) / 2, // gen astea negative / pozitive sau schimbate intre ele
-                        (-controller1.left_stick_x + controller2.left_stick_x) / 2,
-                        (-controller1.right_stick_x + controller2.right_stick_x) / 2
+                        (-controller1.left_stick_y) , // gen astea negative / pozitive sau schimbate intre ele
+                        (-controller1.left_stick_x) ,
+                        (-controller1.right_stick_x)
                 )
         );
 
-        // --------- (BODO) lansare avion ---------
+        // --------- ridicare brat ---------
         if (controller1.dpadUpOnce()){
-
+            telemetry.addData("Pepsi", raise_value);
         }
 
         // --------- (BODO) intake primire ---------
@@ -115,8 +111,8 @@ public class MainTeleOp extends OpMode {
             return ;
         }
 
-        else if (controller2.YOnce()) {
-            arm_value = 910;
+        else if (controller1.dpadUpOnce()) {
+            arm_value = 910;//trebe testat
 
             /*if (last_arm_position == 0) {
                 robot.arm.gripperSafety();
@@ -126,7 +122,7 @@ public class MainTeleOp extends OpMode {
             armIsUp = true;
             //robot.arm.raiseArm(arm_value, RAISE_POWER);
             last_arm_position = 3;
-        } else if (controller2.BOnce()) {
+        } else if (controller1.BOnce()) {
             arm_value = 750;
 
            /* if (last_arm_position == 0) {
@@ -140,7 +136,7 @@ public class MainTeleOp extends OpMode {
 
             robot.arm.raiseArm(arm_value, RAISE_POWER);
             last_arm_position = 2;*/
-        } else if (controller2.XOnce()) {
+        } else if (controller1.XOnce()) {
             arm_value = 250;
 
             if (last_arm_position == 0) {
@@ -154,7 +150,7 @@ public class MainTeleOp extends OpMode {
 
             //robot.arm.raiseArm(arm_value, RAISE_POWER);
             last_arm_position = 1;
-        } else if (controller2.AOnce()) {
+        } else if (controller1.AOnce()) {
             arm_value = 0;
 
             //robot.arm.raiseArm(arm_value, RAISE_POWER);
@@ -170,7 +166,7 @@ public class MainTeleOp extends OpMode {
 //        robot.gripper.rotateIntake(rotation_speed2);
 
         // ------- (BELE) basculare cutie intake -------
-        if (controller2.dpadLeftOnce()) {
+        if (controller1.dpadLeftOnce()) {
             if(gripper_released == true) {
                // robot.arm.gripperInitialPos();
             } else {
@@ -180,26 +176,27 @@ public class MainTeleOp extends OpMode {
         }
 
         // ------- (BELE) controlare bariera -------
-        if (controller2.dpadRightOnce()) {
-            if (closed == true) {
+        //if (controller1.dpadRightOnce()) {
+        //    if (closed == true) {
 
-            } else {
+        //    } else {
 
-            }
-            closed = !closed;
-        }
-        // ------- (BELE) controlling the slider positions -----
+        //    }
+        //    closed = !closed;
+        //}
+        // ------- controlling the slider positions -----
         if (last_arm_position != 0) {
-            if (controller2.dpadUpOnce()) {
+            if (controller1.dpadUpOnce()) { //again se suprapune
                 if (slider_level < 5) {
                     slider_level = slider_level + 1;
                     if (slider_level == 1) {
                         slider_level = slider_level + 1;
                     }
                 }
+
                 raise_value = 600 * slider_level;
                 robot.slider.raiseSlider(raise_value, RAISE_POWER);
-            } else if (controller2.dpadDownOnce()) {
+            } else if (controller1.dpadDownOnce()) {
                 slider_level = 0;
                 raise_value = 600 * slider_level;
                 robot.slider.raiseSlider(raise_value, RAISE_POWER);
@@ -207,9 +204,9 @@ public class MainTeleOp extends OpMode {
         }
 
         // emergency stop button
-        if (controller2.startButtonOnce()) {
-            stop();
-        }
+        //if (controller2.startButtonOnce()) {          //nu cred ca ne trebe
+          //  stop();
+        //}
 
         // ------- printing the slider position -------
         telemetry.addData("Slider target value", raise_value);
