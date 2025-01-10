@@ -29,6 +29,9 @@ public class MainTeleOp extends OpMode {
     int slider_target_positionup;
     int slider_target_positiondown;
 
+    boolean isExtended_down = false;
+    boolean isExtended_up =false;
+
     @Override
     public void init() {
         robot = new Robot(
@@ -82,20 +85,53 @@ public class MainTeleOp extends OpMode {
 
         // --------- ridicare slider ---------
         if (controller1.YOnce()){
-            robot.slider.raiseSlider(5500 , 2);
+            robot.slider.raiseSlider(5500 , 16);
+            if(arm_value <500) {
+                isExtended_down = true;
+                isExtended_up = false;
+            }else{
+                isExtended_up =true;
+                isExtended_down = false;
+            }
         }
         if (controller1.AOnce()){
-            robot.slider.raiseSlider(0, 2);
+            robot.slider.raiseSlider(0, 16);
+            if(arm_value <500) {
+                isExtended_down = true;
+                isExtended_up = false;
+            }else{
+                isExtended_up =true;
+                isExtended_down = false;
+            }
         }
         if (controller1.B()){
             if (slider_target_positionup <=5500)
                 slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
-            robot.slider.raiseSlider(slider_target_positionup, 4);
+            robot.slider.raiseSlider(slider_target_positionup, 16);
+            if(arm_value < 500){
+                isExtended_down = true;
+                isExtended_up = false;
+            }else{
+                isExtended_up = true;
+                isExtended_down = false;
+            }
         }
         if (controller1.X()){
             if (slider_target_positiondown >=0)
                 slider_target_positiondown =robot.slider.getCurrentPositionSlider()-100;
-            robot.slider.raiseSlider(slider_target_positiondown, 4);
+            robot.slider.raiseSlider(slider_target_positiondown, 16);
+        }
+
+        if(isExtended_down){
+            arm_value = 120;
+            isExtended_down = false;
+            robot.arm.raiseArm(arm_value, RAISE_POWER);
+        }
+
+        if(isExtended_up){
+            arm_value = 1100;
+            isExtended_up = false;
+            robot.arm.raiseArm(arm_value, RAISE_POWER);
         }
 
         // -------  controlling the arm positions -----
@@ -103,11 +139,19 @@ public class MainTeleOp extends OpMode {
             return ;
         }
         else if (controller1.dpadUpOnce()) {
-            arm_value = 50;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
+            if(robot.slider.getCurrentPositionSlider() > 10){
+                slider_target_positiondown = 0;
+                robot.slider.raiseSlider(slider_target_positiondown, 16);
+            }
+            arm_value = 1100;
+            robot.arm.raiseArm(arm_value, RAISE_POWER -0.4);
         } else if (controller1.dpadDownOnce()) {
-            arm_value = 0;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
+            if(robot.slider.getCurrentPositionSlider() > 10){
+                slider_target_positiondown = 0;
+                robot.slider.raiseSlider(slider_target_positiondown, 16);
+            }
+            arm_value = 60;
+            robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
 
 
