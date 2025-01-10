@@ -80,7 +80,7 @@ public class MainTeleOp extends OpMode {
                 )
         );
 
-        // --------- ridicare brat ---------
+        // --------- ridicare slider ---------
         if (controller1.YOnce()){
             robot.slider.raiseSlider(5500 , 2);
         }
@@ -98,12 +98,21 @@ public class MainTeleOp extends OpMode {
             robot.slider.raiseSlider(slider_target_positiondown, 4);
         }
 
-        // --------- (BODO) intake primire ---------
-        double rotation_speed1 = controller1.right_trigger - controller1.left_trigger;
-        robot.gripper.rotateIntake(rotation_speed1);
+        // -------  controlling the arm positions -----
+        if(!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
+            return ;
+        }
+        else if (controller1.dpadUpOnce()) {
+            arm_value = 50;
+            robot.arm.raiseArm(arm_value, RAISE_POWER);
+        } else if (controller1.dpadDownOnce()) {
+            arm_value = -10;
+            robot.arm.raiseArm(arm_value, RAISE_POWER);
+        }
 
-        // --------- (BODO) control lift ---------
-        if (controller1.leftBumper()) {
+
+        // ---------- controale lift -------------
+        /*if (controller1.leftBumper()) {
             robot.lift.setDownPosition();
             gripper_released = true;
         } else if (controller1.rightBumper()) {
@@ -113,67 +122,16 @@ public class MainTeleOp extends OpMode {
 
         if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
             return ;
-        } //else if (controller1.YOnce()) {
-            //arm_value = 3500;
-           // lastRightLift = robot.lift.liftUpLeft(arm_value, 1);
-           // lastLeftLift = robot.lift.liftUpRight(arm_value, 1);
-        //}
+        } else if (controller1.dpadRightOnce()) {
+            arm_value = 3500;
+            lastRightLift = robot.lift.liftUpLeft(arm_value, 1);
+            lastLeftLift = robot.lift.liftUpRight(arm_value, 1);
+        }*/
 
 
 
-        // ------- (BELE) controlling the arm positions -----
-        if(!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
-            return ;
-        }
-
-        //else if (controller1.dpadUpOnce()) {
-          //  arm_value = 910;//trebe testat
-
-            /*if (last_arm_position == 0) {
-                robot.arm.gripperSafety();
-                robot.gripper.closeBarier();
-            }*/
-
-            //armIsUp = true;
-            //robot.arm.raiseArm(arm_value, RAISE_POWER);
-            //last_arm_position = 3;
-        //} else if (controller1.BOnce()) {
-        //    arm_value = 750;
-
-           /* if (last_arm_position == 0) {
-                robot.arm.gripperSafety();
-                robot.gripper.closeBarier();
-            }
-
-            armIsUp = false;
-            robot.arm.gripperSafety();
-            robot.gripper.closeBarier();
-
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
-            last_arm_position = 2;*/
-        //} else if (controller1.XOnce()) {
-          //  arm_value = 250;
-
-            //if (last_arm_position == 0) {
-//                robot.arm.gripperSafety();
-//                robot.gripper.closeBarier();
-            //}
-
-           // armIsUp = false;
-            //robot.arm.gripperSafety();
 
 
-            //robot.arm.raiseArm(arm_value, RAISE_POWER);
-            //last_arm_position = 1;
-        //} else if (controller1.AOnce()) {
-          //  arm_value = 0;
-
-            //robot.arm.raiseArm(arm_value, RAISE_POWER);
-         //   last_arm_position = 0;
-
-            //robot.arm.gripperAfterArm();
-
-        //}
 
 
         // --------- (BELE) intake iesire ---------
@@ -181,26 +139,17 @@ public class MainTeleOp extends OpMode {
 //        robot.gripper.rotateIntake(rotation_speed2);
 
         // ------- (BELE) basculare cutie intake -------
-        if (controller1.dpadLeftOnce()) {
+        /*if (controller1.dpadLeftOnce()) {
             if(gripper_released == true) {
                // robot.arm.gripperInitialPos();
             } else {
                 //robot.arm.gripperReleasePos();
             }
             gripper_released = !gripper_released;
-        }
+        }*/
 
-        // ------- (BELE) controlare bariera -------
-        //if (controller1.dpadRightOnce()) {
-        //    if (closed == true) {
-
-        //    } else {
-
-        //    }
-        //    closed = !closed;
-        //}
         // ------- controlling the slider positions -----
-        if (last_arm_position != 0) {
+        /*if (last_arm_position != 0) {
             if (controller1.dpadUpOnce()) { //again se suprapune
                 if (slider_level < 5) {
                     slider_level = slider_level + 1;
@@ -216,7 +165,7 @@ public class MainTeleOp extends OpMode {
                 raise_value = 600 * slider_level;
                 robot.slider.raiseSlider(raise_value, RAISE_POWER);
             }
-        }
+        }*/
 
         // emergency stop button
         //if (controller2.startButtonOnce()) {          //nu cred ca ne trebe
@@ -228,10 +177,11 @@ public class MainTeleOp extends OpMode {
         telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
         telemetry.addLine("---------------------");
         telemetry.addData("Arm target value", arm_value);
-       // telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
+        telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
         telemetry.addLine("---------------------");
-        telemetry.addData("Lift target value", arm_value);
-        telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
+
+        //telemetry.addData("Lift target value", arm_value);
+        //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
 
         telemetry.update();
     }
