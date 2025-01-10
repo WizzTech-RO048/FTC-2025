@@ -13,7 +13,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class Arm {
+public class rArm {
 
     private final Telemetry telemetry;
     private final HardwareMap hardwareMap;
