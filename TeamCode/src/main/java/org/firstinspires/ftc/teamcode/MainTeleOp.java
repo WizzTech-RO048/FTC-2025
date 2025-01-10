@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.os.Build;
-import android.util.Pair;
-import androidx.annotation.RequiresApi;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -28,6 +25,9 @@ public class MainTeleOp extends OpMode {
     private int slider_level = 0;
     private ScheduledFuture<?> lastArmMove, lastSliderMove;
     private ScheduledFuture<?> lastRightLift, lastLeftLift;
+    boolean isPressed = false;
+    int slider_target_positionup;
+    int slider_target_positiondown;
 
     @Override
     public void init() {
@@ -58,7 +58,9 @@ public class MainTeleOp extends OpMode {
     @Override
     public void loop() {
         controller1.update();
-
+        isPressed=false;
+        slider_target_positionup=robot.slider.getCurrentPositionSlider();
+        slider_target_positiondown=robot.slider.getCurrentPositionSlider();
 
         // controller 1
         // - movement
@@ -79,8 +81,21 @@ public class MainTeleOp extends OpMode {
         );
 
         // --------- ridicare brat ---------
-        if (controller1.dpadUpOnce()){
-            telemetry.addData("Pepsi", raise_value);
+        if (controller1.YOnce()){
+            robot.slider.raiseSlider(5500 , 2);
+        }
+        if (controller1.AOnce()){
+            robot.slider.raiseSlider(0, 2);
+        }
+        if (controller1.B()){
+            if (slider_target_positionup <=5500)
+                slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
+            robot.slider.raiseSlider(slider_target_positionup, 4);
+        }
+        if (controller1.X()){
+            if (slider_target_positiondown >=0)
+                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-100;
+            robot.slider.raiseSlider(slider_target_positiondown, 4);
         }
 
         // --------- (BODO) intake primire ---------
@@ -98,11 +113,11 @@ public class MainTeleOp extends OpMode {
 
         if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
             return ;
-        } else if (controller1.YOnce()) {
-            arm_value = 3500;
-            lastRightLift = robot.lift.liftUpLeft(arm_value, 1);
-            lastLeftLift = robot.lift.liftUpRight(arm_value, 1);
-        }
+        } //else if (controller1.YOnce()) {
+            //arm_value = 3500;
+           // lastRightLift = robot.lift.liftUpLeft(arm_value, 1);
+           // lastLeftLift = robot.lift.liftUpRight(arm_value, 1);
+        //}
 
 
 
@@ -111,19 +126,19 @@ public class MainTeleOp extends OpMode {
             return ;
         }
 
-        else if (controller1.dpadUpOnce()) {
-            arm_value = 910;//trebe testat
+        //else if (controller1.dpadUpOnce()) {
+          //  arm_value = 910;//trebe testat
 
             /*if (last_arm_position == 0) {
                 robot.arm.gripperSafety();
                 robot.gripper.closeBarier();
             }*/
 
-            armIsUp = true;
+            //armIsUp = true;
             //robot.arm.raiseArm(arm_value, RAISE_POWER);
-            last_arm_position = 3;
-        } else if (controller1.BOnce()) {
-            arm_value = 750;
+            //last_arm_position = 3;
+        //} else if (controller1.BOnce()) {
+        //    arm_value = 750;
 
            /* if (last_arm_position == 0) {
                 robot.arm.gripperSafety();
@@ -136,29 +151,29 @@ public class MainTeleOp extends OpMode {
 
             robot.arm.raiseArm(arm_value, RAISE_POWER);
             last_arm_position = 2;*/
-        } else if (controller1.XOnce()) {
-            arm_value = 250;
+        //} else if (controller1.XOnce()) {
+          //  arm_value = 250;
 
-            if (last_arm_position == 0) {
+            //if (last_arm_position == 0) {
 //                robot.arm.gripperSafety();
 //                robot.gripper.closeBarier();
-            }
+            //}
 
-            armIsUp = false;
+           // armIsUp = false;
             //robot.arm.gripperSafety();
 
 
             //robot.arm.raiseArm(arm_value, RAISE_POWER);
-            last_arm_position = 1;
-        } else if (controller1.AOnce()) {
-            arm_value = 0;
+            //last_arm_position = 1;
+        //} else if (controller1.AOnce()) {
+          //  arm_value = 0;
 
             //robot.arm.raiseArm(arm_value, RAISE_POWER);
-            last_arm_position = 0;
+         //   last_arm_position = 0;
 
             //robot.arm.gripperAfterArm();
 
-        }
+        //}
 
 
         // --------- (BELE) intake iesire ---------
@@ -209,7 +224,7 @@ public class MainTeleOp extends OpMode {
         //}
 
         // ------- printing the slider position -------
-        telemetry.addData("Slider target value", raise_value);
+        telemetry.addData("Slider target value", isPressed );
         telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
         telemetry.addLine("---------------------");
         telemetry.addData("Arm target value", arm_value);
