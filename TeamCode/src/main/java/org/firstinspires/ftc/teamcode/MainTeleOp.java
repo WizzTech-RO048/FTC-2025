@@ -106,7 +106,7 @@ public class MainTeleOp extends OpMode {
         }
         if (controller1.B()){
             if (slider_target_positionup <=5500)
-                slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
+                slider_target_positionup =robot.slider.getCurrentPositionSlider()+400;
             robot.slider.raiseSlider(slider_target_positionup, 16);
             if(arm_value < 500){
                 isExtended_down = true;
@@ -118,12 +118,12 @@ public class MainTeleOp extends OpMode {
         }
         if (controller1.X()){
             if (slider_target_positiondown >=0)
-                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-100;
+                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-400;
             robot.slider.raiseSlider(slider_target_positiondown, 16);
         }
 
         if(isExtended_down){
-            arm_value = 120;
+            arm_value = 150;
             isExtended_down = false;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
         }
@@ -150,7 +150,7 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 60;
+            arm_value = 40;
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
 
