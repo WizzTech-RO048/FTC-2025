@@ -40,8 +40,8 @@ public class Lift {
         left_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         left_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        lift_servo_left = hardwareMap.get(Servo.class, "scul_left");
-        lift_servo_right = hardwareMap.get(Servo.class, "scul_right");
+        lift_servo_left = hardwareMap.get(Servo.class, "servo_left");
+        lift_servo_right = hardwareMap.get(Servo.class, "servo_right");
     }
 
     private ScheduledFuture<?> raiseArmLiftRight = null, raiseArmLiftLeft = null;
@@ -98,8 +98,12 @@ public class Lift {
         lift_servo_right.setPosition(RIGHT_LIFT_DOWN);
     }
 
-    public int getCurrentPositionArm() {
-        return left_lift.getCurrentPosition();
+    public double getCurrentPositionServoLeft() {
+        return lift_servo_left.getPosition();
+    }
+    public double getCurrentPositionServoRight()
+    {
+        return lift_servo_right.getPosition();
     }
 
     public static class Parameters {

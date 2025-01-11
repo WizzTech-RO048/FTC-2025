@@ -17,15 +17,17 @@ public class MainTeleOp extends OpMode {
     private Controller controller1;
     private SampleMecanumDrive drive;
 
-    private  int raise_value, arm_value;
+    private  int raise_value, arm_value,lift_value;
     public double RAISE_POWER = 1.0;
-    private boolean closed, gripper_released , armIsUp;
+    private boolean closed, armIsUp;
+    private boolean gripper_positioned, gripper_released;
     private boolean sculatoare;
     private int last_arm_position; // 0 - a, 1 - x, 2 - b, 3 - y
     private int slider_level = 0;
     private ScheduledFuture<?> lastArmMove, lastSliderMove;
     private ScheduledFuture<?> lastRightLift, lastLeftLift;
-    boolean isPressed = false;
+    //boolean isPressed = false;
+
     int slider_target_positionup;
     int slider_target_positiondown;
 
@@ -61,7 +63,7 @@ public class MainTeleOp extends OpMode {
     @Override
     public void loop() {
         controller1.update();
-        isPressed=false;
+        //isPressed=false;
         slider_target_positionup=robot.slider.getCurrentPositionSlider();
         slider_target_positiondown=robot.slider.getCurrentPositionSlider();
 
@@ -120,10 +122,11 @@ public class MainTeleOp extends OpMode {
             if (slider_target_positiondown >=0)
                 slider_target_positiondown =robot.slider.getCurrentPositionSlider()-400;
             robot.slider.raiseSlider(slider_target_positiondown, 16);
+            robot.lift.setUpPosition();
         }
 
         if(isExtended_down){
-            arm_value = 150;
+            arm_value = 190;
             isExtended_down = false;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
         }
@@ -155,75 +158,66 @@ public class MainTeleOp extends OpMode {
         }
 
 
-        // ---------- controale lift -------------
-        /*if (controller1.leftBumper()) {
-            robot.lift.setDownPosition();
-            gripper_released = true;
-        } else if (controller1.rightBumper()) {
-            robot.lift.setUpPosition();
-            gripper_released = false;
+        //----------- gripper ---------------
+        if(controller1.dpadLeftOnce())
+            if(gripper_positioned == false)
+            {
+                robot.gripper.grab_position();
+                gripper_positioned=true;
+            }
+        if(controller1.dpadRightOnce())
+            if(gripper_positioned == true)
+            {
+                robot.gripper.release_position();
+                gripper_positioned=false;
+            }
+        if(controller1.leftBumperOnce())
+        {
+            if(gripper_released == true)
+            {
+                robot.gripper.grab();
+                gripper_released=false;
+            }
+            if (gripper_released == false)
+            {
+                robot.gripper.release();
+                gripper_released = true;
+            }
         }
+        //if(controller1.rightBumperOnce())
+        //{
 
+        //}
+        // ---------- controale lift -------------
+        double left_trig = controller1.left_trigger;
+        double right_trig = controller1.right_trigger;
+        if (left_trig > 0) {
+            robot.lift.setDownPosition();
+            telemetry.addLine("sper ca merge");
+        }
+        else if (right_trig > 0)
+        {
+            robot.lift.setUpPosition();
+            telemetry.addLine("sper ca merge 2");
+        }
         if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
             return ;
-        } else if (controller1.dpadRightOnce()) {
-            arm_value = 3500;
-            lastRightLift = robot.lift.liftUpLeft(arm_value, 1);
-            lastLeftLift = robot.lift.liftUpRight(arm_value, 1);
-        }*/
+        } else if (controller1.rightBumper()) {
+            lift_value = 7000;
+            lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+            lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
+        }
 
-
-
-
-
-
-
-        // --------- (BELE) intake iesire ---------
-//        double rotation_speed2 = controller2.right_trigger - controller2.left_trigger;
-//        robot.gripper.rotateIntake(rotation_speed2);
-
-        // ------- (BELE) basculare cutie intake -------
-        /*if (controller1.dpadLeftOnce()) {
-            if(gripper_released == true) {
-               // robot.arm.gripperInitialPos();
-            } else {
-                //robot.arm.gripperReleasePos();
-            }
-            gripper_released = !gripper_released;
-        }*/
-
-        // ------- controlling the slider positions -----
-        /*if (last_arm_position != 0) {
-            if (controller1.dpadUpOnce()) { //again se suprapune
-                if (slider_level < 5) {
-                    slider_level = slider_level + 1;
-                    if (slider_level == 1) {
-                        slider_level = slider_level + 1;
-                    }
-                }
-
-                raise_value = 600 * slider_level;
-                robot.slider.raiseSlider(raise_value, RAISE_POWER);
-            } else if (controller1.dpadDownOnce()) {
-                slider_level = 0;
-                raise_value = 600 * slider_level;
-                robot.slider.raiseSlider(raise_value, RAISE_POWER);
-            }
-        }*/
-
-        // emergency stop button
-        //if (controller2.startButtonOnce()) {          //nu cred ca ne trebe
-          //  stop();
-        //}
 
         // ------- printing the slider position -------
-        telemetry.addData("Slider target value", isPressed );
+        //telemetry.addData("Slider target value", isPressed );
         telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
         telemetry.addLine("---------------------");
         telemetry.addData("Arm target value", arm_value);
         telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
         telemetry.addLine("---------------------");
-
+        telemetry.addData("Sculatoare 1 level", robot.lift.getCurrentPositionServoLeft());
+        telemetry.addData("Sculatoare 2 level", robot.lift.getCurrentPositionServoRight());
         //telemetry.addData("Lift target value", arm_value);
         //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
 
