@@ -80,9 +80,12 @@ public class MainTeleOp extends OpMode {
         // --------- movement general al robotului ---------
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (controller1.left_stick_y) , // gen astea negative / pozitive sau schimbate intre ele
+
                         (controller1.left_stick_x) ,
-                        (controller1.right_stick_x)
+                        (controller1.right_stick_x),
+                        (controller1.left_stick_y)  // gen astea negative / pozitive sau schimbate intre ele
+
+
                 )
         );
 
@@ -127,14 +130,14 @@ public class MainTeleOp extends OpMode {
         }
 
         if(isExtended_down){
-            arm_value = 150;
+            arm_value = 100;
             robot.arm.raiseArm(arm_value, RAISE_POWER + 1);
             isExtended_down = false;
 
         }
 
         if(isExtended_up){
-            arm_value = 825;
+            arm_value = 850;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
             isExtended_up = false;
 
@@ -149,14 +152,14 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 825;
+            arm_value = 850;
             robot.arm.raiseArm(arm_value, RAISE_POWER -0.4);
         } else if (controller1.dpadDownOnce()) {
             if(robot.slider.getCurrentPositionSlider() > 10){
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 40;
+            arm_value = 100;
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
 
