@@ -32,6 +32,7 @@ Our programming team is compromised of dedicated students who bring a variety of
 - **Lead Programmer**: [Gorunescu Mihai](https://github.com/mihai888nextlab)
 - **Lead Programmer**: [Vacariuc Andrei](https://github.com/AndreiV4332)
 - **Lead Programmer**: [Rusu Amalia](https://github.com/ami048)
+- **Lead Programmer**: [Cristi Stiegelbauer]([https://github.com/ami048](https://github.com/crististg))
 
 # Sponsors & Partners
 
