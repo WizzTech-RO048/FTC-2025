@@ -140,7 +140,6 @@ public class AutoRedBackdrop extends LinearOpMode {
 
         }
 
-        robot.gripper.rotateIntake(1);
         while(opModeIsActive()) { sleep(20); }
     }
 
