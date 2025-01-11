@@ -21,8 +21,8 @@ public class Lift {
     private final DcMotorEx right_lift, left_lift;
 
     private final Servo lift_servo_right, lift_servo_left;
-    private final double LEFT_LIFT_UP = 0.9, RIGHT_LIFT_UP = 0.0;
-    private final double LEFT_LIFT_DOWN = 0.3, RIGHT_LIFT_DOWN = 0.7;
+    private final double LEFT_LIFT_UP = 1, RIGHT_LIFT_UP = -0.8;
+    private final double LEFT_LIFT_DOWN = -0.8  , RIGHT_LIFT_DOWN = +0.6;
 
 
     Lift(@NonNull final Parameters parameters) {

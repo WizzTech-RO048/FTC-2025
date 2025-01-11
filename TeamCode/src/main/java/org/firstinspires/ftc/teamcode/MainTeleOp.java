@@ -54,7 +54,7 @@ public class MainTeleOp extends OpMode {
         //sculatoare = false;
         last_arm_position = 0;
         gripper_released = false;
-        gripper_positioned = false;
+        gripper_positioned = true;
 
     }
 
@@ -80,9 +80,9 @@ public class MainTeleOp extends OpMode {
         // --------- movement general al robotului ---------
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (-controller1.left_stick_y) , // gen astea negative / pozitive sau schimbate intre ele
-                        (-controller1.left_stick_x) ,
-                        (-controller1.right_stick_x)
+                        (controller1.left_stick_y) , // gen astea negative / pozitive sau schimbate intre ele
+                        (controller1.left_stick_x) ,
+                        (controller1.right_stick_x)
                 )
         );
 
@@ -127,15 +127,17 @@ public class MainTeleOp extends OpMode {
         }
 
         if(isExtended_down){
-            arm_value = 190;
+            arm_value = 150;
+            robot.arm.raiseArm(arm_value, RAISE_POWER + 1);
             isExtended_down = false;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
+
         }
 
         if(isExtended_up){
-            arm_value = 1100;
-            isExtended_up = false;
+            arm_value = 825;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
+            isExtended_up = false;
+
         }
 
         // -------  controlling the arm positions -----
@@ -147,7 +149,7 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 1100;
+            arm_value = 825;
             robot.arm.raiseArm(arm_value, RAISE_POWER -0.4);
         } else if (controller1.dpadDownOnce()) {
             if(robot.slider.getCurrentPositionSlider() > 10){
@@ -176,12 +178,12 @@ public class MainTeleOp extends OpMode {
         {
             if(gripper_released == true)
             {
-                robot.gripper.release();
+                robot.gripper.grab();
                 gripper_released=false;
             }
             if (gripper_released == false)
             {
-                robot.gripper.grab();
+                robot.gripper.release();
                 gripper_released = true;
             }
         }
@@ -194,12 +196,10 @@ public class MainTeleOp extends OpMode {
         double right_trig = controller1.right_trigger;
         if (left_trig > 0) {
             robot.lift.setDownPosition();
-            telemetry.addLine("sper ca merge");
         }
         else if (right_trig > 0)
         {
             robot.lift.setUpPosition();
-            telemetry.addLine("sper ca merge 2");
         }
         if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
             return ;
@@ -217,8 +217,13 @@ public class MainTeleOp extends OpMode {
         telemetry.addData("Arm target value", arm_value);
         telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
         telemetry.addLine("---------------------");
-        telemetry.addData("Sculatoare 1 level", robot.lift.getCurrentPositionServoLeft());
-        telemetry.addData("Sculatoare 2 level", robot.lift.getCurrentPositionServoRight());
+        telemetry.addData("Lift 1 level", robot.lift.getCurrentPositionServoLeft());
+        telemetry.addData("Lift 2 level", robot.lift.getCurrentPositionServoRight());
+        telemetry.addLine("---------------------");
+        telemetry.addData("Gripper_position left", robot.gripper.getposleft());
+        telemetry.addData("Gripper_position right", robot.gripper.getposright());
+        telemetry.addData("Gripper_position gripper", robot.gripper.getposgripper());
+
         //telemetry.addData("Lift target value", arm_value);
         //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
 
