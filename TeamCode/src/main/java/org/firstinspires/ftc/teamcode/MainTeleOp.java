@@ -49,11 +49,12 @@ public class MainTeleOp extends OpMode {
 
 
         //robot.gripper.openBarier();
-        robot.lift.setDownPosition();
-        closed = false;
-        sculatoare = false;
+        //robot.lift.setDownPosition();
+        //closed = false;
+        //sculatoare = false;
         last_arm_position = 0;
         gripper_released = false;
+        gripper_positioned = false;
 
     }
 
@@ -175,12 +176,12 @@ public class MainTeleOp extends OpMode {
         {
             if(gripper_released == true)
             {
-                robot.gripper.grab();
+                robot.gripper.release();
                 gripper_released=false;
             }
             if (gripper_released == false)
             {
-                robot.gripper.release();
+                robot.gripper.grab();
                 gripper_released = true;
             }
         }

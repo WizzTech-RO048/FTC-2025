@@ -10,11 +10,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.Objects;
 
 public class Gripper {
-    private final double GRAB_POSITION_1 = 0.5, GRAB_POSITION_2 =1.0 ;
-    private final double RELEASE_POSITION_1 = GRAB_POSITION_1+0.1;
-    private final double RELEASE_POSITION_2 = GRAB_POSITION_2-0.1;
+    private final double GRAB_POSITION_1 = 0.5, GRAB_POSITION_2 =1.0 ;//trebuie cu smecheria cu axu
+    private final double RELEASE_POSITION_1 = GRAB_POSITION_1+0.5;
+    private final double RELEASE_POSITION_2 = GRAB_POSITION_2-0.5;
 
-    private final double GRAB_POSITION_3 =0.2;
+    private final double GRAB_POSITION_3 =-1.0;
     private final double RELEASE_POSITION_3 =1.0 ;
 
     private final double LEFT_PICKUP = 0.0, RIGHT_PICKUP = 1.0-0.13;
