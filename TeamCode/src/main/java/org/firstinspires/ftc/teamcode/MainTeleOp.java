@@ -162,29 +162,27 @@ public class MainTeleOp extends OpMode {
 
 
         //----------- gripper ---------------
-        if(controller1.dpadLeftOnce())
-            if(gripper_positioned == false)
-            {
-                robot.gripper.grab_position();
-                gripper_positioned=true;
-            }
-        if(controller1.dpadRightOnce())
-            if(gripper_positioned == true)
-            {
-                robot.gripper.release_position();
-                gripper_positioned=false;
-            }
+        if(controller1.dpadLeftOnce()) {
+            robot.gripper.grab_position();
+            gripper_positioned=!gripper_positioned;
+        }
+        if(controller1.dpadRightOnce()) {
+            robot.gripper.release_position();
+            gripper_positioned=!gripper_positioned;
+        }
+
+
         if(controller1.leftBumperOnce())
         {
-            if(gripper_released == true)
+            if(gripper_released)
             {
                 robot.gripper.grab();
-                gripper_released=false;
+                gripper_released=!gripper_released;
             }
             if (gripper_released == false)
             {
                 robot.gripper.release();
-                gripper_released = true;
+                gripper_released=!gripper_released;
             }
         }
         //if(controller1.rightBumperOnce())
