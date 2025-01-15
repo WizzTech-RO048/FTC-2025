@@ -19,6 +19,7 @@ public class MainTeleOp extends OpMode {
 
     private  int raise_value, arm_value,lift_value;
     public double RAISE_POWER = 1.0;
+
     private boolean closed, armIsUp;
     private boolean gripper_positioned, gripper_released;
     private boolean sculatoare;
@@ -80,16 +81,13 @@ public class MainTeleOp extends OpMode {
         // --------- movement general al robotului ---------
         drive.setWeightedDrivePower(
                 new Pose2d(
-
                         (controller1.left_stick_x) ,
                         (controller1.right_stick_x),
                         (controller1.left_stick_y)  // gen astea negative / pozitive sau schimbate intre ele
-
-
                 )
         );
 
-        // --------- ridicare slider ---------
+        // --------- extindere slider ---------
         if (controller1.YOnce()){
             robot.slider.raiseSlider(5500 , 16);
             if(arm_value <500) {
@@ -100,6 +98,8 @@ public class MainTeleOp extends OpMode {
                 isExtended_down = false;
             }
         }
+
+        // --------- retractie slider ---------
         if (controller1.AOnce()){
             robot.slider.raiseSlider(0, 16);
             if(arm_value <500) {
@@ -110,6 +110,8 @@ public class MainTeleOp extends OpMode {
                 isExtended_down = false;
             }
         }
+
+        // --------- extindere slider controlat ---------
         if (controller1.B()){
             if (slider_target_positionup <=5500)
                 slider_target_positionup =robot.slider.getCurrentPositionSlider()+400;
@@ -122,6 +124,8 @@ public class MainTeleOp extends OpMode {
                 isExtended_down = false;
             }
         }
+
+        // --------- retractie slider controlat ---------
         if (controller1.X()){
             if (slider_target_positiondown >=0)
                 slider_target_positiondown =robot.slider.getCurrentPositionSlider()-400;
@@ -129,6 +133,7 @@ public class MainTeleOp extends OpMode {
             robot.lift.setUpPosition();
         }
 
+        // --------- verificare slider extins in jos ---------
         if(isExtended_down){
             arm_value = 100;
             robot.arm.raiseArm(arm_value, RAISE_POWER + 1);
@@ -136,6 +141,7 @@ public class MainTeleOp extends OpMode {
 
         }
 
+        // --------- verificare slider extins in sus ---------
         if(isExtended_up){
             arm_value = 850;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
