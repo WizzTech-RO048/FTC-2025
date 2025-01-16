@@ -57,6 +57,7 @@ public class MainTeleOp extends OpMode {
         gripper_released = false;
         gripper_positioned = true;
 
+
     }
 
     // ------ the emergency stop function ---------
@@ -81,16 +82,16 @@ public class MainTeleOp extends OpMode {
         // --------- movement general al robotului ---------
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (controller1.left_stick_x) ,
+                        (controller1.left_stick_y) ,
                         (controller1.right_stick_x),
-                        (controller1.left_stick_y)  // gen astea negative / pozitive sau schimbate intre ele
+                        (controller1.left_stick_x)// gen astea negative / pozitive sau schimbate intre ele
                 )
         );
 
         // --------- extindere slider ---------
         if (controller1.YOnce()){
             robot.slider.raiseSlider(5500 , 16);
-            if(arm_value <500) {
+            if(arm_value <300) {
                 isExtended_down = true;
                 isExtended_up = false;
             }else{
@@ -102,7 +103,7 @@ public class MainTeleOp extends OpMode {
         // --------- retractie slider ---------
         if (controller1.AOnce()){
             robot.slider.raiseSlider(0, 16);
-            if(arm_value <500) {
+            if(arm_value <300) {
                 isExtended_down = true;
                 isExtended_up = false;
             }else{
@@ -116,7 +117,7 @@ public class MainTeleOp extends OpMode {
             if (slider_target_positionup <=5500)
                 slider_target_positionup =robot.slider.getCurrentPositionSlider()+400;
             robot.slider.raiseSlider(slider_target_positionup, 16);
-            if(arm_value < 500){
+            if(arm_value < 300){
                 isExtended_down = true;
                 isExtended_up = false;
             }else{
@@ -143,7 +144,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- verificare slider extins in sus ---------
         if(isExtended_up){
-            arm_value = 850;
+            arm_value = 600;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
             isExtended_up = false;
 
@@ -158,7 +159,7 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 850;
+            arm_value = 600;
             robot.arm.raiseArm(arm_value, RAISE_POWER -0.4);
         } else if (controller1.dpadDownOnce()) {
             if(robot.slider.getCurrentPositionSlider() > 10){
@@ -202,10 +203,20 @@ public class MainTeleOp extends OpMode {
         double left_trig = controller1.left_trigger;
         double right_trig = controller1.right_trigger;
         if (left_trig > 0) {
+            /*
+            lift_value = 0;
+            lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+            lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
+            */
             robot.lift.setDownPosition();
         }
         else if (right_trig > 0)
         {
+            /*
+            lift_value = 1000;
+            lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+            lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
+             */
             robot.lift.setUpPosition();
         }
         if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
@@ -230,6 +241,8 @@ public class MainTeleOp extends OpMode {
         telemetry.addData("Gripper_position left", robot.gripper.getposleft());
         telemetry.addData("Gripper_position right", robot.gripper.getposright());
         telemetry.addData("Gripper_position gripper", robot.gripper.getposgripper());
+        telemetry.addLine("---------------------");
+        telemetry.addData("Lift_Value", lift_value);
 
         //telemetry.addData("Lift target value", arm_value);
         //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
