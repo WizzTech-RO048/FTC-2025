@@ -24,7 +24,6 @@ public class Lift {
     private final double LEFT_LIFT_UP = +1 , RIGHT_LIFT_UP = -0.8;
     private final double LEFT_LIFT_DOWN = +0.3  , RIGHT_LIFT_DOWN = +0.6;
 
-
     Lift(@NonNull final Parameters parameters) {
         scheduler = Objects.requireNonNull(parameters.scheduler, "Scheduler was not set");
         telemetry = Objects.requireNonNull(parameters.telemetry, "Telemetry was not set up");
