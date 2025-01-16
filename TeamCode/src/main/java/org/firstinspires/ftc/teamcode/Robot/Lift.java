@@ -21,7 +21,7 @@ public class Lift {
     private final DcMotorEx right_lift, left_lift;
 
     private final Servo lift_servo_right, lift_servo_left;
-    private final double LEFT_LIFT_UP = 1, RIGHT_LIFT_UP = -0.8;
+    private final double LEFT_LIFT_UP = +0.6 , RIGHT_LIFT_UP = -0.2;
     private final double LEFT_LIFT_DOWN = -0.8  , RIGHT_LIFT_DOWN = +0.6;
 
 

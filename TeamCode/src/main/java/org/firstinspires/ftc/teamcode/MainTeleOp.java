@@ -203,20 +203,20 @@ public class MainTeleOp extends OpMode {
         double left_trig = controller1.left_trigger;
         double right_trig = controller1.right_trigger;
         if (left_trig > 0) {
-            /*
+
             lift_value = 0;
             lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
             lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
-            */
+
             robot.lift.setDownPosition();
         }
         else if (right_trig > 0)
         {
-            /*
+
             lift_value = 1000;
             lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
             lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
-             */
+
             robot.lift.setUpPosition();
         }
         if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
