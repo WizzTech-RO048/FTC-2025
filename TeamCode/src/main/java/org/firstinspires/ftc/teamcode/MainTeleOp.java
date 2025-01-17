@@ -114,7 +114,7 @@ public class MainTeleOp extends OpMode {
         }
 
         // --------- extindere slider controlat ---------
-        /*if (controller1.B()){
+        if (controller1.B()){
             if (slider_target_positionup <=5500)
                 slider_target_positionup =robot.slider.getCurrentPositionSlider()+400;
             robot.slider.raiseSlider(slider_target_positionup, 16);
@@ -125,7 +125,7 @@ public class MainTeleOp extends OpMode {
                 isExtended_up = true;
                 isExtended_down = false;
             }
-        }*/
+        }
 
         // --------- retractie slider controlat ---------
         if (controller1.X()){
