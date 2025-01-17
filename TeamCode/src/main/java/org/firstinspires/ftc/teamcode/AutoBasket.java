@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode; /**
  * */
 
 import android.annotation.SuppressLint;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,6 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.apriltag.AprilTagDetection;
 
 import java.util.concurrent.Executors;
@@ -26,7 +29,7 @@ public class AutoBasket extends LinearOpMode {
 
     double tagsize = 0.166;
 
-    int detected_location;
+    int detected_location =1;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -40,19 +43,19 @@ public class AutoBasket extends LinearOpMode {
         telemetry.setMsTransmissionInterval(50);
 
 
-//        if (detected_location == 1) {///-------------unghi pe sub schela
-//            TrajectorySequence Blue_Audience_Left = drive.trajectorySequenceBuilder(new Pose2d())
-//                    .lineToConstantHeading(new Vector2d(-29,0))
-//                    .lineToConstantHeading(new Vector2d(-20,0))
-//                    .splineToLinearHeading(new Pose2d(-29,19,Math.toRadians(-90)),Math.toRadians(0))
-//                    .forward(21)
-//                    .back(12)
-//                    .build();
-//
-//            if(isStopRequested()) return;
-//            drive.followTrajectorySequence(Blue_Audience_Left);
-//
-//        } else if (detected_location == 2) {
+        if (detected_location == 1) {///-------------unghi pe sub schela
+            TrajectorySequence Blue_Audience_Left = drive.trajectorySequenceBuilder(new Pose2d())
+                    .lineToConstantHeading(new Vector2d(-29,0))
+                    .lineToConstantHeading(new Vector2d(-20,0))
+                    .splineToLinearHeading(new Pose2d(-29,19,Math.toRadians(-90)),Math.toRadians(0))
+                    .forward(21)
+                    .back(12)
+                    .build();
+
+            if(isStopRequested()) return;
+            drive.followTrajectorySequence(Blue_Audience_Left);
+
+        }// else if (detected_location == 2) {
 //            // scenariul mid
 //            TrajectorySequence Blue_Audience_Middle = drive.trajectorySequenceBuilder(new Pose2d())
 //                    .back(32)
