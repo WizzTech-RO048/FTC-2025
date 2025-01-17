@@ -27,7 +27,7 @@ public class Gripper {
     private final HardwareMap hardwareMap;
 
     private final Servo claw;
-    private final Servo left_turner, right_turner;
+    private final CRServo left_turner, right_turner;
 
 
 
@@ -36,19 +36,19 @@ public class Gripper {
         hardwareMap = Objects.requireNonNull(parameters.hardwareMap, "HardwareMap was not set");
 
         claw = hardwareMap.get(Servo.class, "claw");
-        left_turner = hardwareMap.get(Servo.class, "left_turner");
-        right_turner = hardwareMap.get(Servo.class, "right_turner");
+        left_turner = hardwareMap.get(CRServo.class, "left_turner");
+        right_turner = hardwareMap.get(CRServo.class, "right_turner");
     }
 
 
     public void grab_position() {
-        left_turner.setPosition(GRAB_POSITION_1);
-        right_turner.setPosition(GRAB_POSITION_2);
+        left_turner.setPower(-1);
+        right_turner.setPower(1);
     }
 
     public void release_position() {
-        left_turner.setPosition(RELEASE_POSITION_1);
-        right_turner.setPosition(RELEASE_POSITION_2);
+        left_turner.setPower(1);
+        right_turner.setPower(-1);
     }
 
     public void grab()
@@ -63,14 +63,6 @@ public class Gripper {
     public double getposgripper()
     {
         return claw.getPosition();
-    }
-    public double getposleft()
-    {
-        return left_turner.getPosition();
-    }
-    public double getposright()
-    {
-        return right_turner.getPosition();
     }
 
     public static class Parameters {

@@ -238,9 +238,6 @@ public class MainTeleOp extends OpMode {
         telemetry.addData("Lift 1 level", robot.lift.getCurrentPositionServoLeft());
         telemetry.addData("Lift 2 level", robot.lift.getCurrentPositionServoRight());
         telemetry.addLine("---------------------");
-        telemetry.addData("Gripper_position left", robot.gripper.getposleft());
-        telemetry.addData("Gripper_position right", robot.gripper.getposright());
-        telemetry.addData("Gripper_position gripper", robot.gripper.getposgripper());
         telemetry.addLine("---------------------");
         telemetry.addData("Lift_Value", lift_value);
 
