@@ -56,7 +56,8 @@ public class MainTeleOp extends OpMode {
         last_arm_position = 0;
         gripper_released = false;
         gripper_positioned = true;
-
+        arm_value = 200;
+        robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         robot.lift.setUpPosition();
     }
 
@@ -113,7 +114,7 @@ public class MainTeleOp extends OpMode {
         }
 
         // --------- extindere slider controlat ---------
-        if (controller1.B()){
+        /*if (controller1.B()){
             if (slider_target_positionup <=5500)
                 slider_target_positionup =robot.slider.getCurrentPositionSlider()+400;
             robot.slider.raiseSlider(slider_target_positionup, 16);
@@ -124,7 +125,7 @@ public class MainTeleOp extends OpMode {
                 isExtended_up = true;
                 isExtended_down = false;
             }
-        }
+        }*/
 
         // --------- retractie slider controlat ---------
         if (controller1.X()){
