@@ -136,7 +136,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- verificare slider extins in jos ---------
         if(isExtended_down){
-            arm_value = 100;
+            arm_value = 200;
             robot.arm.raiseArm(arm_value, RAISE_POWER + 1);
             isExtended_down = false;
 
@@ -166,7 +166,7 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 100;
+            arm_value = 200;
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
 
