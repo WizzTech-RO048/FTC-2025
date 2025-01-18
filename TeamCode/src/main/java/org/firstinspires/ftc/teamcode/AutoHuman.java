@@ -27,8 +27,8 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 
-@Autonomous(name="Basket Auto")
-public class AutoBasket extends LinearOpMode {
+@Autonomous(name="Human Auto")
+public class AutoHuman extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -42,29 +42,29 @@ public class AutoBasket extends LinearOpMode {
         ScheduledFuture<?> lastArmMove, lastSliderMove;
 
         while (!isStarted() && !isStopRequested()) {
-            // test'
+            // test
             waitForStart();
         }
 
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            (0),
-                            (0),
-                            (-1)// gen astea negative / pozitive sau schimbate intre ele
-                    )
-            );
+        drive.setWeightedDrivePower(
+                new Pose2d(
+                        (0),
+                        (0),
+                        (1)// gen astea negative / pozitive sau schimbate intre ele
+                )
+        );
 
-            sleep(500);
+        sleep(1000);
 
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            (0),
-                            (0),
-                            (0)// gen astea negative / pozitive sau schimbate intre ele
-                    )
-            );
+        drive.setWeightedDrivePower(
+                new Pose2d(
+                        (0),
+                        (0),
+                        (0)// gen astea negative / pozitive sau schimbate intre ele
+                )
+        );
 
-            // safrsit test
+        // safrsit test
 
         waitForStart();
         while(opModeIsActive()) { sleep(200); }
