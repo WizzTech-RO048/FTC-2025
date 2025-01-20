@@ -1,0 +1,17 @@
+# Ignore Android build files
+/build/
+/TeamCode/build/
+
+# Ignore IntelliJ IDEA project files
+/.idea/
+*.iml
+
+# Ignore Gradle wrapper files
+/.gradle/
+/local.properties
+
+# Ignore other generated files
+*.apk
+*.jar
+*.class
+*.dex
