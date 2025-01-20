@@ -3,7 +3,7 @@
 /TeamCode/build/
 
 # Ignore IntelliJ IDEA project files
-/.idea/
+/.idea
 *.iml
 
 # Ignore Gradle wrapper files
