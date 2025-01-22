@@ -58,7 +58,7 @@ public class MainTeleOp extends OpMode {
         last_arm_position = 0;
         gripper_released = false;
         gripper_positioned = true;
-        arm_value = 100;
+        arm_value = 150;
         robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         /*robot.lift.setUpPosition();*/
     }
@@ -139,7 +139,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- verificare slider extins in jos ---------
         if(isExtended_down){
-            arm_value = 100;
+            arm_value = 150;
             robot.arm.raiseArm(arm_value, RAISE_POWER + 1);
             isExtended_down = false;
 
@@ -169,7 +169,7 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 100;
+            arm_value = 150;
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
 
@@ -194,7 +194,7 @@ public class MainTeleOp extends OpMode {
                 robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
                 lb_down =true;
             }else{
-                arm_value = 200;
+                arm_value = 150;
                 robot.arm.raiseArm(arm_value, RAISE_POWER-0.6);
                 lb_down =false;
             }
