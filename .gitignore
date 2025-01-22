@@ -7,8 +7,8 @@
 *.iml
 
 # Ignore Gradle wrapper files
-/.gradle/
-/local.properties
+.gradle/
+local.properties
 
 # Ignore other generated files
 *.apk
