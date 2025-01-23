@@ -6,29 +6,21 @@ package org.firstinspires.ftc.teamcode;
 
 import android.annotation.SuppressLint;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.ComputerVision.Pipelines.TeamPropDetectionPipelineBlue;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.openftc.apriltag.AprilTagDetection;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 
-@Autonomous(name="Basket Auto")
-public class AutoBasket extends LinearOpMode {
+@Autonomous(name="Not Auto")
+public class Auto_Not extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -40,32 +32,6 @@ public class AutoBasket extends LinearOpMode {
         );;
 
         ScheduledFuture<?> lastArmMove, lastSliderMove;
-
-        while (!isStarted() && !isStopRequested()) {
-            // test'
-            waitForStart();
-        }
-
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            (0),
-                            (0),
-                            (-1)// gen astea negative / pozitive sau schimbate intre ele
-                    )
-            );
-
-            sleep(500);
-
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            (0),
-                            (0),
-                            (0)// gen astea negative / pozitive sau schimbate intre ele
-                    )
-            );
-
-            // safrsit test
-
         waitForStart();
         while(opModeIsActive()) { sleep(200); }
     }

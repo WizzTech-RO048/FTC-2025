@@ -29,11 +29,13 @@ public class MainTeleOp extends OpMode {
     private ScheduledFuture<?> lastRightLift, lastLeftLift;
     //boolean isPressed = false;
 
-    int slider_target_positionup;
-    int slider_target_positiondown;
+    int slider_target_positionup =0;
+    int slider_target_positiondown =0;
 
     boolean isExtended_down = false;
     boolean isExtended_up =false;
+    boolean gripper_rotating = false;
+    boolean lb_down =false;
 
     @Override
     public void init() {
@@ -56,7 +58,7 @@ public class MainTeleOp extends OpMode {
         last_arm_position = 0;
         gripper_released = false;
         gripper_positioned = true;
-        arm_value = 200;
+        arm_value = 100;
         robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         robot.lift.setUpPosition();
     }
@@ -91,7 +93,9 @@ public class MainTeleOp extends OpMode {
 
         // --------- extindere slider ---------
         if (controller1.YOnce()){
-            robot.slider.raiseSlider(5500 , 16);
+            if (slider_target_positionup <=5500)
+                slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
+            robot.slider.raiseSlider(slider_target_positionup, 16);
             if(arm_value <300) {
                 isExtended_down = true;
                 isExtended_up = false;
@@ -116,7 +120,7 @@ public class MainTeleOp extends OpMode {
         // --------- extindere slider controlat ---------
         if (controller1.B()){
             if (slider_target_positionup <=5500)
-                slider_target_positionup =robot.slider.getCurrentPositionSlider()+400;
+                slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
             robot.slider.raiseSlider(slider_target_positionup, 16);
             if(arm_value < 300){
                 isExtended_down = true;
@@ -130,7 +134,7 @@ public class MainTeleOp extends OpMode {
         // --------- retractie slider controlat ---------
         if (controller1.X()){
             if (slider_target_positiondown >=0)
-                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-400;
+                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-100;
             robot.slider.raiseSlider(slider_target_positiondown, 16);
             robot.lift.setUpPosition();
         }
@@ -174,28 +178,32 @@ public class MainTeleOp extends OpMode {
 
         //----------- gripper ---------------
         if(controller1.dpadLeftOnce()) {
-            robot.gripper.grab_position();
-            gripper_positioned=!gripper_positioned;
+                robot.gripper.grab_position();
+                gripper_positioned=!gripper_positioned;
+
         }
         if(controller1.dpadRightOnce()) {
-            robot.gripper.release_position();
-            gripper_positioned=!gripper_positioned;
+                robot.gripper.release_position();
+                gripper_positioned=!gripper_positioned;
+
         }
 
 
         if(controller1.leftBumperOnce())
         {
-            if(gripper_released)
-            {
-                robot.gripper.grab();
-                gripper_released=!gripper_released;
+            if(lb_down==false){
+                arm_value=50;
+                robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
+                lb_down =true;
+            }else{
+                arm_value = 200;
+                robot.arm.raiseArm(arm_value, RAISE_POWER-0.6);
+                lb_down =false;
             }
-            if (gripper_released == false)
-            {
-                robot.gripper.release();
-                gripper_released=!gripper_released;
-            }
+
         }
+
+
         //if(controller1.rightBumperOnce())
         //{
 
@@ -205,7 +213,7 @@ public class MainTeleOp extends OpMode {
         double right_trig = controller1.right_trigger;
         if (left_trig > 0) {
 
-            lift_value = 0;
+            lift_value = -1000;
             lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
             lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
@@ -214,7 +222,7 @@ public class MainTeleOp extends OpMode {
         else if (right_trig > 0)
         {
 
-            lift_value = 1000;
+            lift_value = 7000;
             lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
             lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
