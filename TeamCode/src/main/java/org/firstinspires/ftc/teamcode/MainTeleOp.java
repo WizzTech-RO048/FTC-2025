@@ -125,7 +125,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- verificare slider extins in jos ---------
         if(isExtended_down){
-            arm_value = 100;
+            arm_value = 200;
             robot.arm.raiseArm(arm_value, RAISE_POWER + 1);
             isExtended_down = false;
 
@@ -133,7 +133,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- verificare slider extins in sus ---------
         if(isExtended_up){
-            arm_value = 750;
+            arm_value = 800;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
             isExtended_up = false;
 
@@ -153,13 +153,13 @@ public class MainTeleOp extends OpMode {
         } else if (controller1.dpadDownOnce()) {
             if(robot.slider.getCurrentPositionSlider() > 10){
                 slider_target_positiondown = 0;
-                robot.slider.raiseSlider(slider_target_positiondown, 16);
+                robot.slider.raiseSlider(slider_target_positiondown, 10);
             }
-            arm_value = 100;
+            arm_value = 200;
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
         if (controller1.leftBumper()){
-            if (arm_target_positionup <=750) {
+            if (arm_target_positionup <=800) {
                 arm_target_positionup = robot.arm.getCurrentPositionArm() + 150;
                 robot.arm.raiseArm(arm_target_positionup, 16);
             }
