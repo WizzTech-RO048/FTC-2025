@@ -21,7 +21,7 @@ public class MainTeleOp extends OpMode {
     public double RAISE_POWER = 1.0;
 
     private boolean closed, armIsUp;
-    private boolean gripper_positioned, gripper_released;
+    private int gripper_position = 0; //0-oprit 1-aduna piesa 2-beleste piesa
     private boolean sculatoare;
     private int last_arm_position; // 0 - a, 1 - x, 2 - b, 3 - y
     private int slider_level = 0;
@@ -56,8 +56,6 @@ public class MainTeleOp extends OpMode {
         //closed = false;
         //sculatoare = false;
         last_arm_position = 0;
-        gripper_released = false;
-        gripper_positioned = true;
         arm_value = 150;
         robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         /*robot.lift.setUpPosition();*/
@@ -176,14 +174,22 @@ public class MainTeleOp extends OpMode {
 
         //----------- gripper ---------------
         if(controller1.dpadLeftOnce()) {
-                robot.gripper.grab_position();
-                gripper_positioned=!gripper_positioned;
-
+                if (gripper_position == 1) {
+                    robot.gripper.no_position();
+                    gripper_position = 0;
+                } else {
+                    robot.gripper.grab_position();
+                    gripper_position=1;
+                }
         }
         if(controller1.dpadRightOnce()) {
+            if (gripper_position == 2) {
+                robot.gripper.no_position();
+                gripper_position = 0;
+            } else {
                 robot.gripper.release_position();
-                gripper_positioned=!gripper_positioned;
-
+                gripper_position=2;
+            }
         }
 
 
@@ -210,12 +216,19 @@ public class MainTeleOp extends OpMode {
         double left_trig = controller1.left_trigger;
         double right_trig = controller1.right_trigger;
         if (left_trig > 0) {
+            if (robot.lift.getCurrentPositionServoLeft() > 900 && robot.lift.getCurrentPositionServoRight() > 900) {
+                lift_value = 0;
+                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
-            lift_value = -1000;
-            lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
-            lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
+                robot.lift.setUpPosition();
+            } else {
+                lift_value = -1000;
+                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
-            robot.lift.setDownPosition();
+                robot.lift.setDownPosition();
+            }
         }
         else if (right_trig > 0)
         {
