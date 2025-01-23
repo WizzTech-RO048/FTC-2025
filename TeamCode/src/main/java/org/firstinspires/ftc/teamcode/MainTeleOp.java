@@ -21,7 +21,7 @@ public class MainTeleOp extends OpMode {
     public double RAISE_POWER = 1.0;
 
     private boolean closed, armIsUp;
-    private boolean gripper_positioned, gripper_released;
+    private int gripper_position = 0; //0-oprit 1-aduna piesa 2-beleste piesa
     private boolean sculatoare;
     private int last_arm_position; // 0 - a, 1 - x, 2 - b, 3 - y
     private int slider_level = 0;
@@ -56,11 +56,9 @@ public class MainTeleOp extends OpMode {
         //closed = false;
         //sculatoare = false;
         last_arm_position = 0;
-        gripper_released = false;
-        gripper_positioned = true;
-        arm_value = 100;
+        arm_value = 150;
         robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
-        robot.lift.setUpPosition();
+        /*robot.lift.setUpPosition();*/
     }
 
     // ------ the emergency stop function ---------
@@ -93,9 +91,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- extindere slider ---------
         if (controller1.YOnce()){
-            if (slider_target_positionup <=5500)
-                slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
-            robot.slider.raiseSlider(slider_target_positionup, 16);
+            robot.slider.raiseSlider(5700, 16);
             if(arm_value <300) {
                 isExtended_down = true;
                 isExtended_up = false;
@@ -119,8 +115,8 @@ public class MainTeleOp extends OpMode {
 
         // --------- extindere slider controlat ---------
         if (controller1.B()){
-            if (slider_target_positionup <=5500)
-                slider_target_positionup =robot.slider.getCurrentPositionSlider()+100;
+            if (slider_target_positionup <=5600)
+                slider_target_positionup =robot.slider.getCurrentPositionSlider()+200;
             robot.slider.raiseSlider(slider_target_positionup, 16);
             if(arm_value < 300){
                 isExtended_down = true;
@@ -134,14 +130,14 @@ public class MainTeleOp extends OpMode {
         // --------- retractie slider controlat ---------
         if (controller1.X()){
             if (slider_target_positiondown >=0)
-                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-100;
+                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-200;
             robot.slider.raiseSlider(slider_target_positiondown, 16);
             robot.lift.setUpPosition();
         }
 
         // --------- verificare slider extins in jos ---------
         if(isExtended_down){
-            arm_value = 200;
+            arm_value = 150;
             robot.arm.raiseArm(arm_value, RAISE_POWER + 1);
             isExtended_down = false;
 
@@ -149,7 +145,7 @@ public class MainTeleOp extends OpMode {
 
         // --------- verificare slider extins in sus ---------
         if(isExtended_up){
-            arm_value = 600;
+            arm_value = 750;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
             isExtended_up = false;
 
@@ -164,44 +160,43 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 600;
+            arm_value = 750;
             robot.arm.raiseArm(arm_value, RAISE_POWER -0.4);
         } else if (controller1.dpadDownOnce()) {
             if(robot.slider.getCurrentPositionSlider() > 10){
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
-            arm_value = 200;
+            arm_value = 150;
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
 
 
         //----------- gripper ---------------
-        if(controller1.dpadLeftOnce()) {
-                robot.gripper.grab_position();
-                gripper_positioned=!gripper_positioned;
-
+        if(controller1.leftBumper()) {
+            robot.gripper.grab_position();
+            gripper_position=1;
+        } else if (controller1.rightBumper()) {
+            robot.gripper.release_position();
+            gripper_position=2;
+        } else {
+            robot.gripper.no_position();
+            gripper_position = 0;
         }
-        if(controller1.dpadRightOnce()) {
-                robot.gripper.release_position();
-                gripper_positioned=!gripper_positioned;
 
-        }
-
-
-        if(controller1.leftBumperOnce())
-        {
-            if(lb_down==false){
-                arm_value=50;
-                robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
-                lb_down =true;
-            }else{
-                arm_value = 200;
-                robot.arm.raiseArm(arm_value, RAISE_POWER-0.6);
-                lb_down =false;
-            }
-
-        }
+//        if(controller1.leftBumperOnce())
+//        {
+//            if(lb_down==false){
+//                arm_value=50;
+//                robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
+//                lb_down =true;
+//            }else{
+//                arm_value = 150;
+//                robot.arm.raiseArm(arm_value, RAISE_POWER-0.6);
+//                lb_down =false;
+//            }
+//
+//        }
 
 
         //if(controller1.rightBumperOnce())
@@ -212,12 +207,19 @@ public class MainTeleOp extends OpMode {
         double left_trig = controller1.left_trigger;
         double right_trig = controller1.right_trigger;
         if (left_trig > 0) {
+            if (robot.lift.getCurrentPositionServoLeft() > 900 && robot.lift.getCurrentPositionServoRight() > 900) {
+                lift_value = 0;
+                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
-            lift_value = -1000;
-            lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
-            lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
+                robot.lift.setUpPosition();
+            } else {
+                lift_value = -1000;
+                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
-            robot.lift.setDownPosition();
+                robot.lift.setDownPosition();
+            }
         }
         else if (right_trig > 0)
         {
@@ -249,6 +251,7 @@ public class MainTeleOp extends OpMode {
         telemetry.addLine("---------------------");
         telemetry.addLine("---------------------");
         telemetry.addData("Lift_Value", lift_value);
+
 
         //telemetry.addData("Lift target value", arm_value);
         //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
