@@ -16,3 +16,5 @@ local.properties
 *.class
 *.dex
 .idea/workspace.xml
+/.gradle
+/FtcRobotController/build

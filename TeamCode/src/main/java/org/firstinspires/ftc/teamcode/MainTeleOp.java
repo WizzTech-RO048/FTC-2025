@@ -173,39 +173,30 @@ public class MainTeleOp extends OpMode {
 
 
         //----------- gripper ---------------
-        if(controller1.dpadLeftOnce()) {
-                if (gripper_position == 1) {
-                    robot.gripper.no_position();
-                    gripper_position = 0;
-                } else {
-                    robot.gripper.grab_position();
-                    gripper_position=1;
-                }
-        }
-        if(controller1.dpadRightOnce()) {
-            if (gripper_position == 2) {
-                robot.gripper.no_position();
-                gripper_position = 0;
-            } else {
-                robot.gripper.release_position();
-                gripper_position=2;
-            }
+        if(controller1.leftBumper()) {
+            robot.gripper.grab_position();
+            gripper_position=1;
+        } else if (controller1.rightBumper()) {
+            robot.gripper.release_position();
+            gripper_position=2;
+        } else {
+            robot.gripper.no_position();
+            gripper_position = 0;
         }
 
-
-        if(controller1.leftBumperOnce())
-        {
-            if(lb_down==false){
-                arm_value=50;
-                robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
-                lb_down =true;
-            }else{
-                arm_value = 150;
-                robot.arm.raiseArm(arm_value, RAISE_POWER-0.6);
-                lb_down =false;
-            }
-
-        }
+//        if(controller1.leftBumperOnce())
+//        {
+//            if(lb_down==false){
+//                arm_value=50;
+//                robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
+//                lb_down =true;
+//            }else{
+//                arm_value = 150;
+//                robot.arm.raiseArm(arm_value, RAISE_POWER-0.6);
+//                lb_down =false;
+//            }
+//
+//        }
 
 
         //if(controller1.rightBumperOnce())
