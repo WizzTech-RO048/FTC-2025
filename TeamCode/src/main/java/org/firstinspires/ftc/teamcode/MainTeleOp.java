@@ -159,12 +159,20 @@ public class MainTeleOp extends OpMode {
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
         }
         if (controller1.leftBumper()){
+            if(robot.slider.getCurrentPositionSlider() > 10){
+                slider_target_positiondown = 0;
+                robot.slider.raiseSlider(slider_target_positiondown, 10);
+            }
             if (arm_target_positionup <=800) {
                 arm_target_positionup = robot.arm.getCurrentPositionArm() + 150;
                 robot.arm.raiseArm(arm_target_positionup, 16);
             }
         }
         if(controller1.rightBumper()) {
+            if(robot.slider.getCurrentPositionSlider() > 10){
+                slider_target_positiondown = 0;
+                robot.slider.raiseSlider(slider_target_positiondown, 10);
+            }
             if (arm_target_positiondown >= 100) {
                 arm_target_positiondown = robot.arm.getCurrentPositionArm() - 150;
                 robot.arm.raiseArm(arm_target_positiondown,16);
