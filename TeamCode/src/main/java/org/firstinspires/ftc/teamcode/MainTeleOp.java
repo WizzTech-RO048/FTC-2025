@@ -153,7 +153,7 @@ public class MainTeleOp extends OpMode {
         } else if (controller1.dpadDownOnce()) {
             if(robot.slider.getCurrentPositionSlider() > 10){
                 slider_target_positiondown = 0;
-                robot.slider.raiseSlider(slider_target_positiondown, 10);
+                robot.slider.raiseSlider(slider_target_positiondown, 16);
             }
             arm_value = 200;
             robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
