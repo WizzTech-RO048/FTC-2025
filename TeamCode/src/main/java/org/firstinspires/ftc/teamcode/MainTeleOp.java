@@ -98,45 +98,69 @@ public class MainTeleOp extends OpMode {
                         (controller1.left_stick_x)// gen astea negative / pozitive sau schimbate intre ele
                 )
         );
-
-        // --------- extindere slider ---------
-        if (controller1.YOnce()){
-            robot.slider.raiseSlider(5700, RAISE_POWER);
+        if(!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
+            return ;
         }
+        else {
+            // --------- extindere slider ---------
+            if (controller1.YOnce()) {
+                if (robot.arm.getCurrentPositionArm() <= 200)  /// check if arm is raised || raise arm
+                    robot.arm.raiseArm(200, RAISE_POWER);
+                robot.slider.raiseSlider(5700, RAISE_POWER);
+            }
 
-        // --------- retractie slider ---------
-        if (controller1.AOnce()){
-            robot.slider.raiseSlider(0, RAISE_POWER);
-        }
+            // --------- retractie slider ---------
+            if (controller1.AOnce()) {
+                if (robot.arm.getCurrentPositionArm() <= 200)  /// check if arm is raised || raise arm
+                    robot.arm.raiseArm(200, RAISE_POWER/2);
+                robot.slider.raiseSlider(0, RAISE_POWER);
+            }
 
-        // --------- extindere slider controlat ---------
-        if (controller1.B()){
-            if (slider_target_positionup <=5600)
-                slider_target_positionup =robot.slider.getCurrentPositionSlider()+200;
-            robot.slider.raiseSlider(slider_target_positionup, RAISE_POWER);
-        }
+            // --------- extindere slider controlat ---------
+            if (controller1.B()) {  /// extend slider a bittt
+                if (slider_target_positionup <= 5500) {
+                    // if not at max
+                    if (robot.arm.getCurrentPositionArm() <= 400)
+                    {
+                        robot.arm.raiseArm(400, RAISE_POWER);
+                        robot.slider.raiseSlider(1950,RAISE_POWER);
+                    }
+                    else{
+                        if(robot.arm.getCurrentPositionArm() <= 200)
+                            robot.arm.raiseArm(200, RAISE_POWER);
+                        robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() + 200, RAISE_POWER);
+                    }
+                }
+                else {
+                    robot.slider.raiseSlider(5700, RAISE_POWER);
+                }
+            }
 
-        // --------- retractie slider controlat ---------
-        if (controller1.X()){
-            if (slider_target_positiondown >=0)
-                slider_target_positiondown =robot.slider.getCurrentPositionSlider()-200;
-            robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
-        }
+            // --------- retractie slider controlat ---------
+            if (controller1.X()) {
+                if (slider_target_positiondown >= 200) {
+                    if (robot.arm.getCurrentPositionArm() <= 200)  /// check if arm is raised || raise arm
+                        robot.arm.raiseArm(200, RAISE_POWER);
+                    robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() - 200, RAISE_POWER);
 
-        // --------- verificare slider extins in jos ---------
-        if(isExtended_down){
-            arm_value = 200;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
-            isExtended_down = false;
+                } else {
+                    robot.slider.raiseSlider(0, RAISE_POWER);
+                }
+            }
 
-        }
-
-        // --------- verificare slider extins in sus ---------
-        if(isExtended_up){
-            arm_value = 800;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
-            isExtended_up = false;
-
+//        // --------- verificare slider extins in jos ---------
+//        if(isExtended_down){
+//            arm_value = 200;
+//            robot.arm.raiseArm(arm_value, RAISE_POWER);
+//            isExtended_down = false;
+//        }
+//
+//        // --------- verificare slider extins in sus ---------
+//        if(isExtended_up){
+//            arm_value = 800;
+//            robot.arm.raiseArm(arm_value, RAISE_POWER);
+//            isExtended_up = false;
+//        }
         }
 
         // -------  controlling the arm positions -----
@@ -149,33 +173,34 @@ public class MainTeleOp extends OpMode {
                 robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
             }
             arm_value = 750;
-            robot.arm.raiseArm(arm_value, RAISE_POWER );
-        } else if (controller1.dpadDownOnce()) {
-            if(robot.slider.getCurrentPositionSlider() > 10){
-                slider_target_positiondown = 0;
-                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
-            }
-            arm_value = 200;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
-        }
-        if (controller1.leftBumper()){
-            if(robot.slider.getCurrentPositionSlider() > 10){
+        } else if (controller1.dpadDownOnce()) {
+            if(robot.slider.getCurrentPositionSlider() > 10 && robot.arm.getCurrentPositionArm() > 400){
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
             }
+            if(robot.slider.getCurrentPositionSlider() <2500)
+            {arm_value = 100;
+            robot.arm.raiseArm(arm_value, RAISE_POWER/2);}
+        }
+        if (controller1.rightBumper()){
+//            if(robot.slider.getCurrentPositionSlider() > 10){
+//                slider_target_positiondown = 0;
+//                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
+//            }
             if (arm_target_positionup <=800) {
                 arm_target_positionup = robot.arm.getCurrentPositionArm() + 150;
                 robot.arm.raiseArm(arm_target_positionup, RAISE_POWER);
             }
         }
-        if(controller1.rightBumper()) {
-            if(robot.slider.getCurrentPositionSlider() > 10){
-                slider_target_positiondown = 0;
-                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
-            }
+        if(controller1.leftBumper()) {
+//            if(robot.slider.getCurrentPositionSlider() > 10){
+//                slider_target_positiondown = 0;
+//                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
+//            }
             if (arm_target_positiondown >= 100) {
-                arm_target_positiondown = robot.arm.getCurrentPositionArm() - 150;
-                robot.arm.raiseArm(arm_target_positiondown,RAISE_POWER);
+                arm_target_positiondown = robot.arm.getCurrentPositionArm() - 75;
+                robot.arm.raiseArm(arm_target_positiondown,RAISE_POWER/2);
             }
         }
 
