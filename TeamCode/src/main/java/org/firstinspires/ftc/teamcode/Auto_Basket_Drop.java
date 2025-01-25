@@ -48,19 +48,48 @@ public class Auto_Basket_Drop extends LinearOpMode {
             // test'
             waitForStart();
         }
-
+        drive.setWeightedDrivePower(
+                new Pose2d(
+                        (-1),
+                        (0),
+                        (0)// gen astea negative / pozitive sau schimbate intre ele
+                )
+        );
+        sleep(500);
+        drive.setWeightedDrivePower(
+                new Pose2d(
+                        (0),
+                        (0),
+                        (0)// gen astea negative / pozitive sau schimbate intre ele
+                )
+        );
         robot.arm.raiseArm(750,1);
         sleep(2000);
         robot.slider.raiseSlider(5700,1);
-        sleep(2000);
+        sleep(3000);
         robot.gripper.grab_position();
         sleep(2000);
         robot.gripper.no_position();
         sleep(2000);
         //robot.arm.raiseArm(0,0.5);
         robot.slider.raiseSlider(0,1);
-        sleep(2000);
-        robot.arm.raiseArm(200, 1);
+        sleep(5000);
+        drive.setWeightedDrivePower(
+                new Pose2d(
+                        (1),
+                        (0),
+                        (0)// gen astea negative / pozitive sau schimbate intre ele
+                )
+        );
+        sleep(150);
+        drive.setWeightedDrivePower(
+                new Pose2d(
+                        (0),
+                        (0),
+                        (0)// gen astea negative / pozitive sau schimbate intre ele
+                )
+        );
+        robot.arm.raiseArm(200, 0.5);
         sleep(2000);
         robot.arm.raiseArm(0,1);
         drive.setWeightedDrivePower(
