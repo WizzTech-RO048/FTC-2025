@@ -38,6 +38,7 @@ public class MainTeleOp extends OpMode {
     boolean isExtended_up =false;
     boolean gripper_rotating = false;
     boolean lb_down =false;
+    boolean lift_position=false;
 
     @Override
     public void init() {
@@ -241,18 +242,22 @@ public class MainTeleOp extends OpMode {
         //}
         // ---------- controale lift -------------
         if (controller1.dpadLeftOnce()) {
-            if (robot.lift.getCurrentPositionServoLeft() > 900 && robot.lift.getCurrentPositionServoRight() > 900) {
+            if (!lift_position) {
                 lift_value = 0;
                 lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
                 lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
                 robot.lift.setUpPosition();
+
+                lift_position = !lift_position;
             } else {
                 lift_value = -1000;
                 lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
                 lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
                 robot.lift.setDownPosition();
+
+                lift_position = !lift_position;
             }
         }
         if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
