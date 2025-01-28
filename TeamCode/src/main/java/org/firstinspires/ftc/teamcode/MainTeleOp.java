@@ -173,24 +173,25 @@ public class MainTeleOp extends OpMode {
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
             }
-            arm_value = 750;
+            arm_value = 400;
             robot.arm.raiseArm(arm_value, RAISE_POWER);
         } else if (controller1.dpadDownOnce()) {
             if(robot.slider.getCurrentPositionSlider() > 10 && robot.arm.getCurrentPositionArm() > 400){
                 slider_target_positiondown = 0;
                 robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
             }
-            if(robot.slider.getCurrentPositionSlider() <2500)
-            {arm_value = 100;
-            robot.arm.raiseArm(arm_value, RAISE_POWER/2);}
+            if(robot.slider.getCurrentPositionSlider() <2500) {
+                arm_value = 100;
+                robot.arm.raiseArm(arm_value, RAISE_POWER/2);
+            }
         }
         if (controller1.rightBumper()){
 //            if(robot.slider.getCurrentPositionSlider() > 10){
 //                slider_target_positiondown = 0;
 //                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
 //            }
-            if (arm_target_positionup <=800) {
-                arm_target_positionup = robot.arm.getCurrentPositionArm() + 150;
+            if (arm_target_positionup <=400) {
+                arm_target_positionup = robot.arm.getCurrentPositionArm() + 100;
                 robot.arm.raiseArm(arm_target_positionup, RAISE_POWER);
             }
         }

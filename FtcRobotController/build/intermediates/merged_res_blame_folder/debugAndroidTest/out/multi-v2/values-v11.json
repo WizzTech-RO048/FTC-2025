@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.qualcomm.ftcrobotcontroller.test.FtcRobotController-mergeDebugAndroidTestResources-16:/values-v11/values-v11.xml",
+            "outputFile": "com.qualcomm.ftcrobotcontroller.test.FtcRobotController-mergeDebugAndroidTestResources-15:/values-v11/values-v11.xml",
             "map": [
                 {
-                    "source": "/root/.gradle/caches/transforms-3/a5e71af0ae13ffe6d7b9adbab6f9ebfa/transformed/jetified-RobotCore-9.0.1/res/values-v11/values-v11.xml",
+                    "source": "/Users/vladt/.gradle/caches/transforms-3/2017c1507d5fe3658e539f38b60cac79/transformed/jetified-RobotCore-9.0.1/res/values-v11/values-v11.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
