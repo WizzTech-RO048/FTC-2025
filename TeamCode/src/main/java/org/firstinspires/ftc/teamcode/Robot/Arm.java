@@ -32,7 +32,7 @@ public class Arm {
         hardwareMap = Objects.requireNonNull(parameters.hardwareMap, "HardwareMap was not set up");
 
         arm = hardwareMap.get(DcMotorEx.class, "arm");
-        arm.setDirection(DcMotorSimple.Direction.FORWARD);
+        arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
