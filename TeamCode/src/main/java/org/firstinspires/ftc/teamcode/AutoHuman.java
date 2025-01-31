@@ -14,7 +14,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.ComputerVision.Pipelines.TeamPropDetectionPipelineBlue;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.apriltag.AprilTagDetection;
@@ -29,6 +28,8 @@ import java.util.concurrent.ScheduledFuture;
 
 @Autonomous(name="Human Auto")
 public class AutoHuman extends LinearOpMode {
+
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -46,140 +47,20 @@ public class AutoHuman extends LinearOpMode {
             waitForStart();
         }
 
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (1)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
+        TrajectorySequence Red_BackDrop_Left = drive.trajectorySequenceBuilder(new Pose2d())
+//                .lineToConstantHeading(new Vector2d(-5,0))
+//                .lineToConstantHeading(new Vector2d(-20,0))
+//                .splineToLinearHeading(new Pose2d(-29,19,Math.toRadians(-90)),Math.toRadians(0))
+//                .forward(5)
+//                .back(12)
+                .turn(Math.toRadians(-90))
+//                .lineToConstantHeading(new Vector2d(-2,34))//parcare
+//                .lineToConstantHeading(new Vector2d(0,40))
+                .build();
 
-        sleep(600);
+        drive.followTrajectorySequence(Red_BackDrop_Left);
 
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
 
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (-1),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(700);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(400);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (1)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(300);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (1),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (-1),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(400);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (1)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (1),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (-1),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (1),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        // safrsit test
-
-        waitForStart();
         while(opModeIsActive()) { sleep(200); }
     }
 

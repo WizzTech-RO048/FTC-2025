@@ -25,7 +25,7 @@ public class MainTeleOp extends OpMode {
     public double RAISE_POWER = 1.0;
 
     public int ARM_MAX_POS = 400;
-    public int SLIDER_MAX_POS = 5000;
+    public int SLIDER_MAX_POS = 5700;
 
     public double arm_percentage = 0.0;      // procent din cat sa ridice din ARM_MAX_POS (are valoarea intre 0.0 si 1.0)
     public double slider_percentage = 0.0;   // procent din cat sa ridice din SLIDER_MAX_POS (are valoarea intre 0.0 si 1.0)
@@ -148,15 +148,9 @@ public class MainTeleOp extends OpMode {
         double right_trig = controller2.right_trigger;
         if (left_trig > 0) {
             robot.gripper.grab_position();
-            gripper_position = 1;
         } else if (right_trig > 0) {
             robot.gripper.release_position();
-            gripper_position = 2;
-        } else {
-            robot.gripper.no_position();
-            gripper_position = 0;
         }
-
 
         // =======================
         // ===== DRIVER 2 ========
@@ -169,9 +163,9 @@ public class MainTeleOp extends OpMode {
             if (controller2.YOnce()) {
                 if (robot.arm.getCurrentPositionArm() <= 200) {
                     arm_percentage = 1.0;
-                    robot.arm.raiseArm((int) (arm_percentage * ARM_MAX_POS), RAISE_POWER);
+                    robot.arm.raiseArm((int)(arm_percentage * ARM_MAX_POS), RAISE_POWER);
                 }
-                robot.slider.raiseSlider(5700, RAISE_POWER);
+                robot.slider.raiseSlider((int)(slider_percentage * SLIDER_MAX_POS), RAISE_POWER);
             }
 
             // --------- retractie slider ---------
