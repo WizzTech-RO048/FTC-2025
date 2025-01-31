@@ -3,24 +3,24 @@
 3    package="com.qualcomm.ftcrobotcontroller.test" >
 4
 5    <uses-sdk
-5-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:5:5-74
+5-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:5:15-41
+6-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:5:15-41
 7        android:targetSdkVersion="28" />
-7-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:5:42-71
+7-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:5:42-71
 8
 9    <instrumentation
-9-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:11:5-15:86
+9-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:11:5-15:86
 10        android:name="android.test.InstrumentationTestRunner"
-10-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:11:22-75
+10-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:11:22-75
 11        android:functionalTest="false"
-11-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:14:22-52
+11-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:13:22-53
+12-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:13:22-53
 13        android:label="Tests for com.qualcomm.ftcrobotcontroller.test"
-13-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:15:22-84
+13-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:15:22-84
 14        android:targetPackage="com.qualcomm.ftcrobotcontroller.test" />
-14-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:12:22-82
+14-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:12:22-82
 15
 16    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 16-->[:FtcRobotController] /Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-81
@@ -178,7 +178,7 @@
 98-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/vladt/.gradle/caches/transforms-3/3ff17c95c9e2bb605762f6daec90f3e0/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:44:9-33
 99
 100    <application
-100-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:7:5-9:19
+100-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:7:5-9:19
 101        android:name="org.firstinspires.ftc.robotcore.internal.system.RobotApplication"
 101-->[org.firstinspires.ftc:RobotCore:9.0.1] /Users/vladt/.gradle/caches/transforms-3/2017c1507d5fe3658e539f38b60cac79/transformed/jetified-RobotCore-9.0.1/AndroidManifest.xml:87:18-97
 102        android:allowBackup="true"
@@ -198,8 +198,8 @@
 110        android:usesCleartextTraffic="true" >
 110-->[:FtcRobotController] /Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:9-44
 111        <uses-library android:name="android.test.runner" />
-111-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:8:9-60
-111-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4115926037805978413.xml:8:23-57
+111-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:8:9-60
+111-->/Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7257965480912347867.xml:8:23-57
 112        <!-- Indicates to the ControlHubUpdater what the latest version of the Control Hub is that this app supports -->
 113        <meta-data
 113-->[:FtcRobotController] /Users/vladt/Desktop/vladt/wizztech/2024-2025-INTO-THE-DEEP/code/FTC-2025/FtcRobotController/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:9-23:33

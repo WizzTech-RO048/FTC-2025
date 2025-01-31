@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.os.Environment;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -8,17 +9,26 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Robot.*;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 
-@TeleOp(name="FTC2025")
+@TeleOp(name = "FTC2025")
 public class MainTeleOp extends OpMode {
     private Robot robot;
-    private Controller controller1;
+    private Controller controller1, controller2;
     private SampleMecanumDrive drive;
 
-    private  int raise_value, arm_value =  0,lift_value;
+    private int raise_value, arm_value = 0, lift_value;
     public double RAISE_POWER = 1.0;
+
+    public int ARM_MAX_POS = 400;
+    public int SLIDER_MAX_POS = 5000;
+
+    public double arm_percentage = 0.0;      // procent din cat sa ridice din ARM_MAX_POS (are valoarea intre 0.0 si 1.0)
+    public double slider_percentage = 0.0;   // procent din cat sa ridice din SLIDER_MAX_POS (are valoarea intre 0.0 si 1.0)
 
     private boolean closed, armIsUp;
     private int gripper_position = 0; //0-oprit 1-aduna piesa 2-beleste piesa
@@ -29,16 +39,22 @@ public class MainTeleOp extends OpMode {
     private ScheduledFuture<?> lastRightLift, lastLeftLift;
     //boolean isPressed = false;
 
-    int slider_target_positionup =0;
-    int slider_target_positiondown =0;
-    int arm_target_positionup=0;
-    int arm_target_positiondown=0;
+    int slider_target_positionup = 0;
+    int slider_target_positiondown = 0;
+    int arm_target_positionup = 0;
+    int arm_target_positiondown = 0;
 
     boolean isExtended_down = false;
-    boolean isExtended_up =false;
+    boolean isExtended_up = false;
     boolean gripper_rotating = false;
-    boolean lb_down =false;
-    boolean lift_position=false;
+    boolean lb_down = false;
+    boolean lift_position = false;
+
+    double movement_speed = 1.0;
+
+    // ----- for generating telemetry logs -----
+    private FileWriter writer;
+    private long startTime;
 
     @Override
     public void init() {
@@ -47,21 +63,33 @@ public class MainTeleOp extends OpMode {
                 telemetry,
                 Executors.newScheduledThreadPool(1)
         );
+
+        // ====================================================
+        // === controller1 - movement si control intake     ===
+        // === controller2 - control slider si control arm  ===
+        // ====================================================
         controller1 = new Controller(gamepad1);
+        controller2 = new Controller(gamepad2);
 
 
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
-        //robot.gripper.openBarier();
-        //robot.lift.setDownPosition();
-        //closed = false;
-        //sculatoare = false;
         last_arm_position = 0;
-//        arm_value = 150;
-//        robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
-        /*robot.lift.setUpPosition();*/
+
+
+        // ----- for generating telemetry logs -----
+        File logFile = new File(Environment.getExternalStorageDirectory().getPath() + "/FIRST/encoder_log.txt");
+        try {
+            writer = new FileWriter(logFile, false); // Overwrites existing file
+            writer.write("Time(ms), Encoder Position\n"); // Header row
+            telemetry.addData("Log", "Initialized. File: encoder_log.txt");
+        } catch (IOException e) {
+            telemetry.addData("Error", "File write failed: " + e.getMessage());
+        }
+        startTime = System.currentTimeMillis();
+
+
     }
 
     // ------ the emergency stop function ---------
@@ -70,15 +98,18 @@ public class MainTeleOp extends OpMode {
     @Override
     public void loop() {
         controller1.update();
+        controller2.update();
+
         //isPressed=false;
-        slider_target_positionup=robot.slider.getCurrentPositionSlider();
-        slider_target_positiondown=robot.slider.getCurrentPositionSlider();
-        arm_target_positionup=robot.arm.getCurrentPositionArm();
-        arm_target_positiondown=robot.arm.getCurrentPositionArm();
-        if(arm_value < 300){
+//        slider_target_positionup = robot.slider.getCurrentPositionSlider();
+//        slider_target_positiondown = robot.slider.getCurrentPositionSlider();
+//        arm_target_positionup = robot.arm.getCurrentPositionArm();
+//        arm_target_positiondown = robot.arm.getCurrentPositionArm();
+
+        if (arm_value < 300) {
             isExtended_down = true;
             isExtended_up = false;
-        }else{
+        } else {
             isExtended_up = true;
             isExtended_down = false;
         }
@@ -90,208 +121,210 @@ public class MainTeleOp extends OpMode {
         // - lift
 
 
+        // --- limitare de viteza in cazul in care e arm-ul e ridicat sus ---
+        if (robot.arm.getCurrentPositionArm() >= 350) {
+            movement_speed = 0.5;
+        } else {
+            movement_speed = 1.0;
+        }
+
+        // TODO: normalizare valori motor arm / schimbare valori
+
+        // =======================
+        // ===== DRIVER 1 ========
+        // =======================
 
         // --------- movement general al robotului ---------
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (controller1.left_stick_y) ,
-                        (controller1.right_stick_x),
-                        (controller1.left_stick_x)// gen astea negative / pozitive sau schimbate intre ele
+                        (controller1.left_stick_y * movement_speed),
+                        (controller1.right_stick_x * movement_speed),
+                        (controller1.left_stick_x * movement_speed)  // gen astea negative / pozitive sau schimbate intre ele
                 )
         );
-        if(!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
-            return ;
-        }
-        else {
-            // --------- extindere slider ---------
-            if (controller1.YOnce()) {
-                if (robot.arm.getCurrentPositionArm() <= 200)  /// check if arm is raised || raise arm
-                    robot.arm.raiseArm(200, RAISE_POWER);
-                robot.slider.raiseSlider(5700, RAISE_POWER);
-            }
-
-            // --------- retractie slider ---------
-            if (controller1.AOnce()) {
-                if (robot.arm.getCurrentPositionArm() <= 200)  /// check if arm is raised || raise arm
-                    robot.arm.raiseArm(200, RAISE_POWER/2);
-                robot.slider.raiseSlider(0, RAISE_POWER);
-            }
-
-            // --------- extindere slider controlat ---------
-            if (controller1.B()) {  /// extend slider a bittt
-                if (slider_target_positionup <= 5500) {
-                    // if not at max
-                    if (robot.arm.getCurrentPositionArm() <= 400)
-                    {
-                        robot.arm.raiseArm(400, RAISE_POWER);
-                        robot.slider.raiseSlider(1950,RAISE_POWER);
-                    }
-                    else{
-                        if(robot.arm.getCurrentPositionArm() <= 200)
-                            robot.arm.raiseArm(200, RAISE_POWER);
-                        robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() + 200, RAISE_POWER);
-                    }
-                }
-                else {
-                    robot.slider.raiseSlider(5700, RAISE_POWER);
-                }
-            }
-
-            // --------- retractie slider controlat ---------
-            if (controller1.X()) {
-                if (slider_target_positiondown >= 200) {
-                    if (robot.arm.getCurrentPositionArm() <= 200)  /// check if arm is raised || raise arm
-                        robot.arm.raiseArm(200, RAISE_POWER);
-                    robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() - 200, RAISE_POWER);
-
-                } else {
-                    robot.slider.raiseSlider(0, RAISE_POWER);
-                }
-            }
-
-//        // --------- verificare slider extins in jos ---------
-//        if(isExtended_down){
-//            arm_value = 200;
-//            robot.arm.raiseArm(arm_value, RAISE_POWER);
-//            isExtended_down = false;
-//        }
-//
-//        // --------- verificare slider extins in sus ---------
-//        if(isExtended_up){
-//            arm_value = 800;
-//            robot.arm.raiseArm(arm_value, RAISE_POWER);
-//            isExtended_up = false;
-//        }
-        }
-
-        // -------  controlling the arm positions -----
-        if(!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
-            return ;
-        }
-        else if (controller1.dpadUpOnce()) {
-            if(robot.slider.getCurrentPositionSlider() > 10){
-                slider_target_positiondown = 0;
-                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
-            }
-            arm_value = 400;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
-        } else if (controller1.dpadDownOnce()) {
-            if(robot.slider.getCurrentPositionSlider() > 10 && robot.arm.getCurrentPositionArm() > 400){
-                slider_target_positiondown = 0;
-                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
-            }
-            if(robot.slider.getCurrentPositionSlider() <2500) {
-                arm_value = 100;
-                robot.arm.raiseArm(arm_value, RAISE_POWER/2);
-            }
-        }
-        if (controller1.rightBumper()){
-//            if(robot.slider.getCurrentPositionSlider() > 10){
-//                slider_target_positiondown = 0;
-//                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
-//            }
-            if (arm_target_positionup <=400) {
-                arm_target_positionup = robot.arm.getCurrentPositionArm() + 100;
-                robot.arm.raiseArm(arm_target_positionup, RAISE_POWER);
-            }
-        }
-        if(controller1.leftBumper()) {
-//            if(robot.slider.getCurrentPositionSlider() > 10){
-//                slider_target_positiondown = 0;
-//                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
-//            }
-            if (arm_target_positiondown >= 100) {
-                arm_target_positiondown = robot.arm.getCurrentPositionArm() - 75;
-                robot.arm.raiseArm(arm_target_positiondown,RAISE_POWER/2);
-            }
-        }
-
-
 
         //----------- gripper ---------------
-        double left_trig = controller1.left_trigger;
-        double right_trig = controller1.right_trigger;
-        if(left_trig > 0) {
+        double left_trig = controller2.left_trigger;
+        double right_trig = controller2.right_trigger;
+        if (left_trig > 0) {
             robot.gripper.grab_position();
-            gripper_position=1;
+            gripper_position = 1;
         } else if (right_trig > 0) {
             robot.gripper.release_position();
-            gripper_position=2;
+            gripper_position = 2;
         } else {
             robot.gripper.no_position();
             gripper_position = 0;
         }
 
-//        if(controller1.leftBumperOnce())
-//        {
-//            if(lb_down==false){
-//                arm_value=50;
-//                robot.arm.raiseArm(arm_value, RAISE_POWER - 0.6);
-//                lb_down =true;
-//            }else{
-//                arm_value = 150;
-//                robot.arm.raiseArm(arm_value, RAISE_POWER-0.6);
-//                lb_down =false;
+
+        // =======================
+        // ===== DRIVER 2 ========
+        // =======================
+
+        if (!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
+            return;
+        } else {
+            // --------- extindere slider ---------
+            if (controller2.YOnce()) {
+                if (robot.arm.getCurrentPositionArm() <= 200) {
+                    arm_percentage = 1.0;
+                    robot.arm.raiseArm((int) (arm_percentage * ARM_MAX_POS), RAISE_POWER);
+                }
+                robot.slider.raiseSlider(5700, RAISE_POWER);
+            }
+
+            // --------- retractie slider ---------
+            if (controller2.AOnce()) {
+                if (robot.arm.getCurrentPositionArm() <= 200) {
+                    arm_percentage = 0.5;
+                    robot.arm.raiseArm((int) (arm_percentage * ARM_MAX_POS), RAISE_POWER / 2);
+                }
+                robot.slider.raiseSlider(0, RAISE_POWER);
+            }
+
+
+            // --------- extindere slider controlat ---------
+            if (controller2.B()) {  /// extend slider a bittt
+                if (slider_target_positionup <= 5500) {
+                    // if not at max
+                    if (robot.arm.getCurrentPositionArm() < 300) {
+                        arm_percentage = 0.25;
+                        robot.arm.raiseArm((int)(arm_percentage * ARM_MAX_POS), RAISE_POWER);
+                        robot.slider.raiseSlider(2100, RAISE_POWER);
+                    } else {
+                        robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() + 200, RAISE_POWER);
+                    }
+                } else {
+                    robot.slider.raiseSlider(5700, RAISE_POWER);
+                }
+            }
+
+            // --------- retractie slider controlat ---------
+            if (controller2.X()) {
+                if (slider_percentage >= 0.1) {
+                    if (arm_percentage <= 0.5) {
+                        arm_percentage = 0.5;
+                        robot.arm.raiseArm((int)(arm_percentage * ARM_MAX_POS), RAISE_POWER);
+                    }
+                    slider_percentage = slider_percentage - 0.1;
+                    robot.slider.raiseSlider((int)(slider_percentage * SLIDER_MAX_POS), RAISE_POWER);
+                } else {
+                    slider_percentage = 0.0;
+                    robot.slider.raiseSlider((int)(slider_percentage * SLIDER_MAX_POS), RAISE_POWER);
+                }
+            }
+
+
+            // -------  controlling the arm positions -----
+            if (!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
+                return;
+            } else if (controller2.dpadUpOnce()) {
+                if (robot.slider.getCurrentPositionSlider() > 10) {
+                    slider_target_positiondown = 0;
+                    robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
+                }
+                arm_value = 400;
+                robot.arm.raiseArm(arm_value, RAISE_POWER);
+            } else if (controller2.dpadDownOnce()) {
+                if (robot.slider.getCurrentPositionSlider() > 10 && robot.arm.getCurrentPositionArm() > 400) {
+                    slider_target_positiondown = 0;
+                    robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
+                }
+                if (robot.slider.getCurrentPositionSlider() < 2500) {
+                    arm_value = 100;
+                    robot.arm.raiseArm(arm_value, RAISE_POWER / 2);
+                }
+            }
+
+            if (controller2.rightBumper()) {
+//            if(robot.slider.getCurrentPositionSlider() > 10){
+//                slider_target_positiondown = 0;
+//                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
 //            }
+                if (arm_target_positionup <= 400) {
+                    arm_target_positionup = robot.arm.getCurrentPositionArm() + 100;
+                    robot.arm.raiseArm(arm_target_positionup, RAISE_POWER);
+                }
+            }
+            if (controller2.leftBumper()) {
+//            if(robot.slider.getCurrentPositionSlider() > 10){
+//                slider_target_positiondown = 0;
+//                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
+//            }
+                if (arm_target_positiondown >= 100) {
+                    arm_target_positiondown = robot.arm.getCurrentPositionArm() - 75;
+                    robot.arm.raiseArm(arm_target_positiondown, RAISE_POWER / 2);
+                }
+            }
+        }
+            // ---------- controale lift -------------
+//        if (controller1.dpadLeftOnce()) {
+//            if (!lift_position) {
+//                lift_value = 0;
+//                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+//                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 //
+//                robot.lift.setUpPosition();
+//
+//                lift_position = !lift_position;
+//            } else {
+//                lift_value = -1000;
+//                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
+//                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
+//
+//                robot.lift.setDownPosition();
+//
+//                lift_position = !lift_position;
+//            }
+//        }
+//        if (!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
+//            return;
+//        } else if (controller1.dpadRightOnce()) {
+//            arm_value = 0;
+//            robot.arm.raiseArm(arm_value, RAISE_POWER);
+//            lift_value = 7000;
+//            lastRightLift = robot.lift.liftUpLeft(lift_value, RAISE_POWER);
+//            lastLeftLift = robot.lift.liftUpRight(lift_value, RAISE_POWER);
 //        }
 
 
-        //if(controller1.rightBumperOnce())
-        //{
+            // ------- printing the slider position -------
+            //telemetry.addData("Slider target value", isPressed );
+//        telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
+//        telemetry.addLine("---------------------");
+//        telemetry.addData("Arm target value", arm_value);
+//        telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
+//        telemetry.addLine("---------------------");
+//        telemetry.addData("Lift 1 level", robot.lift.getCurrentPositionServoLeft());
+//        telemetry.addData("Lift 2 level", robot.lift.getCurrentPositionServoRight());
+//        telemetry.addLine("---------------------");
+//        telemetry.addLine("---------------------");
+//        telemetry.addData("Lift_Value", lift_value);
 
-        //}
-        // ---------- controale lift -------------
-        if (controller1.dpadLeftOnce()) {
-            if (!lift_position) {
-                lift_value = 0;
-                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
-                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
-                robot.lift.setUpPosition();
+            //telemetry.addData("Lift target value", arm_value);
+            //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
 
-                lift_position = !lift_position;
-            } else {
-                lift_value = -1000;
-                lastRightLift = robot.lift.liftUpLeft(lift_value, 1);
-                lastLeftLift = robot.lift.liftUpRight(lift_value, 1);
 
-                robot.lift.setDownPosition();
 
-                lift_position = !lift_position;
+        // ------ printing data in the telemetry logs file ------
+        long timestamp = System.currentTimeMillis() - startTime;
+        try {
+            if (writer != null) {
+                writer.write(timestamp + "," + robot.arm.getCurrentPositionArm() + "\n");
+                writer.flush(); // Ensure immediate writing
             }
-        }
-        if(!Utils.isDone(lastRightLift) || !Utils.isDone(lastLeftLift)) {
-            return ;
-        } else if (controller1.dpadRightOnce()) {
-            arm_value = 0;
-            robot.arm.raiseArm(arm_value, RAISE_POWER);
-            lift_value = 7000;
-            lastRightLift = robot.lift.liftUpLeft(lift_value, RAISE_POWER);
-            lastLeftLift = robot.lift.liftUpRight(lift_value, RAISE_POWER);
+        } catch (IOException e) {
+            telemetry.addData("Error", "Logging failed: " + e.getMessage());
         }
 
-
-        // ------- printing the slider position -------
-        //telemetry.addData("Slider target value", isPressed );
-        telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
-        telemetry.addLine("---------------------");
-        telemetry.addData("Arm target value", arm_value);
-        telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
-        telemetry.addLine("---------------------");
-        telemetry.addData("Lift 1 level", robot.lift.getCurrentPositionServoLeft());
-        telemetry.addData("Lift 2 level", robot.lift.getCurrentPositionServoRight());
-        telemetry.addLine("---------------------");
-        telemetry.addLine("---------------------");
-        telemetry.addData("Lift_Value", lift_value);
-
-
-        //telemetry.addData("Lift target value", arm_value);
-        //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
-
+        // Show telemetry
+        telemetry.addData("Encoder", robot.arm.getCurrentPositionArm());
+        telemetry.addData("Log", "Saving to encoder_log.txt");
         telemetry.update();
+
+        // TODO: use 'adb pull /sdcard/FIRST/encoder_log.txt' for getting the file
+
     }
-
 }
-
-//test
