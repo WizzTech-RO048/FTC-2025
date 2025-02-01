@@ -48,8 +48,8 @@ public class AutoHuman extends LinearOpMode {
         drive.setWeightedDrivePower(
                 new Pose2d(
                         (0),
-                        (0),
-                        (0.5)// gen astea negative / pozitive sau schimbate intre ele
+                        (1),
+                        (0)// gen astea negative / pozitive sau schimbate intre ele
                 )
         );
 
@@ -63,119 +63,6 @@ public class AutoHuman extends LinearOpMode {
                 )
         );
 
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (-0.5),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(700);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(400);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0.5)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(300);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0.5),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (-0.5),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(400);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0.5)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(400);
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0.5),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (-0.5),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0.5),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
-        sleep(800);
-
-        drive.setWeightedDrivePower(
-                new Pose2d(
-                        (0),
-                        (0),
-                        (0)// gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
         // safrsit test
 
         waitForStart();
