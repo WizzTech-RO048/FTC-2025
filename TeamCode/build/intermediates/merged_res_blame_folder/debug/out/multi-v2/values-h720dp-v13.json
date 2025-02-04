@@ -4,7 +4,11 @@
             "outputFile": "org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-17:/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
+<<<<<<< Updated upstream
                     "source": "/home/crististg/.gradle/caches/transforms-3/97f43086dbd253d3e8d9b1f8f32a59eb/transformed/appcompat-1.2.0/res/values-h720dp-v13/values-h720dp-v13.xml",
+=======
+                    "source": "C:\\Users\\Mihai\\.gradle\\caches\\transforms-3\\97f43086dbd253d3e8d9b1f8f32a59eb\\transformed\\appcompat-1.2.0\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+>>>>>>> Stashed changes
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
