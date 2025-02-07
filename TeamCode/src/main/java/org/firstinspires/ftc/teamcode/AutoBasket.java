@@ -1,6 +1,6 @@
 /**
  * Testing the implementation of the apriltag detection.
- * */
+ */
 
 package org.firstinspires.ftc.teamcode;
 
@@ -26,7 +26,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 
-@Autonomous(name="Basket Auto")
+@Autonomous(name = "Basket Auto")
 public class AutoBasket extends LinearOpMode {
 
     @Override
@@ -36,7 +36,8 @@ public class AutoBasket extends LinearOpMode {
                 hardwareMap,
                 telemetry,
                 Executors.newScheduledThreadPool(1)
-        );;
+        );
+        ;
 
         ScheduledFuture<?> lastArmMove, lastSliderMove;
 
@@ -45,28 +46,22 @@ public class AutoBasket extends LinearOpMode {
             waitForStart();
         }
 
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            (0),
-                            (0),
-                            (-1)// gen astea negative / pozitive sau schimbate intre ele
-                    )
-            );
+        // TODO: @gorunescu uita te aici
 
-            sleep(500);
+        TrajectorySequence Red_BackDrop_Left = drive.trajectorySequenceBuilder(new Pose2d())
+//                .forward(17) TODO: incercati sa folositi forward
+//                .back(23) TODO: incercati sa folositi back
+//                .strafeLeft(23) TODO: incercati sa folositi left
+//                .strafeRight(23) TODO: incercati sa folositi right
+                .turn(Math.toRadians(90)) // TODO: testati daca merge bine rotatia (OBS: rotatia se face in functie de nr de radiani, nu de grade - ask me more daca nu intelegeti)
+                .build();
 
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            (0),
-                            (0),
-                            (0)// gen astea negative / pozitive sau schimbate intre ele
-                    )
-            );
-
-            // safrsit test
+        drive.followTrajectorySequence(Red_BackDrop_Left);
 
         waitForStart();
-        while(opModeIsActive()) { sleep(200); }
+        while (opModeIsActive()) {
+            sleep(200);
+        }
     }
 
     @SuppressLint("DefaultLocale")
