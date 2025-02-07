@@ -166,8 +166,8 @@ public class MainTeleOp extends OpMode {
             // --------- extindere slider ---------
             if (controller1.YOnce()) {
                 if (robot.arm.getCurrentPositionArm() <= 200) {
-                    arm_percentage = 1.0;
-                    robot.arm.raiseArm((int) (arm_percentage * ARM_MAX_POS), RAISE_POWER);
+                    arm_target_position=200;
+                    robot.arm.raiseArm(arm_target_position, RAISE_POWER);
 
                     slider_percentage = 1.0;
                     robot.slider.raiseSlider((int) (slider_percentage * SLIDER_MAX_POS), RAISE_POWER);
@@ -243,7 +243,7 @@ public class MainTeleOp extends OpMode {
 //                slider_target_positiondown = 0;
 //                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
 //            }
-                if (robot.arm.getCurrentPositionArm() < 250) {
+                if (robot.arm.getCurrentPositionArm() < 220) {
                     arm_target_position = 225;
                     robot.arm.raiseArm(arm_target_position, RAISE_POWER);
                 } else{

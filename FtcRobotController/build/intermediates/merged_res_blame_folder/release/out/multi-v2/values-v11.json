@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.qualcomm.ftcrobotcontroller.FtcRobotController-merged_res-18:/values-v11/values-v11.xml",
+            "outputFile": "com.qualcomm.ftcrobotcontroller.FtcRobotController-mergeReleaseResources-15:/values-v11/values-v11.xml",
             "map": [
                 {
-                    "source": "/Users/vladt/.gradle/caches/transforms-3/cd67206d3a42b9a926e6761ce00754f7/transformed/jetified-RobotCore-9.0.1/res/values-v11/values-v11.xml",
+                    "source": "C:\\Users\\Mihai\\.gradle\\caches\\transforms-3\\2017c1507d5fe3658e539f38b60cac79\\transformed\\jetified-RobotCore-9.0.1\\res\\values-v11\\values-v11.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -17,10 +17,10 @@
             ]
         },
         {
-            "outputFile": "com.qualcomm.ftcrobotcontroller.FtcRobotController-mergeReleaseResources-16:/values-v11/values-v11.xml",
+            "outputFile": "com.qualcomm.ftcrobotcontroller.FtcRobotController-merged_res-17:/values-v11/values-v11.xml",
             "map": [
                 {
-                    "source": "/Users/vladt/.gradle/caches/transforms-3/cd67206d3a42b9a926e6761ce00754f7/transformed/jetified-RobotCore-9.0.1/res/values-v11/values-v11.xml",
+                    "source": "C:\\Users\\Mihai\\.gradle\\caches\\transforms-3\\2017c1507d5fe3658e539f38b60cac79\\transformed\\jetified-RobotCore-9.0.1\\res\\values-v11\\values-v11.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
