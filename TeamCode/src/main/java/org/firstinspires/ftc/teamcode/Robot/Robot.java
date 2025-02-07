@@ -15,10 +15,10 @@ public class Robot {
     public Telemetry telemetry;
 
     public Slider slider;
-    public Arm arm;
+    public Arm arm, arm2;
 
     public Gripper gripper;
-    public Lift lift;
+//    public Lift lift;
 
     public Robot(final HardwareMap hardwareMap, final Telemetry t, ScheduledExecutorService scheduler) {
         telemetry = t;
@@ -40,6 +40,11 @@ public class Robot {
         arm_parameters.scheduler = scheduler;
         arm = new Arm(arm_parameters);
 
+        Arm.Parameters arm_parameters2 = new Arm.Parameters();
+        arm_parameters2.telemetry = telemetry;
+        arm_parameters2.hardwareMap = hardwareMap;
+        arm_parameters2.scheduler = scheduler;
+        arm2 = new Arm(arm_parameters);
 
 
 
@@ -48,11 +53,11 @@ public class Robot {
         gripper_parameters.hardwareMap = hardwareMap;
         gripper = new Gripper(gripper_parameters);
 
-        Lift.Parameters lift_parameters = new Lift.Parameters();
-        lift_parameters.telemetry = telemetry;
-        lift_parameters.hardwareMap = hardwareMap;
-        lift_parameters.scheduler = scheduler;
-        lift = new Lift(lift_parameters);
+//        Lift.Parameters lift_parameters = new Lift.Parameters();
+//        lift_parameters.telemetry = telemetry;
+//        lift_parameters.hardwareMap = hardwareMap;
+//        lift_parameters.scheduler = scheduler;
+//        lift = new Lift(lift_parameters);
 
     }
 

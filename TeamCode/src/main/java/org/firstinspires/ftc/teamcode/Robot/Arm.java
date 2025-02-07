@@ -19,7 +19,7 @@ public class Arm {
     private final HardwareMap hardwareMap;
     private final ScheduledExecutorService scheduler;
 
-    private final DcMotorEx arm;
+    private final DcMotorEx arm, arm2;
 
     /*private final double LEFT_SAFETY = 1.0-0.08, RIGHT_SAFETY = 0.0+0.08;
     private final double LEFT_AFTERARM = 1.0-0.15, RIGHT_AFTERARM = 0.0+0.15;
@@ -35,6 +35,11 @@ public class Arm {
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        arm2 = hardwareMap.get(DcMotorEx.class, "arm2");
+        arm2.setDirection(DcMotorSimple.Direction.FORWARD);
+        arm2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
 
@@ -53,13 +58,31 @@ public class Arm {
         }
     }
 
+    public void raiseArm2(int targetPositionValue, double raisePower) {
+        int currentPosition = getCurrentPositionArm();
+
+        arm2.setTargetPosition(targetPositionValue);
+        arm2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        if (currentPosition > targetPositionValue) {
+            arm2.setPower(raisePower);
+        } else{
+            arm2.setPower(-raisePower);
+        }
+    }
+
     public int getCurrentPositionArm() {
         return arm.getCurrentPosition();
+    }
+
+    public int getCurrentPositionArm2() {
+        return arm2.getCurrentPosition();
     }
 
     public void stopArm() {
         // ----- stopping the slider moving -----
         arm.setPower(0.0);
+        arm2.setPower(0.0);
     }
 
     public static class Parameters {
