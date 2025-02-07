@@ -154,8 +154,7 @@ public class MainTeleOp extends OpMode {
             robot.gripper.grab_position();
         } else if (right_trig > 0) {
             robot.gripper.release_position();
-        }
-        else robot.gripper.no_position();
+        } else robot.gripper.no_position();
 
         // =======================
         // ===== DRIVER 2 ========
@@ -193,28 +192,30 @@ public class MainTeleOp extends OpMode {
             if (controller1.B()) {  /// extend slider a bittt
                 if (slider_target_position <= 5400) {
                     // if not at max
-                    if (robot.arm.getCurrentPositionArm() < 300) {
-                        arm_percentage = 0.25;
-                        robot.arm.raiseArm((int) (arm_percentage * ARM_MAX_POS), RAISE_POWER);
-                        robot.slider.raiseSlider(2100, RAISE_POWER);
-                    } else {
-                        robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() + 200, RAISE_POWER);
+//                    if (robot.arm.getCurrentPositionArm() < 300) {
+//                        arm_percentage = 0.25;
+//                        robot.arm.raiseArm((int) (arm_percentage * ARM_MAX_POS), RAISE_POWER);
+//                        robot.slider.raiseSlider(2100, RAISE_POWER);
+//                    } else {
+//                    }
+                    if (slider_percentage <= 300) {
+
                     }
-                } else {
-                    robot.slider.raiseSlider(5700, RAISE_POWER);
+
+                    robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() + 200, RAISE_POWER);
                 }
             }
 
             // --------- retractie slider controlat ---------
             if (controller1.X()) {
-                if (robot.slider.getCurrentPositionSlider() >= 200){/// check if arm is raised || raise arm
-                //   robot.arm.raiseArm(200, RAISE_POWER);
-                robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() - 200, RAISE_POWER);
+                if (robot.slider.getCurrentPositionSlider() >= 200) {/// check if arm is raised || raise arm
+                    //   robot.arm.raiseArm(200, RAISE_POWER);
+                    robot.slider.raiseSlider(robot.slider.getCurrentPositionSlider() - 200, RAISE_POWER);
 
-                // } else {
-                //  robot.slider.raiseSlider(0, RAISE_POWER);
+                    // } else {
+                    //  robot.slider.raiseSlider(0, RAISE_POWER);
+                }
             }
-        }
 
 
             // -------  controlling the arm positions -----
@@ -226,8 +227,7 @@ public class MainTeleOp extends OpMode {
                 }
                 arm_value = 700;
                 robot.arm.raiseArm(arm_value, RAISE_POWER);
-            }
-            else if (controller1.dpadDownOnce()) {
+            } else if (controller1.dpadDownOnce()) {
                 if (robot.slider.getCurrentPositionSlider() > 10 && robot.arm.getCurrentPositionArm() > 400) {
                     slider_target_position = 0;
                     robot.slider.raiseSlider(slider_target_position, RAISE_POWER);
@@ -243,7 +243,10 @@ public class MainTeleOp extends OpMode {
 //                slider_target_positiondown = 0;
 //                robot.slider.raiseSlider(slider_target_positiondown, RAISE_POWER);
 //            }
-                if (arm_target_position <= 700) {
+                if (robot.arm.getCurrentPositionArm() < 250) {
+                    arm_target_position = 225;
+                    robot.arm.raiseArm(arm_target_position, RAISE_POWER);
+                } else{
                     arm_target_position = robot.arm.getCurrentPositionArm() + 60;
                     robot.arm.raiseArm(arm_target_position, RAISE_POWER);
                 }
@@ -256,11 +259,12 @@ public class MainTeleOp extends OpMode {
                 if (arm_target_position >= 100) {
                     arm_target_position = robot.arm.getCurrentPositionArm() - 40;
                     robot.arm.raiseArm(arm_target_position, RAISE_POWER / 2);
+                } else {
+                    robot.arm.raiseArm(0, RAISE_POWER / 2);
                 }
-                else { robot.arm.raiseArm(0,RAISE_POWER/2);}
             }
         }
-            // ---------- controale lift -------------
+        // ---------- controale lift -------------
 //        if (controller1.dpadLeftOnce()) {
 //            if (!lift_position) {
 //                lift_value = 0;
@@ -291,23 +295,23 @@ public class MainTeleOp extends OpMode {
 //        }
 
 
-            // ------- printing the slider position -------
+        // ------- printing the slider position -------
 //            telemetry.addData("Slider target value", isPressed );
         telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
         telemetry.addLine("---------------------");
         telemetry.addData("Arm target value", arm_value);
         telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
+        telemetry.addData("Arm position2", robot.arm2.getCurrentPositionArm());
         telemetry.addLine("---------------------");
-        telemetry.addData("Lift 1 level", robot.lift.getCurrentPositionServoLeft());
-        telemetry.addData("Lift 2 level", robot.lift.getCurrentPositionServoRight());
+//        telemetry.addData("Lift 1 level", robot.lift.getCurrentPositionServoLeft());
+//        telemetry.addData("Lift 2 level", robot.lift.getCurrentPositionServoRight());
         telemetry.addLine("---------------------");
         telemetry.addLine("---------------------");
         telemetry.addData("Lift_Value", lift_value);
 
 
-            //telemetry.addData("Lift target value", arm_value);
-            //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
-
+        //telemetry.addData("Lift target value", arm_value);
+        //telemetry.addData("lift position", robot.lift.getCurrentPositionArm());
 
 
         // ------ printing data in the telemetry logs file ------
