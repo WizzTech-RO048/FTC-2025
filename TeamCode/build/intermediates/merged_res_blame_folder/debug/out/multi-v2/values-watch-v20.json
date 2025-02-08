@@ -4,7 +4,11 @@
             "outputFile": "org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-17:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\Mihai\\.gradle\\caches\\transforms-3\\97f43086dbd253d3e8d9b1f8f32a59eb\\transformed\\appcompat-1.2.0\\res\\values-watch-v20\\values-watch-v20.xml",
+=======
+                    "source": "C:\\Users\\vacar\\.gradle\\caches\\transforms-3\\97f43086dbd253d3e8d9b1f8f32a59eb\\transformed\\appcompat-1.2.0\\res\\values-watch-v20\\values-watch-v20.xml",
+>>>>>>> origin/main
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",
