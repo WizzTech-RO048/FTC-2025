@@ -18,6 +18,7 @@ public class Robot {
     public Arm arm, arm2;
 
     public Gripper gripper;
+    public HorizontalSlider horizontalSlider;
 //    public Lift lift;
 
     public Robot(final HardwareMap hardwareMap, final Telemetry t, ScheduledExecutorService scheduler) {

@@ -190,7 +190,7 @@ public class MainTeleOp extends OpMode {
 
             // --------- extindere slider controlat ---------
             if (controller1.B()) {  /// extend slider a bittt
-                if (slider_target_position <= 5400) {
+                if (robot.slider.getCurrentPositionSlider() <= 5400) {
                     // if not at max
 //                    if (robot.arm.getCurrentPositionArm() < 300) {
 //                        arm_percentage = 0.25;
@@ -264,6 +264,13 @@ public class MainTeleOp extends OpMode {
                 }
             }
         }
+        if (controller1.dpadLeftOnce()) {
+            robot.horizontalSlider.setExtendedPosition();
+        }
+        if (controller1.dpadRightOnce())
+        {
+            robot.horizontalSlider.setStationaryPosition();
+        }
         // ---------- controale lift -------------
 //        if (controller1.dpadLeftOnce()) {
 //            if (!lift_position) {
@@ -308,6 +315,7 @@ public class MainTeleOp extends OpMode {
         telemetry.addLine("---------------------");
         telemetry.addLine("---------------------");
         telemetry.addData("Lift_Value", lift_value);
+        telemetry.addLine("---------------------");
 
 
         //telemetry.addData("Lift target value", arm_value);

@@ -6,28 +6,22 @@ package org.firstinspires.ftc.teamcode;
 
 import android.annotation.SuppressLint;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 
-@Autonomous(name = "Brute 20 puncte Auto")
-public class brt20 extends LinearOpMode {
+@Autonomous(name = "Brute 10 puncte Auto")
+public class brut10 extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
