@@ -49,7 +49,7 @@ public class Auto_Basket_Drop extends LinearOpMode {
         }
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (-1),
+                        (-0.5),
                         (0),
                         (0)// gen astea negative / pozitive sau schimbate intre ele
                 )
@@ -75,7 +75,7 @@ public class Auto_Basket_Drop extends LinearOpMode {
         sleep(5000);
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (1),
+                        (0.5),
                         (0),
                         (0)// gen astea negative / pozitive sau schimbate intre ele
                 )
