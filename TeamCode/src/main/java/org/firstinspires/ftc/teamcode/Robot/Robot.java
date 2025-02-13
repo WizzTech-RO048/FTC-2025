@@ -60,6 +60,10 @@ public class Robot {
 //        lift_parameters.scheduler = scheduler;
 //        lift = new Lift(lift_parameters);
 
+        HorizontalSlider.Parameters horizontalSlider_parameters = new HorizontalSlider.Parameters();
+        horizontalSlider_parameters.telemetry = telemetry;
+        horizontalSlider_parameters.hardwareMap = hardwareMap;
+        horizontalSlider = new HorizontalSlider(horizontalSlider_parameters);
     }
 
     public void getCurrentPos() {
