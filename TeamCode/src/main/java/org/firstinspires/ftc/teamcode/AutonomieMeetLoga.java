@@ -46,7 +46,7 @@ public class AutonomieMeetLoga extends LinearOpMode {
             waitForStart();
         }
 
-        robot.arm.raiseArm(150, 1.0);
+        //robot.arm.raiseArm(150, 1.0);
 
         sleep(1000);
 
@@ -66,7 +66,7 @@ public class AutonomieMeetLoga extends LinearOpMode {
 
         sleep(1000);
 
-        robot.slider.raiseSlider(1500, 1.0);
+        //robot.slider.raiseSlider(1500, 1.0);
 
         sleep(1000);
 

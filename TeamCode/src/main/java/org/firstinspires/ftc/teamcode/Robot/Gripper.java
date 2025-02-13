@@ -23,56 +23,46 @@ public class Gripper {
 
     private final double OPEN_BARIER_POS = 0.00, CLOSE_BARIER_POS = 0.1;
     */
+
+    private final double PASS_OBJECT_LEFT_PICKUP = 0.85, PASS_OBJECT_LEFT_RELEASE = 0.2;
+    private final double PASS_OBJECT_RIGHT_PICKUP = 0.3, PASS_OBJECT_RIGHT_RELEASE = 1;
+
+    private final double GRIPPER_GRAB = -1, GRIPPER_RELEASE = 1;
+
     private final Telemetry telemetry;
     private final HardwareMap hardwareMap;
 
-    //private final Servo claw;
-    private final CRServo left_turner, right_turner;
-
-
+    private final Servo leftGripper, rightGripper, gripper;
 
     Gripper(@NonNull final Parameters parameters) {
         telemetry = Objects.requireNonNull(parameters.telemetry, "Telemetry object was not set");
         hardwareMap = Objects.requireNonNull(parameters.hardwareMap, "HardwareMap was not set");
 
-        //claw = hardwareMap.get(Servo.class, "claw");
-        //left_turner = hardwareMap.get(Servo.class, "left_turner");
-        left_turner = hardwareMap.get(CRServo.class, "left_turner");
-        right_turner = hardwareMap.get(CRServo.class, "right_turner");
+        leftGripper = hardwareMap.get(Servo.class, "gripperLeftIntake");
+        rightGripper = hardwareMap.get(Servo.class, "gripperRightIntake");
+
+        gripper = hardwareMap.get(Servo.class, "gripperIntake");
     }
 
 
     public void grab_position() {
-        left_turner.setPower(-1);
-        right_turner.setPower(1);
+        gripper.setPosition(GRIPPER_GRAB);
     }
 
     public void release_position() {
-        left_turner.setPower(1);
-        right_turner.setPower(-1);
+        gripper.setPosition(GRIPPER_RELEASE);
     }
 
-    public void no_position(){
-        left_turner.setPower(0);
-        right_turner.setPower(0);
+    public void pass_object_pickup_position() {
+        leftGripper.setPosition(PASS_OBJECT_LEFT_PICKUP);
+        rightGripper.setPosition(PASS_OBJECT_RIGHT_PICKUP);
     }
 
-    /*
-    public void grab()
-    {
-        claw.setPosition(GRAB_POSITION_3);
+    public void pass_object_release_position() {
+        leftGripper.setPosition(PASS_OBJECT_LEFT_RELEASE);
+        rightGripper.setPosition(PASS_OBJECT_RIGHT_RELEASE);
     }
 
-    public void release()
-    {
-        claw.setPosition(RELEASE_POSITION_3);
-    }
-
-    public double getposgripper()
-    {
-        return claw.getPosition();
-    }
-*/
     public static class Parameters {
         public HardwareMap hardwareMap;
         public Telemetry telemetry;

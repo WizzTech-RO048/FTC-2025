@@ -68,7 +68,7 @@ public class Auto_Basket_Drop extends LinearOpMode {
         sleep(3000);
         robot.gripper.grab_position();
         sleep(2000);
-        robot.gripper.no_position();
+        //robot.gripper.no_position();
         sleep(2000);
         //robot.arm.raiseArm(0,0.5);
         robot.slider.raiseSlider(0,1);

@@ -8,18 +8,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.concurrent.ScheduledExecutorService;
 
-
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class Robot {
 
     public Telemetry telemetry;
 
+    public Arm arm;
     public Slider slider;
-    public Arm arm, arm2;
-
     public Gripper gripper;
     public HorizontalSlider horizontalSlider;
-//    public Lift lift;
 
     public Robot(final HardwareMap hardwareMap, final Telemetry t, ScheduledExecutorService scheduler) {
         telemetry = t;
@@ -40,14 +36,12 @@ public class Robot {
         arm_parameters.hardwareMap = hardwareMap;
         arm_parameters.scheduler = scheduler;
         arm = new Arm(arm_parameters);
-
-        Arm.Parameters arm_parameters2 = new Arm.Parameters();
-        arm_parameters2.telemetry = telemetry;
-        arm_parameters2.hardwareMap = hardwareMap;
-        arm_parameters2.scheduler = scheduler;
-        arm2 = new Arm(arm_parameters);
-
-
+//
+//        Arm.Parameters arm_parameters2 = new Arm.Parameters();
+//        arm_parameters2.telemetry = telemetry;
+//        arm_parameters2.hardwareMap = hardwareMap;
+//        arm_parameters2.scheduler = scheduler;
+//        arm2 = new Arm(arm_parameters);
 
         Gripper.Parameters gripper_parameters = new Gripper.Parameters();
         gripper_parameters.telemetry = telemetry;
