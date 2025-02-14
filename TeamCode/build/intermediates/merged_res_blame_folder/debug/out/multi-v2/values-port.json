@@ -4,7 +4,7 @@
             "outputFile": "org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-17:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\vacar\\.gradle\\caches\\transforms-3\\97f43086dbd253d3e8d9b1f8f32a59eb\\transformed\\appcompat-1.2.0\\res\\values-port\\values-port.xml",
+                    "source": "/home/crististg/.gradle/caches/transforms-3/97f43086dbd253d3e8d9b1f8f32a59eb/transformed/appcompat-1.2.0/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
