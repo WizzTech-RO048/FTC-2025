@@ -63,9 +63,9 @@ public class Auto_Bar extends LinearOpMode {
                 )
         );
         sleep(1000);
-        robot.arm.raiseArm(800,1);
+        robot.arm.raiseArm(460,1);
         sleep(1000);
-        robot.slider.raiseSlider(4700,1);
+        robot.slider.raiseSlider(535,1);
         sleep(1000);
         drive.setWeightedDrivePower(
                 new Pose2d(

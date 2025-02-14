@@ -49,7 +49,7 @@ public class Auto_Basket_Drop extends LinearOpMode {
         }
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (-1),
+                        (-0.5),
                         (0),
                         (0)// gen astea negative / pozitive sau schimbate intre ele
                 )
@@ -68,14 +68,14 @@ public class Auto_Basket_Drop extends LinearOpMode {
         sleep(3000);
         robot.gripper.grab_position();
         sleep(2000);
-        robot.gripper.no_position();
+        //robot.gripper.no_position();
         sleep(2000);
         //robot.arm.raiseArm(0,0.5);
         robot.slider.raiseSlider(0,1);
         sleep(5000);
         drive.setWeightedDrivePower(
                 new Pose2d(
-                        (1),
+                        (0.5),
                         (0),
                         (0)// gen astea negative / pozitive sau schimbate intre ele
                 )

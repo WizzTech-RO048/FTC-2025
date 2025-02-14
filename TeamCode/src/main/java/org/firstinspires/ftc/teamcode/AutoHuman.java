@@ -48,12 +48,12 @@ public class AutoHuman extends LinearOpMode {
         drive.setWeightedDrivePower(
                 new Pose2d(
                         (0),
-                        (1),
+                        (0.5),
                         (0)// gen astea negative / pozitive sau schimbate intre ele
                 )
         );
 
-        sleep(600);
+        sleep(1200);
 
         drive.setWeightedDrivePower(
                 new Pose2d(

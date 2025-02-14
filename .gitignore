@@ -18,3 +18,7 @@ local.properties
 .idea/workspace.xml
 /.gradle
 /FtcRobotController/build
+
+FtcRobotController/
+
+TeamCode/
