@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 
+import static android.os.SystemClock.sleep;
+
 @TeleOp(name = "FTC2025")
 public class MainTeleOp extends OpMode {
     private Robot robot;
@@ -53,6 +55,8 @@ public class MainTeleOp extends OpMode {
     boolean gripper_rotating = false;
     boolean lb_down = false;
     boolean lift_position = false;
+
+    boolean gripper_grab = true;
 
     double movement_speed = 1.0;
 
@@ -136,12 +140,17 @@ public class MainTeleOp extends OpMode {
         }
 
         if (controller1.dpadLeftOnce()) {
+            robot.gripper.grab_position();gripper_grab = true;
+            sleep(500);
             robot.horizontalSlider.setExtendedPosition();
             robot.gripper.pass_object_pickup_position();
+            sleep(200);
+            robot.gripper.release_position();gripper_grab = false;
         }
         if (controller1.dpadRightOnce()) {
             robot.horizontalSlider.setStationaryPosition();
             robot.gripper.pass_object_release_position();
+            robot.gripper.grab_position();gripper_grab = true;
         }
         if (controller1.dpadUpOnce()) {
             robot.gripper.pass_object_pickup_position();
@@ -151,11 +160,14 @@ public class MainTeleOp extends OpMode {
         }
 
         if (controller1.leftBumperOnce()) {
-            robot.gripper.grab_position();
-        }
+            if(gripper_grab == false){
+                robot.gripper.grab_position();
+                gripper_grab = true;
+            }else{
+                robot.gripper.release_position();
+                gripper_grab = false;
+            }
 
-        if (controller1.rightBumperOnce()) {
-            robot.gripper.release_position();
         }
 
         // ------- printing the slider position -------
