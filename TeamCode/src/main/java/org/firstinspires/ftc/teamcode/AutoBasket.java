@@ -42,18 +42,21 @@ public class AutoBasket extends LinearOpMode {
         ScheduledFuture<?> lastArmMove, lastSliderMove;
 
         while (!isStarted() && !isStopRequested()) {
-            // test'
+            // test
             waitForStart();
         }
 
+        int  arm_value = 175;
+        double RAISE_POWER = 1.0;
+        robot.arm.raiseArm(arm_value, RAISE_POWER / 2);
+        sleep(200);
         // TODO: @gorunescu uita te aici
 
         TrajectorySequence Red_BackDrop_Left = drive.trajectorySequenceBuilder(new Pose2d())
-//                .forward(17) TODO: incercati sa folositi forward
-//                .back(23) TODO: incercati sa folositi back
-//                .strafeLeft(23) TODO: incercati sa folositi left
-//                .strafeRight(23) TODO: incercati sa folositi right
-                .turn(Math.toRadians(90)) // TODO: testati daca merge bine rotatia (OBS: rotatia se face in functie de nr de radiani, nu de grade - ask me more daca nu intelegeti)
+//                .forward(6)
+//                .strafeLeft(23)
+                  .strafeRight(5)
+                .turn(Math.toRadians(-180)) // TODO: testati daca merge bine rotatia (OBS: rotatia se face in functie de nr de radiani, nu de grade - ask me more daca nu intelegeti)
                 .build();
 
         drive.followTrajectorySequence(Red_BackDrop_Left);
