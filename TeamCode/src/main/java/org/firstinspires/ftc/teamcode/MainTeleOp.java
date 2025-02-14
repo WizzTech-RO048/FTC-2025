@@ -137,9 +137,11 @@ public class MainTeleOp extends OpMode {
 
         if (controller1.dpadLeftOnce()) {
             robot.horizontalSlider.setExtendedPosition();
+            robot.gripper.pass_object_pickup_position();
         }
         if (controller1.dpadRightOnce()) {
             robot.horizontalSlider.setStationaryPosition();
+            robot.gripper.pass_object_release_position();
         }
         if (controller1.dpadUpOnce()) {
             robot.gripper.pass_object_pickup_position();
