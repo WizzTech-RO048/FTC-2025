@@ -69,7 +69,7 @@ public class Gripper {
     }
 
     public void release_position_initial() {
-        gripper.setPosition(GRIPPER_RELEASE-0.6);
+        intake_gripper.setPosition(INTAKE_GRIPPER_RELEASE-0.6);
     }
 
     public void pass_object_pickup_position() {

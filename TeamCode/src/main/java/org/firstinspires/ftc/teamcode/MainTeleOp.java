@@ -64,20 +64,20 @@ public class MainTeleOp extends OpMode {
     private long startTime;
 
     public void extindere_slider_orizontal(){
-        robot.gripper.grab_position();gripper_grab = true;
+        robot.gripper.intake_grab_position();gripper_grab = true;
         robot.horizontalSlider.setExtendedPosition();
         robot.gripper.pass_object_pickup_position();
         sleep(150);
-        robot.gripper.release_position();gripper_grab = false;
+        robot.gripper.intake_release_position();gripper_grab = false;
         isExtended = true;
     }
 
     public void retragere_slider_vertical(){
-        robot.gripper.grab_position();gripper_grab=true;
+        robot.gripper.intake_grab_position();gripper_grab=true;
         sleep(400);
         robot.horizontalSlider.setStationaryPosition();
         robot.gripper.pass_object_release_position();
-        robot.gripper.grab_position();gripper_grab = true;
+        robot.gripper.intake_grab_position();gripper_grab = true;
         isExtended = false;
     }
 
@@ -171,13 +171,13 @@ public class MainTeleOp extends OpMode {
 
         if (controller1.leftBumperOnce()) {
             if(gripper_grab == false){
-                robot.gripper.grab_position();
+                robot.gripper.intake_grab_position();
                 gripper_grab = true;
             }else{
                 if(isExtended == false){
                     robot.gripper.release_position_initial();
                 }else{
-                    robot.gripper.release_position();
+                    robot.gripper.intake_release_position();
                 }
                 gripper_grab = false;
             }
