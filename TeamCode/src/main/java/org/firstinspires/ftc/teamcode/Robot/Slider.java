@@ -132,7 +132,7 @@ public class Slider {
         sliderLeft.setTargetPosition(targetPositionValue);
         sliderLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        sliderRight.setTargetPosition(-targetPositionValue);
+        sliderRight.setTargetPosition(targetPositionValue);
         sliderRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         if (currentPosition > targetPositionValue) {

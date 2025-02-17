@@ -28,7 +28,7 @@ public class MainTeleOp extends OpMode {
 
     public int ARM_MAX_POS = 600;
     public int SLIDER_BASKET_POS = 2700;
-public int SLIDER_CHAMBER_POS = 1500;
+    public int SLIDER_CHAMBER_POS = 1500;
 
     public double arm_percentage = 0.0;      // procent din cat sa ridice din ARM_MAX_POS (are valoarea intre 0.0 si 1.0)
     public double slider_percentage = 0.0;   // procent din cat sa ridice din SLIDER_MAX_POS (are valoarea intre 0.0 si 1.0)
@@ -49,7 +49,7 @@ public int SLIDER_CHAMBER_POS = 1500;
 
     int arm_target_position = 0;
 
-    boolean isExtended =false;
+    boolean isExtended = false;
     boolean gripper_rotating = false;
     boolean lb_down = false;
     boolean lift_position = false;
@@ -61,7 +61,6 @@ public int SLIDER_CHAMBER_POS = 1500;
     // ----- for generating telemetry logs -----
     private FileWriter writer;
     private long startTime;
-
 
 
     @Override
@@ -149,32 +148,34 @@ public int SLIDER_CHAMBER_POS = 1500;
 //        if (controller1.dpadUpOnce()) {
 //            robot.gripper.pass_object_pickup_position();
 //        }
-//        if (controller1.dpadDownOnce()) {
+        if (controller1.dpadDownOnce()) {
 //            robot.gripper.pass_object_release_position();
-//        }
-        if(controller1.dpadLeftOnce()) {
-            robot.slider.raiseSlider(SLIDER_BASKET_POS,1);
+            robot.slider.raiseSlider(0, 1);
+
+        }
+        if (controller1.dpadLeftOnce()) {
+            robot.slider.raiseSlider(SLIDER_BASKET_POS, 1);
         }
 
-        if(controller1.dpadRightOnce()) {
-            robot.slider.raiseSlider(SLIDER_CHAMBER_POS,1);
+        if (controller1.dpadRightOnce()) {
+            robot.slider.raiseSlider(SLIDER_CHAMBER_POS, 1);
         }
 
-        if(controller1.YOnce()){
+        if (controller1.YOnce()) {
             robot.gripper.score_object_pickup_position();
         }
-        if(controller1.XOnce()){
+        if (controller1.XOnce()) {
             robot.gripper.score_object_release_position();
         }
 
         if (controller1.leftBumperOnce()) {
 
         }
-        if(controller1.AOnce()) {
+        if (controller1.AOnce()) {
             robot.gripper.outtake_grab_position();
         }
 
-        if(controller1.BOnce()) {
+        if (controller1.BOnce()) {
             robot.gripper.outtake_release_position();
         }
 

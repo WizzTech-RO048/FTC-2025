@@ -79,7 +79,6 @@ public class Robot {
         gripper.intake_grab_position();
         sleep(400);
         gripper.pass_object_release_position();
-
         gripper.intake_grab_position();
         sleep(500);
         horizontalSlider.setStationaryPosition();
