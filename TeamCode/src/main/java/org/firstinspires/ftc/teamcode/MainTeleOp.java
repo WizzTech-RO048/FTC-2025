@@ -63,23 +63,7 @@ public class MainTeleOp extends OpMode {
     private FileWriter writer;
     private long startTime;
 
-    public void extindere_slider_orizontal(){
-        robot.gripper.intake_grab_position();gripper_grab = true;
-        robot.horizontalSlider.setExtendedPosition();
-        robot.gripper.pass_object_pickup_position();
-        sleep(150);
-        robot.gripper.intake_release_position();gripper_grab = false;
-        isExtended = true;
-    }
 
-    public void retragere_slider_vertical(){
-        robot.gripper.intake_grab_position();gripper_grab=true;
-        sleep(400);
-        robot.horizontalSlider.setStationaryPosition();
-        robot.gripper.pass_object_release_position();
-        robot.gripper.intake_grab_position();gripper_grab = true;
-        isExtended = false;
-    }
 
     @Override
     public void init() {
@@ -157,10 +141,14 @@ public class MainTeleOp extends OpMode {
         }
 
         if (controller1.dpadLeftOnce()) {
-            extindere_slider_orizontal();
+            robot.extindere_slider_orizontal();
+            gripper_grab = false;
+            isExtended = true;
         }
         if (controller1.dpadRightOnce()) {
-            retragere_slider_vertical();
+            robot.retragere_slider_vertical();
+            gripper_grab = true;
+            isExtended = false;
         }
         if (controller1.dpadUpOnce()) {
             robot.gripper.pass_object_pickup_position();

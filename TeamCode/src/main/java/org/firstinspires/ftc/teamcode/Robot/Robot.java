@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.concurrent.ScheduledExecutorService;
 
+import static android.os.SystemClock.sleep;
+
 public class Robot {
 
     public Telemetry telemetry;
@@ -16,6 +18,7 @@ public class Robot {
     public Slider slider;
     public Gripper gripper;
     public HorizontalSlider horizontalSlider;
+
 
     public Robot(final HardwareMap hardwareMap, final Telemetry t, ScheduledExecutorService scheduler) {
         telemetry = t;
@@ -58,8 +61,25 @@ public class Robot {
         horizontalSlider_parameters.telemetry = telemetry;
         horizontalSlider_parameters.hardwareMap = hardwareMap;
         horizontalSlider = new HorizontalSlider(horizontalSlider_parameters);
+
+
     }
 
+    public void extindere_slider_orizontal (){
+        gripper.intake_grab_position();
+        horizontalSlider.setExtendedPosition();
+        gripper.pass_object_pickup_position();
+        sleep(150);
+        gripper.intake_release_position();
+    }
+
+    public void retragere_slider_vertical(){
+        gripper.intake_grab_position();
+        sleep(400);
+        horizontalSlider.setStationaryPosition();
+        gripper.pass_object_release_position();
+        gripper.intake_grab_position();
+    }
     public void getCurrentPos() {
         telemetry.addData("Slider position", slider.getCurrentPositionSlider());
         telemetry.update();
