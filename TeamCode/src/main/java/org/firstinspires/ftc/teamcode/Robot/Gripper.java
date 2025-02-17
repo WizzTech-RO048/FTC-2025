@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
 import androidx.annotation.NonNull;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -27,12 +25,17 @@ public class Gripper {
     private final double PASS_OBJECT_LEFT_PICKUP = 0.85, PASS_OBJECT_LEFT_RELEASE = 0.2;
     private final double PASS_OBJECT_RIGHT_PICKUP = 0.3, PASS_OBJECT_RIGHT_RELEASE = 1;
 
-    private final double GRIPPER_GRAB = -1, GRIPPER_RELEASE = 1;
+    private final double SCORE_OBJECT_LEFT_PICKUP = 0, SCORE_OBJECT_LEFT_RELEASE = 0;
+    private final double SCORE_OBJECT_RIGHT_PICKUP = 0, SCORE_OBJECT_RIGHT_RELEASE = 0;
+
+    private final double INTAKE_GRIPPER_GRAB = -1, INTAKE_GRIPPER_RELEASE = 1;
+    private final double OUTTAKE_GRIPPER_GRAB = 0, OUTTAKE_GRIPPER_RELEASE = 0;
 
     private final Telemetry telemetry;
     private final HardwareMap hardwareMap;
 
-    private final Servo leftGripper, rightGripper, gripper;
+    private final Servo leftGripper, rightGripper, intake_gripper;
+    private final Servo leftRaiser, rightRaiser, outtake_gripper;
 
     Gripper(@NonNull final Parameters parameters) {
         telemetry = Objects.requireNonNull(parameters.telemetry, "Telemetry object was not set");
@@ -41,16 +44,28 @@ public class Gripper {
         leftGripper = hardwareMap.get(Servo.class, "gripperLeftIntake");
         rightGripper = hardwareMap.get(Servo.class, "gripperRightIntake");
 
-        gripper = hardwareMap.get(Servo.class, "gripperIntake");
+        leftRaiser = hardwareMap.get(Servo.class, "gripperLeftOuttake");
+        rightRaiser = hardwareMap.get(Servo.class, "gripperRightOuttake");
+
+        intake_gripper = hardwareMap.get(Servo.class, "gripperIntake");
+        outtake_gripper = hardwareMap.get(Servo.class, "gripperOuttake");
     }
 
 
-    public void grab_position() {
-        gripper.setPosition(GRIPPER_GRAB);
+    public void intake_grab_position() {
+        intake_gripper.setPosition(INTAKE_GRIPPER_GRAB);
     }
 
-    public void release_position() {
-        gripper.setPosition(GRIPPER_RELEASE);
+    public void intake_release_position() {
+        intake_gripper.setPosition(INTAKE_GRIPPER_RELEASE);
+    }
+
+    public void outtake_grab_position() {
+        outtake_gripper.setPosition(OUTTAKE_GRIPPER_GRAB);
+    }
+
+    public void outtake_release_position() {
+        outtake_gripper.setPosition(OUTTAKE_GRIPPER_RELEASE);
     }
 
     public void release_position_initial() {
@@ -65,6 +80,16 @@ public class Gripper {
     public void pass_object_release_position() {
         leftGripper.setPosition(PASS_OBJECT_LEFT_RELEASE);
         rightGripper.setPosition(PASS_OBJECT_RIGHT_RELEASE);
+    }
+
+    public void score_object_pickup_position() {
+        leftRaiser.setPosition(SCORE_OBJECT_LEFT_PICKUP);
+        rightRaiser.setPosition(SCORE_OBJECT_RIGHT_PICKUP);
+    }
+
+    public void score_object_release_position() {
+        leftRaiser.setPosition(SCORE_OBJECT_LEFT_RELEASE);
+        rightRaiser.setPosition(SCORE_OBJECT_RIGHT_RELEASE);
     }
 
     public static class Parameters {
