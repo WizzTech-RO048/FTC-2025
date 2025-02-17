@@ -140,17 +140,17 @@ public class MainTeleOp extends OpMode {
         }
 
         if (controller1.dpadLeftOnce()) {
-            robot.gripper.grab_position();gripper_grab = true;
+            robot.gripper.intake_grab_position();gripper_grab = true;
             sleep(500);
             robot.horizontalSlider.setExtendedPosition();
             robot.gripper.pass_object_pickup_position();
             sleep(200);
-            robot.gripper.release_position();gripper_grab = false;
+            robot.gripper.intake_release_position();gripper_grab = false;
         }
         if (controller1.dpadRightOnce()) {
             robot.horizontalSlider.setStationaryPosition();
             robot.gripper.pass_object_release_position();
-            robot.gripper.grab_position();gripper_grab = true;
+            robot.gripper.intake_grab_position();gripper_grab = true;
         }
         if (controller1.dpadUpOnce()) {
             robot.gripper.pass_object_pickup_position();
@@ -161,10 +161,10 @@ public class MainTeleOp extends OpMode {
 
         if (controller1.leftBumperOnce()) {
             if(gripper_grab == false){
-                robot.gripper.grab_position();
+                robot.gripper.intake_grab_position();
                 gripper_grab = true;
             }else{
-                robot.gripper.release_position();
+                robot.gripper.intake_release_position();
                 gripper_grab = false;
             }
 

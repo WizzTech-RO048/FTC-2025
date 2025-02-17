@@ -6,20 +6,14 @@ package org.firstinspires.ftc.teamcode;
 
 import android.annotation.SuppressLint;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
@@ -66,7 +60,7 @@ public class Auto_Basket_Drop extends LinearOpMode {
         sleep(2000);
         robot.slider.raiseSlider(5700,1);
         sleep(3000);
-        robot.gripper.grab_position();
+        robot.gripper.intake_grab_position();
         sleep(2000);
         //robot.gripper.no_position();
         sleep(2000);
