@@ -14,7 +14,7 @@ public class Robot {
 
     public Telemetry telemetry;
 
-    public Arm arm;
+    //public Arm arm;
     public Slider slider;
     public Gripper gripper;
     public HorizontalSlider horizontalSlider;
@@ -34,11 +34,11 @@ public class Robot {
         slider_parameters.scheduler = scheduler;
         slider = new Slider(slider_parameters);
 
-        Arm.Parameters arm_parameters = new Arm.Parameters();
+        /*Arm.Parameters arm_parameters = new Arm.Parameters();
         arm_parameters.telemetry = telemetry;
         arm_parameters.hardwareMap = hardwareMap;
         arm_parameters.scheduler = scheduler;
-        arm = new Arm(arm_parameters);
+        arm = new Arm(arm_parameters);*/
 //
 //        Arm.Parameters arm_parameters2 = new Arm.Parameters();
 //        arm_parameters2.telemetry = telemetry;
@@ -67,9 +67,11 @@ public class Robot {
 
     public void extindere_slider_orizontal (){
         gripper.intake_grab_position();
+        gripper.outtake_release_position();
+        sleep(150);
         horizontalSlider.setExtendedPosition();
         gripper.pass_object_pickup_position();
-        sleep(150);
+        sleep(170);
         gripper.intake_release_position();
     }
 
@@ -79,6 +81,10 @@ public class Robot {
         horizontalSlider.setStationaryPosition();
         gripper.pass_object_release_position();
         gripper.intake_grab_position();
+        sleep(1200);
+        gripper.outtake_grab_position();
+        sleep(100);
+        gripper.intake_release_position_initial();
     }
     public void getCurrentPos() {
         telemetry.addData("Slider position", slider.getCurrentPositionSliderLeft());

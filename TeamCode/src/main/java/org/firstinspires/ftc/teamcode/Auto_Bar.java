@@ -35,7 +35,7 @@ public class Auto_Bar extends LinearOpMode {
 
         ScheduledFuture<?> lastArmMove, lastSliderMove;
 
-        robot.arm.raiseArm(100, 1);
+        //robot.arm.raiseArm(100, 1);
 
         while (!isStarted() && !isStopRequested()) {
             // test'
@@ -57,7 +57,7 @@ public class Auto_Bar extends LinearOpMode {
                 )
         );
         sleep(1000);
-        robot.arm.raiseArm(460,1);
+        //robot.arm.raiseArm(460,1);
         sleep(1000);
         robot.slider.raiseSlider(535,1);
         sleep(1000);

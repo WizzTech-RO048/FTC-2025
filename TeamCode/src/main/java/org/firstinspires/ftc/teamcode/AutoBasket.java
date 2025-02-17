@@ -48,7 +48,7 @@ public class AutoBasket extends LinearOpMode {
 
         int  arm_value = 175;
         double RAISE_POWER = 1.0;
-        robot.arm.raiseArm(arm_value, RAISE_POWER / 2);
+        //robot.arm.raiseArm(arm_value, RAISE_POWER / 2);
         sleep(200);
         // TODO: @gorunescu uita te aici
 

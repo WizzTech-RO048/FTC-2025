@@ -27,7 +27,8 @@ public class MainTeleOp extends OpMode {
     public double RAISE_POWER = 1.0;
 
     public int ARM_MAX_POS = 600;
-    public int SLIDER_MAX_POS = 5700;
+    public int SLIDER_BASKET_POS = 2700;
+public int SLIDER_CHAMBER_POS = 1500;
 
     public double arm_percentage = 0.0;      // procent din cat sa ridice din ARM_MAX_POS (are valoarea intre 0.0 si 1.0)
     public double slider_percentage = 0.0;   // procent din cat sa ridice din SLIDER_MAX_POS (are valoarea intre 0.0 si 1.0)
@@ -96,7 +97,6 @@ public class MainTeleOp extends OpMode {
         }
         startTime = System.currentTimeMillis();
 
-
     }
 
     // ------ the emergency stop function ---------
@@ -134,14 +134,17 @@ public class MainTeleOp extends OpMode {
         }
 
         if (controller1.leftBumperOnce()) {
+            robot.gripper.outtake_release_position();
             robot.extindere_slider_orizontal();
             gripper_grab = false;
             isExtended = true;
+
         }
         if (controller1.rightBumperOnce()) {
             robot.retragere_slider_vertical();
-            gripper_grab = true;
             isExtended = false;
+            gripper_grab = false;
+
         }
 //        if (controller1.dpadUpOnce()) {
 //            robot.gripper.pass_object_pickup_position();
@@ -149,9 +152,30 @@ public class MainTeleOp extends OpMode {
 //        if (controller1.dpadDownOnce()) {
 //            robot.gripper.pass_object_release_position();
 //        }
+        if(controller1.dpadLeftOnce()) {
+            robot.slider.raiseSlider(SLIDER_BASKET_POS,1);
+        }
+
+        if(controller1.dpadRightOnce()) {
+            robot.slider.raiseSlider(SLIDER_CHAMBER_POS,1);
+        }
+
+        if(controller1.YOnce()){
+            robot.gripper.score_object_pickup_position();
+        }
+        if(controller1.XOnce()){
+            robot.gripper.score_object_release_position();
+        }
 
         if (controller1.leftBumperOnce()) {
 
+        }
+        if(controller1.AOnce()) {
+            robot.gripper.outtake_grab_position();
+        }
+
+        if(controller1.BOnce()) {
+            robot.gripper.outtake_release_position();
         }
 
 //        -------------slider-------------

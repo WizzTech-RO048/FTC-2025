@@ -57,7 +57,7 @@ public class brut10 extends LinearOpMode {
                 )
         );
         sleep(200);
-        robot.arm.raiseArm(600, 0.5);
+        //robot.arm.raiseArm(600, 0.5);
         sleep(1000);
         drive.setWeightedDrivePower(
                 new Pose2d(
@@ -95,7 +95,7 @@ public class brut10 extends LinearOpMode {
         sleep(2000);
         robot.slider.raiseSlider(0, 0.5);
         sleep(1000);
-        robot.arm.raiseArm(200, 0.5);
+        //robot.arm.raiseArm(200, 0.5);
         sleep(1000);
         waitForStart();
         while (opModeIsActive()) {

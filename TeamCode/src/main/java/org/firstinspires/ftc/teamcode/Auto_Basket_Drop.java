@@ -35,7 +35,7 @@ public class Auto_Basket_Drop extends LinearOpMode {
 
         ScheduledFuture<?> lastArmMove, lastSliderMove;
 
-        robot.arm.raiseArm(100, 1);
+        //robot.arm.raiseArm(100, 1);
 
         while (!isStarted() && !isStopRequested()) {
             // test'
@@ -56,7 +56,7 @@ public class Auto_Basket_Drop extends LinearOpMode {
                         (0)// gen astea negative / pozitive sau schimbate intre ele
                 )
         );
-        robot.arm.raiseArm(750,1);
+        //robot.arm.raiseArm(750,1);
         sleep(2000);
         robot.slider.raiseSlider(5700,1);
         sleep(3000);
@@ -82,9 +82,9 @@ public class Auto_Basket_Drop extends LinearOpMode {
                         (0)// gen astea negative / pozitive sau schimbate intre ele
                 )
         );
-        robot.arm.raiseArm(200, 0.5);
+        //robot.arm.raiseArm(200, 0.5);
         sleep(2000);
-        robot.arm.raiseArm(0,1);
+        //robot.arm.raiseArm(0,1);
         drive.setWeightedDrivePower(
                 new Pose2d(
                         (0),
