@@ -41,9 +41,7 @@ public class MainTeleOp extends OpMode {
     private ScheduledFuture<?> lastRightLift, lastLeftLift;
     //boolean isPressed = false;
 
-    int slider_target_positionup = 0;
-    int slider_target_positiondown = 0;
-
+    int slider_min = 0, slider_max = 0;
     int slider_target_position = 0;
     int arm_target_positionup = 0;
     int arm_target_positiondown = 0;
@@ -131,49 +129,37 @@ public class MainTeleOp extends OpMode {
 
         //----------- gripper ---------------
 
-
-        // =======================
-        // ===== DRIVER 2 ========
-        // =======================
-
         if (!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
             return;
         }
 
-        if (controller1.dpadLeftOnce()) {
+        if (controller1.leftBumperOnce()) {
             robot.extindere_slider_orizontal();
             gripper_grab = false;
             isExtended = true;
         }
-        if (controller1.dpadRightOnce()) {
+        if (controller1.rightBumperOnce()) {
             robot.retragere_slider_vertical();
             gripper_grab = true;
             isExtended = false;
         }
-        if (controller1.dpadUpOnce()) {
-            robot.gripper.pass_object_pickup_position();
-        }
-        if (controller1.dpadDownOnce()) {
-            robot.gripper.pass_object_release_position();
-        }
+//        if (controller1.dpadUpOnce()) {
+//            robot.gripper.pass_object_pickup_position();
+//        }
+//        if (controller1.dpadDownOnce()) {
+//            robot.gripper.pass_object_release_position();
+//        }
 
         if (controller1.leftBumperOnce()) {
-            if(gripper_grab == false){
-                robot.gripper.intake_grab_position();
-                gripper_grab = true;
-            }else{
-                if(isExtended == false){
-                    robot.gripper.release_position_initial();
-                }else{
-                    robot.gripper.intake_release_position();
-                }
-                gripper_grab = false;
-            }
 
         }
 
+//        -------------slider-------------
+
+        //if(controller1.)
         // ------- printing the slider position -------
-        //telemetry.addData("Slider position", robot.slider.getCurrentPositionSlider());
+        telemetry.addData("SliderLeft position", robot.slider.getCurrentPositionSliderLeft());
+        telemetry.addData("SliderRight position", robot.slider.getCurrentPositionSliderRight());
         telemetry.addLine("---------------------");
         //telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
         //telemetry.addData("Arm position2", robot.arm2.getCurrentPositionArm());

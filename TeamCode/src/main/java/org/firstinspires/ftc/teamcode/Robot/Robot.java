@@ -81,8 +81,9 @@ public class Robot {
         gripper.intake_grab_position();
     }
     public void getCurrentPos() {
-        telemetry.addData("Slider position", slider.getCurrentPositionSlider());
+        telemetry.addData("Slider position", slider.getCurrentPositionSliderLeft());
         telemetry.update();
     }
+    //???????????????????????????????????/
 
 }

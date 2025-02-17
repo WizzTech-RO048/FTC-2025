@@ -104,7 +104,7 @@ public class Slider {
     private final HardwareMap hardwareMap;
     private final ScheduledExecutorService scheduler;
 
-    private final DcMotorEx slider;
+    private final DcMotorEx sliderLeft, sliderRight;
 
 //    private final int armRaisedPosition;
 
@@ -113,35 +113,48 @@ public class Slider {
         telemetry = Objects.requireNonNull(parameters.telemetry, "Telemetry was not set up");
         hardwareMap = Objects.requireNonNull(parameters.hardwareMap, "HardwareMap was not set up");
 
-        slider = hardwareMap.get(DcMotorEx.class, "slider");
-        slider.setDirection(DcMotorSimple.Direction.REVERSE);
-        slider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slider.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        sliderLeft = hardwareMap.get(DcMotorEx.class, "leftSlider");
+        sliderLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        sliderLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sliderLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        sliderRight = hardwareMap.get(DcMotorEx.class, "rightSlider");
+        sliderRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        sliderRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sliderRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     private ScheduledFuture<?> raiseSlider = null;
 
     public void raiseSlider(int targetPositionValue, double raisePower) {
-        int currentPosition = getCurrentPositionSlider();
+        int currentPosition = getCurrentPositionSliderLeft();
 
-        slider.setTargetPosition(targetPositionValue);
-        slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        sliderLeft.setTargetPosition(targetPositionValue);
+        sliderLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        sliderRight.setTargetPosition(-targetPositionValue);
+        sliderRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         if (currentPosition > targetPositionValue) {
-            slider.setPower(raisePower);
+            sliderLeft.setPower(raisePower);
+            sliderRight.setPower(raisePower);
         } else {
-            slider.setPower(-raisePower);
+            sliderLeft.setPower(-raisePower);
+            sliderRight.setPower(-raisePower);
         }
     }
 
-    public int getCurrentPositionSlider() {
-        return slider.getCurrentPosition();
+    public int getCurrentPositionSliderLeft() {
+        return sliderLeft.getCurrentPosition();
     }
 
-    public void stopSlider() {
-        // ----- stopping the slider moving -----
-        slider.setPower(0.0);
+    public int getCurrentPositionSliderRight() {
+        return sliderRight.getCurrentPosition();
     }
+//    public void stopSlider() {
+//        // ----- stopping the slider moving -----
+//        slider.setPower(0.0);
+//    }
 
     public static class Parameters {
         public HardwareMap hardwareMap;
