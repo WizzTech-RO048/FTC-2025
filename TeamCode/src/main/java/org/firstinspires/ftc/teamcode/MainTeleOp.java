@@ -50,8 +50,7 @@ public class MainTeleOp extends OpMode {
 
     int arm_target_position = 0;
 
-    boolean isExtended_down = false;
-    boolean isExtended_up = false;
+    boolean isExtended =false;
     boolean gripper_rotating = false;
     boolean lb_down = false;
     boolean lift_position = false;
@@ -63,6 +62,24 @@ public class MainTeleOp extends OpMode {
     // ----- for generating telemetry logs -----
     private FileWriter writer;
     private long startTime;
+
+    public void extindere_slider_orizontal(){
+        robot.gripper.grab_position();gripper_grab = true;
+        robot.horizontalSlider.setExtendedPosition();
+        robot.gripper.pass_object_pickup_position();
+        sleep(150);
+        robot.gripper.release_position();gripper_grab = false;
+        isExtended = true;
+    }
+
+    public void retragere_slider_vertical(){
+        robot.gripper.grab_position();gripper_grab=true;
+        sleep(400);
+        robot.horizontalSlider.setStationaryPosition();
+        robot.gripper.pass_object_release_position();
+        robot.gripper.grab_position();gripper_grab = true;
+        isExtended = false;
+    }
 
     @Override
     public void init() {
@@ -140,17 +157,10 @@ public class MainTeleOp extends OpMode {
         }
 
         if (controller1.dpadLeftOnce()) {
-            robot.gripper.grab_position();gripper_grab = true;
-            sleep(500);
-            robot.horizontalSlider.setExtendedPosition();
-            robot.gripper.pass_object_pickup_position();
-            sleep(200);
-            robot.gripper.release_position();gripper_grab = false;
+            extindere_slider_orizontal();
         }
         if (controller1.dpadRightOnce()) {
-            robot.horizontalSlider.setStationaryPosition();
-            robot.gripper.pass_object_release_position();
-            robot.gripper.grab_position();gripper_grab = true;
+            retragere_slider_vertical();
         }
         if (controller1.dpadUpOnce()) {
             robot.gripper.pass_object_pickup_position();
@@ -164,7 +174,11 @@ public class MainTeleOp extends OpMode {
                 robot.gripper.grab_position();
                 gripper_grab = true;
             }else{
-                robot.gripper.release_position();
+                if(isExtended == false){
+                    robot.gripper.release_position_initial();
+                }else{
+                    robot.gripper.release_position();
+                }
                 gripper_grab = false;
             }
 

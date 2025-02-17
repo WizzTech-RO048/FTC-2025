@@ -53,6 +53,10 @@ public class Gripper {
         gripper.setPosition(GRIPPER_RELEASE);
     }
 
+    public void release_position_initial() {
+        gripper.setPosition(GRIPPER_RELEASE-0.6);
+    }
+
     public void pass_object_pickup_position() {
         leftGripper.setPosition(PASS_OBJECT_LEFT_PICKUP);
         rightGripper.setPosition(PASS_OBJECT_RIGHT_PICKUP);
