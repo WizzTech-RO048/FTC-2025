@@ -78,9 +78,11 @@ public class Robot {
     public void retragere_slider_vertical(){
         gripper.intake_grab_position();
         sleep(400);
-        horizontalSlider.setStationaryPosition();
         gripper.pass_object_release_position();
+
         gripper.intake_grab_position();
+        sleep(500);
+        horizontalSlider.setStationaryPosition();
         sleep(1200);
         gripper.outtake_grab_position();
         sleep(100);
