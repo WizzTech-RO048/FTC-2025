@@ -141,6 +141,7 @@ public class MainTeleOp extends OpMode {
         }
         if (controller1.rightBumperOnce()) {
             robot.retragere_slider_vertical();
+            robot.gripper.outtake_grab_position();
             isExtended = false;
             gripper_grab = false;
 
@@ -167,14 +168,9 @@ public class MainTeleOp extends OpMode {
         if (controller1.XOnce()) {
             robot.gripper.score_object_release_position();
         }
-
-        if (controller1.leftBumperOnce()) {
-
-        }
         if (controller1.AOnce()) {
             robot.gripper.outtake_grab_position();
         }
-
         if (controller1.BOnce()) {
             robot.gripper.outtake_release_position();
         }
