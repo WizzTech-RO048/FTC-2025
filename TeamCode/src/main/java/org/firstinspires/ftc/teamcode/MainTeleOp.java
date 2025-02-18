@@ -140,10 +140,10 @@ public class MainTeleOp extends OpMode {
 
         }
         if (controller1.rightBumperOnce()) {
-            robot.retragere_slider_vertical();
             robot.gripper.outtake_grab_position();
+            robot.retragere_slider_vertical();
             isExtended = false;
-            gripper_grab = false;
+            gripper_grab = true;
 
         }
 //        if (controller1.dpadUpOnce()) {
