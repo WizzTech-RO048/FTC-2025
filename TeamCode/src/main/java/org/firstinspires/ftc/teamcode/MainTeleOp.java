@@ -86,16 +86,18 @@ public class MainTeleOp extends OpMode {
 
 
         // ----- for generating telemetry logs -----
-        File logFile = new File(Environment.getExternalStorageDirectory().getPath() + "/FIRST/encoder_log.txt");
-        try {
-            writer = new FileWriter(logFile, false); // Overwrites existing file
-            writer.write("Time(ms), Encoder Position\n"); // Header row
-            telemetry.addData("Log", "Initialized. File: encoder_log.txt");
-        } catch (IOException e) {
-            telemetry.addData("Error", "File write failed: " + e.getMessage());
-        }
-        startTime = System.currentTimeMillis();
-        robot.gripper.pass_object_release_position();
+//        File logFile = new File(Environment.getExternalStorageDirectory().getPath() + "/FIRST/encoder_log.txt");
+//        try {
+//            writer = new FileWriter(logFile, false); // Overwrites existing file
+//            writer.write("Time(ms), Encoder Position\n"); // Header row
+//            telemetry.addData("Log", "Initialized. File: encoder_log.txt");
+//        } catch (IOException e) {
+//            telemetry.addData("Error", "File write failed: " + e.getMessage());
+//        }
+//        startTime = System.currentTimeMillis();
+
+
+//        robot.gripper.pass_object_release_position();
     }
 
     // ------ the emergency stop function ---------
@@ -190,22 +192,21 @@ public class MainTeleOp extends OpMode {
         telemetry.addLine("---------------------");
 
         // ------ printing data in the telemetry logs file ------
-        long timestamp = System.currentTimeMillis() - startTime;
-        try {
-            if (writer != null) {
-                //writer.write(timestamp + "," + robot.arm.getCurrentPositionArm() + "\n");
-                writer.flush(); // Ensure immediate writing
-            }
-        } catch (IOException e) {
-            telemetry.addData("Error", "Logging failed: " + e.getMessage());
-        }
+//        long timestamp = System.currentTimeMillis() - startTime;
+//        try {
+//            if (writer != null) {
+//                //writer.write(timestamp + "," + robot.arm.getCurrentPositionArm() + "\n");
+//                writer.flush(); // Ensure immediate writing
+//            }
+//        } catch (IOException e) {
+//            telemetry.addData("Error", "Logging failed: " + e.getMessage());
+//        }
 
         // Show telemetry
         //telemetry.addData("Encoder", robot.arm.getCurrentPositionArm());
-        telemetry.addData("Log", "Saving to encoder_log.txt");
-        telemetry.update();
+//        telemetry.addData("Log", "Saving to encoder_log.txt");
+//        telemetry.update();
 
-        // TODO: use 'adb pull /sdcard/FIRST/encoder_log.txt' for getting the file
 
     }
 }
