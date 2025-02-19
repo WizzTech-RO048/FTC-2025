@@ -53,7 +53,7 @@ public class AutoBasket extends LinearOpMode {
         // TODO: @gorunescu uita te aici
 
         TrajectorySequence Red_BackDrop_Left = drive.trajectorySequenceBuilder(new Pose2d())
-//                .forward(6)
+//                .forward(6)w
 //                .strafeLeft(23)
                   .strafeRight(5)
                 .turn(Math.toRadians(-180)) // TODO: testati daca merge bine rotatia (OBS: rotatia se face in functie de nr de radiani, nu de grade - ask me more daca nu intelegeti)
