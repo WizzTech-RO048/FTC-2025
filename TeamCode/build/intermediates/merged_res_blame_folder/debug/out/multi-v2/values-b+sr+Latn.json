@@ -4,21 +4,7 @@
             "outputFile": "org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-17:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
-<<<<<<< Updated upstream
-                    "source": "/home/admin/.gradle/caches/transforms-3/97f43086dbd253d3e8d9b1f8f32a59eb/transformed/appcompat-1.2.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,212,313,419,505,609,731,816,898,989,1082,1177,1271,1371,1464,1559,1664,1755,1846,1932,2037,2143,2246,2353,2462,2569,2739,2836",
-                        "endColumns": "106,100,105,85,103,121,84,81,90,92,94,93,99,92,94,104,90,90,85,104,105,102,106,108,106,169,96,86",
-                        "endOffsets": "207,308,414,500,604,726,811,893,984,1077,1172,1266,1366,1459,1554,1659,1750,1841,1927,2032,2138,2241,2348,2457,2564,2734,2831,2918"
-                    }
-                },
-                {
-                    "source": "/home/admin/.gradle/caches/transforms-3/98965ba8dc742a8aeebd9f87c4e2a6c8/transformed/core-1.3.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
-=======
-                    "source": "C:\\Users\\vacar\\.gradle\\caches\\transforms-3\\98965ba8dc742a8aeebd9f87c4e2a6c8\\transformed\\core-1.3.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
->>>>>>> Stashed changes
+                    "source": "/home/crististg/.gradle/caches/transforms-3/98965ba8dc742a8aeebd9f87c4e2a6c8/transformed/core-1.3.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -33,11 +19,9 @@
                         "endColumns": "100",
                         "endOffsets": "3019"
                     }
-<<<<<<< Updated upstream
-=======
                 },
                 {
-                    "source": "C:\\Users\\vacar\\.gradle\\caches\\transforms-3\\97f43086dbd253d3e8d9b1f8f32a59eb\\transformed\\appcompat-1.2.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "source": "/home/crististg/.gradle/caches/transforms-3/97f43086dbd253d3e8d9b1f8f32a59eb/transformed/appcompat-1.2.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -45,7 +29,6 @@
                         "endColumns": "106,100,105,85,103,121,84,81,90,92,94,93,99,92,94,104,90,90,85,104,105,102,106,108,106,169,96,86",
                         "endOffsets": "207,308,414,500,604,726,811,893,984,1077,1172,1266,1366,1459,1554,1659,1750,1841,1927,2032,2138,2241,2348,2457,2564,2734,2831,2918"
                     }
->>>>>>> Stashed changes
                 }
             ]
         }
