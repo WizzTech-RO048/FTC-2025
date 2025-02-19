@@ -75,7 +75,7 @@ public class Robot {
         gripper.intake_release_position();
     }
 
-    public void retragere_slider_vertical(){
+    public void retragere_slider_orizontal(){
         gripper.intake_grab_position();
         sleep(400);
         gripper.pass_object_release_position();
@@ -91,6 +91,4 @@ public class Robot {
         telemetry.addData("Slider position", slider.getCurrentPositionSliderLeft());
         telemetry.update();
     }
-    //???????????????????????????????????/
-
 }
