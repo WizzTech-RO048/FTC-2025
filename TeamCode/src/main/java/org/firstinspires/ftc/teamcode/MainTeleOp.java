@@ -40,7 +40,6 @@ public class MainTeleOp extends OpMode {
     private int slider_level = 0;
     private ScheduledFuture<?> lastArmMove, lastSliderMove;
     private ScheduledFuture<?> lastRightLift, lastLeftLift;
-    //boolean isPressed = false;
 
     int slider_min = 0, slider_max = 0;
     int slider_target_position = 0;
@@ -63,6 +62,7 @@ public class MainTeleOp extends OpMode {
     private long startTime;
 
 
+
     @Override
     public void init() {
         robot = new Robot(
@@ -73,10 +73,8 @@ public class MainTeleOp extends OpMode {
 
         // ====================================================
         // === controller1 - movement si control intake     ===
-        // === controller1 - control slider si control arm  ===
         // ====================================================
         controller1 = new Controller(gamepad1);
-        controller2 = new Controller(gamepad2);
 
 
         drive = new SampleMecanumDrive(hardwareMap);
@@ -103,113 +101,71 @@ public class MainTeleOp extends OpMode {
 
     @Override
     public void loop() {
+        // ----- citirea de input din controale -----
         controller1.update();
-        controller2.update();
 
-        // controller 1
-        // - movement
-        // - ridcare arm
-        // - intake gripper
-        // - control slider
-        // - lift
-
-        // =======================
-        // ===== DRIVER 1 ========
-        // =======================
-
-        // --------- movement general al robotului ---------
+        // ----- movement general al robotului -----
         drive.setWeightedDrivePower(
-                new Pose2d( /// imi pare rau pt ce urmeaza sa fac, timpuri disperate...
+                new Pose2d(
                         (controller1.left_stick_y * movement_speed),
                         (controller1.left_stick_x * movement_speed),
-                        (controller1.right_stick_x * movement_speed)  // gen astea negative / pozitive sau schimbate intre ele
+                        (controller1.right_stick_x * movement_speed)
                 )
         );
-
-        //----------- gripper ---------------
 
         if (!Utils.isDone(lastArmMove) || !Utils.isDone(lastSliderMove)) {
             return;
         }
 
+        // ----- control mecanism intake -----
         if (controller1.leftBumperOnce()) {
             robot.gripper.outtake_release_position();
             robot.extindere_slider_orizontal();
             gripper_grab = false;
             isExtended = true;
 
-        }
+        } // Extindere slider
         if (controller1.rightBumperOnce()) {
-            robot.retragere_slider_vertical();
+            robot.retragere_slider_orizontal();
             isExtended = false;
             gripper_grab = false;
 
-        }
-//        if (controller1.dpadUpOnce()) {
-//            robot.gripper.pass_object_pickup_position();
-//        }
+        } // Retragere slider
+
+        // ----- control mecanism outtake -----
+        if (controller1.dpadLeftOnce()) {
+            robot.slider.raiseSlider(SLIDER_BASKET_POS, 1);
+        } // Pozitia High Basket
+        if (controller1.dpadRightOnce()) {
+            robot.slider.raiseSlider(SLIDER_CHAMBER_POS, 1);
+        } // Pozitia High Chamber
         if (controller1.dpadDownOnce()) {
 //            robot.gripper.pass_object_release_position();
             robot.slider.raiseSlider(0, 1);
 
-        }
-        if (controller1.dpadLeftOnce()) {
-            robot.slider.raiseSlider(SLIDER_BASKET_POS, 1);
-        }
+        } // Pozitia initiala
 
-        if (controller1.dpadRightOnce()) {
-            robot.slider.raiseSlider(SLIDER_CHAMBER_POS, 1);
-        }
-
+        // ----- control outtake -----
         if (controller1.YOnce()) {
             robot.gripper.score_object_pickup_position();
-        }
+        } // Inchidere
         if (controller1.XOnce()) {
             robot.gripper.score_object_release_position();
-        }
+        } // Deschidere
 
-        if (controller1.leftBumperOnce()) {
-
-        }
+        // ----- control gripper outtake -----
         if (controller1.AOnce()) {
             robot.gripper.outtake_grab_position();
-        }
-
+        } // Inchidere
         if (controller1.BOnce()) {
             robot.gripper.outtake_release_position();
-        }
+        } // Deschidere
 
-//        -------------slider-------------
-
-        //if(controller1.)
-        // ------- printing the slider position -------
+        // ----- printare valori telemetrie -----
         telemetry.addData("SliderLeft position", robot.slider.getCurrentPositionSliderLeft());
         telemetry.addData("SliderRight position", robot.slider.getCurrentPositionSliderRight());
         telemetry.addLine("---------------------");
-        //telemetry.addData("Arm position", robot.arm.getCurrentPositionArm());
-        //telemetry.addData("Arm position2", robot.arm2.getCurrentPositionArm());
-        telemetry.addLine("---------------------");
-        telemetry.addLine("---------------------");
-        telemetry.addLine("---------------------");
-        telemetry.addLine("---------------------");
-
-        // ------ printing data in the telemetry logs file ------
-        long timestamp = System.currentTimeMillis() - startTime;
-        try {
-            if (writer != null) {
-                //writer.write(timestamp + "," + robot.arm.getCurrentPositionArm() + "\n");
-                writer.flush(); // Ensure immediate writing
-            }
-        } catch (IOException e) {
-            telemetry.addData("Error", "Logging failed: " + e.getMessage());
-        }
-
-        // Show telemetry
-        //telemetry.addData("Encoder", robot.arm.getCurrentPositionArm());
-        telemetry.addData("Log", "Saving to encoder_log.txt");
         telemetry.update();
-
-        // TODO: use 'adb pull /sdcard/FIRST/encoder_log.txt' for getting the file
 
     }
 }
