@@ -23,6 +23,12 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url = 'https://jitpack.io' }
+    maven { url = 'https://maven.brott.dev/' }
+}
+
 dependencies {
     implementation project(':FtcRobotController')
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
@@ -31,4 +37,6 @@ dependencies {
     implementation "com.acmerobotics.roadrunner:core:0.5.6"
     implementation "org.apache.commons:commons-math3:3.6.1"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.12.7"
+    implementation 'com.github.rh-robotics:MeepMeep:v1.1.0'
+
 }
