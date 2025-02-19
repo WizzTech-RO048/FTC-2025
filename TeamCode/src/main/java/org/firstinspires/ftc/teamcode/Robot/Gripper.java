@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.Objects;
 
 public class Gripper {
-    private final double GRAB_POSITION_1 = 1.0, GRAB_POSITION_2 = +1.0 ;//trebuie cu smecheria cu axu
+    private final double GRAB_POSITION_1 = 1.0, GRAB_POSITION_2 = +1.0 ;//trebuia e cu smecheria cu axu
     private final double RELEASE_POSITION_1 = GRAB_POSITION_1-1.0;
     private final double RELEASE_POSITION_2 = GRAB_POSITION_2+1.0;
 
@@ -25,8 +25,8 @@ public class Gripper {
     private final double PASS_OBJECT_LEFT_PICKUP = 0.85, PASS_OBJECT_LEFT_RELEASE = 0.2;
     private final double PASS_OBJECT_RIGHT_PICKUP = 0.3, PASS_OBJECT_RIGHT_RELEASE = 1;
 
-    private final double SCORE_OBJECT_LEFT_PICKUP = 0, SCORE_OBJECT_LEFT_RELEASE = -0.5;
-    private final double SCORE_OBJECT_RIGHT_PICKUP = 0, SCORE_OBJECT_RIGHT_RELEASE = 1;
+    private final double SCORE_OBJECT_LEFT_PICKUP = -1, SCORE_OBJECT_LEFT_RELEASE = 1;
+    private final double SCORE_OBJECT_RIGHT_PICKUP = 1, SCORE_OBJECT_RIGHT_RELEASE = -1;
 
     private final double INTAKE_GRIPPER_GRAB = -1, INTAKE_GRIPPER_RELEASE = 1;
     private final double OUTTAKE_GRIPPER_GRAB = -0.8, OUTTAKE_GRIPPER_RELEASE = 0.5;
