@@ -80,7 +80,7 @@ public class Robot {
         sleep(400);
         gripper.pass_object_release_position();
         gripper.intake_grab_position();
-        sleep(500);
+        sleep(700);
         horizontalSlider.setStationaryPosition();
         sleep(1200);
         gripper.outtake_grab_position();

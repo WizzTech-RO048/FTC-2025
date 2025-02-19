@@ -22,8 +22,8 @@ public class Gripper {
     private final double OPEN_BARIER_POS = 0.00, CLOSE_BARIER_POS = 0.1;
     */
 
-    private final double PASS_OBJECT_LEFT_PICKUP = 0.85, PASS_OBJECT_LEFT_RELEASE = -1;
-    private final double PASS_OBJECT_RIGHT_PICKUP = -1, PASS_OBJECT_RIGHT_RELEASE = 1;
+    private final double PASS_OBJECT_LEFT_PICKUP = 0.85, PASS_OBJECT_LEFT_RELEASE = -0.85;
+    private final double PASS_OBJECT_RIGHT_PICKUP = -1, PASS_OBJECT_RIGHT_RELEASE = 0.85;
 
     private final double SCORE_OBJECT_LEFT_PICKUP = -1, SCORE_OBJECT_LEFT_RELEASE = 1;
     private final double SCORE_OBJECT_RIGHT_PICKUP = 1, SCORE_OBJECT_RIGHT_RELEASE = -1;
