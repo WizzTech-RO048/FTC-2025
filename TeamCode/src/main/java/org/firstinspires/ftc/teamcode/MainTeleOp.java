@@ -95,7 +95,7 @@ public class MainTeleOp extends OpMode {
             telemetry.addData("Error", "File write failed: " + e.getMessage());
         }
         startTime = System.currentTimeMillis();
-        robot.gripper.intake_grab_position();
+        robot.gripper.pass_object_release_position();
     }
 
     // ------ the emergency stop function ---------
