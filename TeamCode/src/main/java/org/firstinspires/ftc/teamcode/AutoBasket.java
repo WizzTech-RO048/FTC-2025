@@ -52,14 +52,42 @@ public class AutoBasket extends LinearOpMode {
         sleep(200);
         // TODO: @gorunescu uita te aici
 
-        TrajectorySequence Red_BackDrop_Left = drive.trajectorySequenceBuilder(new Pose2d())
-//                .forward(6)w
-//                .strafeLeft(23)
-                  .strafeRight(5)
-                .turn(Math.toRadians(-180)) // TODO: testati daca merge bine rotatia (OBS: rotatia se face in functie de nr de radiani, nu de grade - ask me more daca nu intelegeti)
+        Pose2d startpose = new Pose2d(32, 60, Math.toRadians(-90));
+        drive.setPoseEstimate(startpose);
+
+        TrajectorySequence Blue_Basket = drive.trajectorySequenceBuilder(startpose)
+                .addTemporalMarker(()->{robot.horizontalSlider.setStationaryPosition();})
+                .splineToLinearHeading(new Pose2d(56, 55, Math.toRadians(-135)), Math.toRadians(20))
+                .waitSeconds(0.8)
+                .addTemporalMarker(()->{robot.gripper.score_object_release_position();})
+                .waitSeconds(0.3)
+                .addTemporalMarker(()->{robot.slider.raiseSlider(2700,1);})
+                .waitSeconds(0.8)
+                .back(8)
+                .addTemporalMarker(()->{robot.gripper.outtake_release_position();})
+                .waitSeconds(0.7)
+                .forward(7)
+                .addTemporalMarker(()->{robot.gripper.score_object_pickup_position();})
+                .waitSeconds(0.5)
+                .addTemporalMarker(()->{robot.slider.raiseSlider(0,1);})
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(48, 48, Math.toRadians(-90)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(56, 56, Math.toRadians(-135)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(58, 48, Math.toRadians(-90)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(56, 56, Math.toRadians(-135)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(58, 13, Math.toRadians(-90)))
+                .strafeLeft(3)
+                .lineToLinearHeading(new Pose2d(60, 50, Math.toRadians(-90)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(37, 13, Math.toRadians(0)))
+                .back(12)
                 .build();
 
-        drive.followTrajectorySequence(Red_BackDrop_Left);
+        drive.followTrajectorySequence(Blue_Basket);
 
         waitForStart();
         while (opModeIsActive()) {

@@ -97,7 +97,6 @@ public class MainTeleOp extends OpMode {
 //        startTime = System.currentTimeMillis();
 
 
-        robot.gripper.pass_object_release_position();
     }
 
     // ------ the emergency stop function ---------
@@ -170,9 +169,9 @@ public class MainTeleOp extends OpMode {
         if (controller1.XOnce()) {
             robot.gripper.score_object_release_position();
         }
-        if (controller1.AOnce()) {
-            robot.gripper.outtake_release_position_chamber();
-        }
+//        if (controller1.AOnce()) {
+//            robot.gripper.outtake_release_position_chamber();
+//        }
         if (controller1.BOnce()) {
             if(gripper_grab == true ) {
                 robot.gripper.outtake_release_position();

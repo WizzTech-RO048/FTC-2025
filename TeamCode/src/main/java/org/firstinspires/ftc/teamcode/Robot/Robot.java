@@ -66,8 +66,8 @@ public class Robot {
     }
 
     public void extindere_slider_orizontal (){
-        gripper.intake_grab_position();
         gripper.outtake_release_position();
+        gripper.intake_grab_position();
         sleep(150);
         horizontalSlider.setExtendedPosition();
         gripper.pass_object_pickup_position();
@@ -80,7 +80,7 @@ public class Robot {
         sleep(400);
         gripper.pass_object_release_position();
         gripper.intake_grab_position();
-        sleep(1200);
+        sleep(700);
         horizontalSlider.setStationaryPosition();
         sleep(1200);
         gripper.outtake_grab_position();
