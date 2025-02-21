@@ -8,12 +8,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.Objects;
 
 public class Gripper {
-//    private final double GRAB_POSITION_1 = 1.0, GRAB_POSITION_2 = +1.0 ;//trebuia e cu smecheria cu axu
-//    private final double RELEASE_POSITION_1 = GRAB_POSITION_1-1.0;
-//    private final double RELEASE_POSITION_2 = GRAB_POSITION_2+1.0;
+    private final double GRAB_POSITION_1 = 1.0, GRAB_POSITION_2 = +1.0 ;//trebuia e cu smecheria cu axu
+    private final double RELEASE_POSITION_1 = GRAB_POSITION_1-1.0;
+    private final double RELEASE_POSITION_2 = GRAB_POSITION_2+1.0;
 
-//    private final double GRAB_POSITION_3 = 0.0;
-//    private final double RELEASE_POSITION_3 = -1.0 ;
+    private final double GRAB_POSITION_3 = 0.0;
+    private final double RELEASE_POSITION_3 = -1.0 ;
 
     /*private final double LEFT_PICKUP = 0.0, RIGHT_PICKUP = 1.0-0.13;
     private final double LEFT_RELEASE = 1.0-0.30, RIGHT_RELEASE = 0.3;
@@ -22,14 +22,16 @@ public class Gripper {
     private final double OPEN_BARIER_POS = 0.00, CLOSE_BARIER_POS = 0.1;
     */
 
-    private final double PASS_OBJECT_LEFT_PICKUP = 0.85, PASS_OBJECT_LEFT_RELEASE = -0.80;
-    private final double PASS_OBJECT_RIGHT_PICKUP = -1, PASS_OBJECT_RIGHT_RELEASE = 0.80;
+    private final double PASS_OBJECT_LEFT_PICKUP = 0.85, PASS_OBJECT_LEFT_RELEASE = -0.90;
+    private final double PASS_OBJECT_RIGHT_PICKUP = -1, PASS_OBJECT_RIGHT_RELEASE = 0.90;
 
     private final double SCORE_OBJECT_LEFT_PICKUP = -1, SCORE_OBJECT_LEFT_RELEASE = 1;
     private final double SCORE_OBJECT_RIGHT_PICKUP = 1, SCORE_OBJECT_RIGHT_RELEASE = -1;
-    private final double OUTTAKE_GRIPPER_CHAMBER = 0;
+    private final double OUTAKE_GRIPPER_CHAMBER_LEFT = 0 , OUTAKE_GRIPPER_CHAMBER_RIGHT = 0;
+
     private final double INTAKE_GRIPPER_GRAB = -1, INTAKE_GRIPPER_RELEASE = 1;
     private final double OUTTAKE_GRIPPER_GRAB = -0.3, OUTTAKE_GRIPPER_RELEASE = 0.5;
+
 
     private final Telemetry telemetry;
     private final HardwareMap hardwareMap;
@@ -71,9 +73,7 @@ public class Gripper {
         outtake_gripper.setPosition(OUTTAKE_GRIPPER_RELEASE);
     }
 
-    public void outtake_release_position_chamber() {
-        leftRaiser.setPosition(OUTTAKE_GRIPPER_CHAMBER);
-    }
+
     public void pass_object_pickup_position() {
         leftGripper.setPosition(PASS_OBJECT_LEFT_PICKUP);
         rightGripper.setPosition(PASS_OBJECT_RIGHT_PICKUP);
@@ -86,16 +86,21 @@ public class Gripper {
 
     public void score_object_pickup_position() {
         leftRaiser.setPosition(SCORE_OBJECT_LEFT_PICKUP);
-//        rightRaiser.setPosition(SCORE_OBJECT_RIGHT_PICKUP);
+        rightRaiser.setPosition(SCORE_OBJECT_RIGHT_PICKUP);
     }
 
     public void score_object_release_position() {
         leftRaiser.setPosition(SCORE_OBJECT_LEFT_RELEASE);
-//        rightRaiser.setPosition(SCORE_OBJECT_RIGHT_RELEASE);
+        rightRaiser.setPosition(SCORE_OBJECT_RIGHT_RELEASE);
     }
+    public void score_object_chamber_position(){
 
+        leftRaiser.setPosition(OUTAKE_GRIPPER_CHAMBER_LEFT);
+        rightRaiser.setPosition(OUTAKE_GRIPPER_CHAMBER_RIGHT);
+    }
     public static class Parameters {
         public HardwareMap hardwareMap;
         public Telemetry telemetry;
     }
+
 }

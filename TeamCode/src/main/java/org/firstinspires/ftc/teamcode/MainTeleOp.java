@@ -144,7 +144,7 @@ public class MainTeleOp extends OpMode {
             robot.retragere_slider_orizontal();
             robot.gripper.outtake_grab_position();
             isExtended = false;
-            gripper_grab = false;
+            gripper_grab = true;
 
         }
 //        if (controller1.dpadUpOnce()) {
@@ -169,11 +169,11 @@ public class MainTeleOp extends OpMode {
         if (controller1.XOnce()) {
             robot.gripper.score_object_release_position();
         }
-//        if (controller1.AOnce()) {
-//            robot.gripper.outtake_release_position_chamber();
-//        }
+        if (controller1.AOnce()) {
+            robot.gripper.score_object_chamber_position();
+        }
         if (controller1.BOnce()) {
-            if(gripper_grab == true ) {
+            if(gripper_grab) {
                 robot.gripper.outtake_release_position();
                 gripper_grab = !gripper_grab;
             } else {
