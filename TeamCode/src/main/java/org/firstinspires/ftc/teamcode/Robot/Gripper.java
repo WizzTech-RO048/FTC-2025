@@ -29,7 +29,7 @@ public class Gripper {
     private final double SCORE_OBJECT_RIGHT_PICKUP = 1, SCORE_OBJECT_RIGHT_RELEASE = -1;
     private final double OUTAKE_GRIPPER_CHAMBER_LEFT = 0 , OUTAKE_GRIPPER_CHAMBER_RIGHT = 0;
 
-    private final double INTAKE_GRIPPER_GRAB = -1, INTAKE_GRIPPER_RELEASE = 1;
+    private final double INTAKE_GRIPPER_GRAB = 0.8, INTAKE_GRIPPER_RELEASE = 0.2;
     private final double OUTTAKE_GRIPPER_GRAB = -0.3, OUTTAKE_GRIPPER_RELEASE = 0.5;
 
 

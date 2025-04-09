@@ -86,6 +86,7 @@ package org.firstinspires.ftc.teamcode.Robot;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import com.qualcomm.hardware.motors.GoBILDA5202Series;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -105,7 +106,6 @@ public class Slider {
     private final ScheduledExecutorService scheduler;
 
     private final DcMotorEx sliderLeft, sliderRight;
-
 //    private final int armRaisedPosition;
 
     Slider(@NonNull final Parameters parameters) {

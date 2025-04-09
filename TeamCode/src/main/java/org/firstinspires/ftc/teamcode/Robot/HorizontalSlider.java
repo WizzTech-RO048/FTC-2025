@@ -14,8 +14,8 @@ public class HorizontalSlider {
 
     private final Servo HorizontalSliderLeft, HorizontalSliderRight;
 
-    private final double leftExtended = 1, leftStationed = 0.8;
-    private final double rightExtended = -1, rightStationed = -0.9;
+    private final double leftExtended = 1, leftStationed = 0.775;
+    private final double rightExtended = 0.38, rightStationed = 0.6;
 
     HorizontalSlider(@NonNull final Parameters parameters) {
         telemetry = Objects.requireNonNull(parameters.telemetry, "Telemetry was not set up");
