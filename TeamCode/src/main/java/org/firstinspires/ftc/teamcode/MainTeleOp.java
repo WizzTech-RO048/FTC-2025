@@ -62,6 +62,11 @@ public class MainTeleOp extends OpMode {
     private FileWriter writer;
     private long startTime;
 
+    //test ca nu mere movementul
+    DcMotor frontLeft;
+    DcMotor backLeft;
+    DcMotor frontRight;
+    DcMotor backRight;
 
     @Override
     public void init() {
@@ -81,6 +86,11 @@ public class MainTeleOp extends OpMode {
 
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        frontLeft = hardwareMap.get(DcMotor.class, "leftFront");
+        backLeft = hardwareMap.get(DcMotor.class, "leftRear");
+        frontRight = hardwareMap.get(DcMotor.class, "rightFront");
+        backRight = hardwareMap.get(DcMotor.class, "rightRear");
 
         last_arm_position = 0;
 
@@ -119,13 +129,37 @@ public class MainTeleOp extends OpMode {
         // =======================
 
         // --------- movement general al robotului ---------
-        drive.setWeightedDrivePower(
-                new Pose2d( /// imi pare rau pt ce urmeaza sa fac, timpuri disperate...
-                        (controller1.left_stick_y * movement_speed),
-                        (controller1.left_stick_x * movement_speed),
-                        (controller1.right_stick_x * movement_speed)  // gen astea negative / pozitive sau schimbate intre ele
-                )
-        );
+//        drive.setWeightedDrivePower(
+//                new Pose2d( /// imi pare rau pt ce urmeaza sa fac, timpuri disperate...
+//                        (-controller1.left_stick_y * movement_speed),
+//                        (-controller1.left_stick_x * movement_speed),
+//                        (-controller1.right_stick_x * movement_speed)  // gen astea negative / pozitive sau schimbate intre ele
+//                )
+//        );
+
+        double y = -controller1.left_stick_y;  // Forward is negative in FTC
+        double x = controller1.left_stick_x;  // Strafing (slight boost to compensate)
+        double rx = -controller1.right_stick_x;  // Rotation
+
+        double frontLeftPower = y + x + rx;
+        double backLeftPower = y - x + rx;
+        double frontRightPower = y - x - rx;
+        double backRightPower = y + x - rx;
+
+        double max = Math.max(Math.abs(frontLeftPower), Math.max(Math.abs(backLeftPower),
+                Math.max(Math.abs(frontRightPower), Math.abs(backRightPower))));
+
+        if (max > 1.0) {
+            frontLeftPower /= max;
+            backLeftPower /= max;
+            frontRightPower /= max;
+            backRightPower /= max;
+        }
+
+        frontLeft.setPower(frontLeftPower);
+        backLeft.setPower(backLeftPower);
+        frontRight.setPower(frontRightPower);
+        backRight.setPower(backRightPower);
 
         //----------- gripper ---------------
 
